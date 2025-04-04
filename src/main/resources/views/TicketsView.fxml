@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<VBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.example.controller.TicketsViewController" spacing="10"
+      style="-fx-padding: 20;">
+
+    <Label text="My Tickets" style="-fx-font-size: 20; -fx-font-weight: bold;"/>
+
+    <TableView fx:id="ticketsTable" style="-fx-pref-height: 300;">
+        <columns>
+            <TableColumn text="Match" prefWidth="200">
+                <cellValueFactory>
+                    <PropertyValueFactory property="matchDescription" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Date" prefWidth="150">
+                <cellValueFactory>
+                    <PropertyValueFactory property="matchDate" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Seat Number" prefWidth="100">
+                <cellValueFactory>
+                    <PropertyValueFactory property="seatNumber" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Price" prefWidth="100">
+                <cellValueFactory>
+                    <PropertyValueFactory property="price" />
+                </cellValueFactory>
+            </TableColumn>
+        </columns>
+    </TableView>
+
+    <HBox spacing="10" alignment="CENTER_RIGHT">
+        <Button text="Close" onAction="#handleClose"
+                style="-fx-pref-width: 80;"/>
+    </HBox>
+</VBox>

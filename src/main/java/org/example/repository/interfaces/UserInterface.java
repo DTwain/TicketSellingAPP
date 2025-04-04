@@ -1,4 +1,10 @@
 package org.example.repository.interfaces;
 
-public interface UserInterface {
+import org.example.domain.User;
+import org.example.repository.Repository;
+
+import java.util.Optional;
+
+public interface UserInterface extends Repository<Long, User> {
+    public Optional<User> findUserByUsername(String username);
 }

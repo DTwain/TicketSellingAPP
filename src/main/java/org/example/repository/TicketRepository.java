@@ -4,29 +4,21 @@ import org.example.domain.Ticket;
 import org.example.domain.Match;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.example.domain.TicketSale;
+import org.example.domain.User;
+import org.example.repository.interfaces.TicketInterface;
+import org.example.service.ServicesException;
 
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.sql.*;
-import java.util.Optional;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
+import java.util.*;
 
-public class TicketRepository implements Repository<Long, Ticket> {
+public class TicketRepository implements TicketInterface {
+    private JdbcUtils jdbcUtils;
     private static final Logger log = LogManager.getLogger(TicketRepository.class);
-    private String url;
 
-    public TicketRepository() {
+    public TicketRepository(Properties properties) {
         log.info("Initializing TicketRepository...");
-        Properties props = new Properties();
-        try (FileInputStream fis = new FileInputStream("db.properties")) {
-            props.load(fis);
-            this.url = props.getProperty("db.url");
-            log.debug("Loaded db.url = {}", this.url);
-        } catch (IOException e) {
-            log.error("Failed to load db.properties", e);
-        }
+        jdbcUtils = new JdbcUtils(properties);
     }
 
     @Override
@@ -34,23 +26,37 @@ public class TicketRepository implements Repository<Long, Ticket> {
         if (id == null) {
             throw new IllegalArgumentException("ID must not be null.");
         }
-        String sql = "SELECT id, match_id, seatNumber, sold, price FROM Ticket WHERE id = ?";
-        try (Connection conn = DriverManager.getConnection(url);
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+        String sql = "SELECT id, match_id, seatNumber, sold, price, user_id FROM Ticket WHERE id = ?";
+
+        try (Connection connection = jdbcUtils.getConnection();
+             PreparedStatement stmt = connection.prepareStatement(sql)) {
+
             stmt.setLong(1, id);
+
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     Long ticketId = rs.getLong("id");
                     Long matchId = rs.getLong("match_id");
                     int seatNumber = rs.getInt("seatNumber");
-                    int soldInt = rs.getInt("sold");
-                    boolean sold = soldInt != 0;
+                    boolean sold = rs.getInt("sold") != 0;
                     double price = rs.getDouble("price");
-                    // Create a minimal Match object with only its id set
+
+                    // Handle nullable user_id
+                    Long userId = null;
+                    Object userIdObj = rs.getObject("user_id");
+                    if (userIdObj != null) {
+                        userId = ((Number) userIdObj).longValue();
+                    }
+
+                    // Create minimal Match object
                     Match match = new Match();
                     match.setId(matchId);
-                    Ticket ticket = new Ticket(ticketId, match, seatNumber, sold, price);
-                    return Optional.of(ticket);
+
+                    // Look up User if userId exists
+                    Optional<User> user = Optional.empty();
+
+                    return Optional.of(new Ticket(ticketId, match, seatNumber, sold, price, user));
                 }
             }
         } catch (SQLException e) {
@@ -62,21 +68,34 @@ public class TicketRepository implements Repository<Long, Ticket> {
     @Override
     public Iterable<Ticket> findAll() {
         List<Ticket> tickets = new ArrayList<>();
-        String sql = "SELECT id, match_id, seatNumber, sold, price FROM Ticket";
-        try (Connection conn = DriverManager.getConnection(url);
-             Statement stmt = conn.createStatement();
+        String sql = "SELECT id, match_id, seatNumber, sold, price, user_id FROM Ticket";
+
+        try (Connection connection = jdbcUtils.getConnection();
+             Statement stmt = connection.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
+
             while (rs.next()) {
                 Long ticketId = rs.getLong("id");
                 Long matchId = rs.getLong("match_id");
                 int seatNumber = rs.getInt("seatNumber");
-                int soldInt = rs.getInt("sold");
-                boolean sold = soldInt != 0;
+                boolean sold = rs.getInt("sold") != 0;
                 double price = rs.getDouble("price");
+
+                // Handle nullable user_id
+                Long userId = null;
+                Object userIdObj = rs.getObject("user_id");
+                if (userIdObj != null) {
+                    userId = ((Number) userIdObj).longValue();
+                }
+
+                // Create minimal Match object
                 Match match = new Match();
                 match.setId(matchId);
-                Ticket ticket = new Ticket(ticketId, match, seatNumber, sold, price);
-                tickets.add(ticket);
+
+                // Look up User if userId exists
+                Optional<User> user = Optional.empty();
+
+                tickets.add(new Ticket(ticketId, match, seatNumber, sold, price, user));
             }
         } catch (SQLException e) {
             log.error("Error retrieving all tickets", e);
@@ -89,15 +108,22 @@ public class TicketRepository implements Repository<Long, Ticket> {
         if (entity == null) {
             throw new IllegalArgumentException("Entity must not be null.");
         }
-        String sql = "INSERT INTO Ticket (id, match_id, seatNumber, sold, price) VALUES (?, ?, ?, ?, ?)";
-        try (Connection conn = DriverManager.getConnection(url);
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setLong(1, entity.getId());
-            stmt.setLong(2, entity.getMatch().getId());
-            stmt.setInt(3, entity.getSeatNumber());
-            stmt.setInt(4, entity.isSold() ? 1 : 0);
-            stmt.setDouble(5, entity.getPrice());
+        String sql = "INSERT INTO Ticket (match_id, seatNumber, sold, price, user_id) VALUES (?, ?, ?, ?, ?)";
+
+        try (Connection connection = jdbcUtils.getConnection();
+             PreparedStatement stmt = connection.prepareStatement(sql)) {
+
+            stmt.setLong(1, entity.getMatch().getId());
+            stmt.setInt(2, entity.getSeatNumber());
+            stmt.setInt(3, entity.isSold() ? 1 : 0);
+            stmt.setDouble(4, entity.getPrice());
+
+            if (entity.getUser().isEmpty()) {
+                stmt.setNull(5, Types.NULL);
+            } else {
+                stmt.setLong(5, entity.getUser().get().getId());
+            }
 
             int rows = stmt.executeUpdate();
             log.info("Inserted {} row(s) into Ticket table for ticket id={}.", rows, entity.getId());
@@ -113,13 +139,17 @@ public class TicketRepository implements Repository<Long, Ticket> {
         if (id == null) {
             throw new IllegalArgumentException("ID must not be null.");
         }
+
         Optional<Ticket> ticketOpt = findOne(id);
         if (ticketOpt.isEmpty()) {
             return Optional.empty();
         }
+
         String sql = "DELETE FROM Ticket WHERE id = ?";
-        try (Connection conn = DriverManager.getConnection(url);
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+        try (Connection connection = jdbcUtils.getConnection();
+             PreparedStatement stmt = connection.prepareStatement(sql)) {
+
             stmt.setLong(1, id);
             int rows = stmt.executeUpdate();
             log.info("Deleted {} row(s) from Ticket table for ticket id={}.", rows, id);
@@ -134,15 +164,24 @@ public class TicketRepository implements Repository<Long, Ticket> {
         if (entity == null) {
             throw new IllegalArgumentException("Entity must not be null.");
         }
-        String sql = "UPDATE Ticket SET match_id = ?, seatNumber = ?, sold = ?, price = ? WHERE id = ?";
-        try (Connection conn = DriverManager.getConnection(url);
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+        String sql = "UPDATE Ticket SET match_id = ?, seatNumber = ?, sold = ?, price = ?, user_id = ? WHERE id = ?";
+
+        try (Connection connection = jdbcUtils.getConnection();
+             PreparedStatement stmt = connection.prepareStatement(sql)) {
 
             stmt.setLong(1, entity.getMatch().getId());
             stmt.setInt(2, entity.getSeatNumber());
             stmt.setInt(3, entity.isSold() ? 1 : 0);
             stmt.setDouble(4, entity.getPrice());
-            stmt.setLong(5, entity.getId());
+
+            if (entity.getUser().isEmpty()) {
+                stmt.setNull(5, Types.NULL);
+            } else {
+                stmt.setLong(5, entity.getUser().get().getId());
+            }
+
+            stmt.setLong(6, entity.getId());
 
             int rows = stmt.executeUpdate();
             if (rows == 0) {
@@ -155,5 +194,166 @@ public class TicketRepository implements Repository<Long, Ticket> {
             log.error("Error updating Ticket: {}", entity, e);
             return Optional.of(entity);
         }
+    }
+
+
+    @Override
+    public int countAvailableTicketsByMatch(Long matchId) throws RepositoryException {
+        String sql = "SELECT COUNT(*) FROM Ticket WHERE match_id = ? AND sold = 0";
+
+        try (Connection connection = jdbcUtils.getConnection();
+             PreparedStatement stmt = connection.prepareStatement(sql)) {
+
+            stmt.setLong(1, matchId);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+            return 0;
+        } catch (SQLException e) {
+            throw new RepositoryException(String.format("Error counting available tickets. %s", e));
+        }
+    }
+
+    @Override
+    public String ticketPriceRangeByMatch(Long matchId) throws RepositoryException {
+        String sql = "SELECT price FROM Ticket WHERE match_id = ? AND sold = 0";
+        List<Double> ticketPriceList = new ArrayList<>();
+        try (Connection connection = jdbcUtils.getConnection();
+             PreparedStatement stmt = connection.prepareStatement(sql)) {
+
+            stmt.setLong(1, matchId);
+            ResultSet rs = stmt.executeQuery();
+
+            while(rs.next()) {
+                double price = rs.getDouble("price");
+                ticketPriceList.add(price);
+            }
+
+            double minValue = ticketPriceList.stream()
+                    .min(Comparator.naturalOrder())
+                    .orElse(0.0);
+
+            double maxValue = ticketPriceList.stream()
+                    .max(Comparator.naturalOrder())
+                    .orElse(0.0);
+
+            return String.format("$%.2f - $%.2f", minValue, maxValue);
+        } catch (SQLException e) {
+            throw new RepositoryException(String.format("Error counting available tickets. %s", e));
+        }
+    }
+
+    @Override
+    public Double sellTickets(TicketSale ticketSale, User customer) throws RepositoryException {
+        Connection connection = null;
+        try {
+            connection = jdbcUtils.getConnection();
+            connection.setAutoCommit(false); // Start transaction
+
+            // 1. Get available tickets for this match ordered by price (cheapest first)
+            String selectSql = "SELECT id, price FROM Ticket " +
+                    "WHERE match_id = ? AND sold = 0 " +
+                    "ORDER BY price ASC " +
+                    "LIMIT ?";
+
+            List<TicketInfo> ticketsToSell = new ArrayList<>();
+            double totalCost = 0.0;
+
+            try (PreparedStatement selectStmt = connection.prepareStatement(selectSql)) {
+                selectStmt.setLong(1, ticketSale.getMatchId());
+                selectStmt.setInt(2, ticketSale.getSeatsPurchased());
+
+                ResultSet rs = selectStmt.executeQuery();
+                while (rs.next()) {
+                    TicketInfo ticket = new TicketInfo(
+                            rs.getLong("id"),
+                            rs.getDouble("price")
+                    );
+                    ticketsToSell.add(ticket);
+                    totalCost += ticket.getPrice();
+                }
+            }
+
+
+            // 3. Update the tickets
+            String updateSql = "UPDATE Ticket SET sold = 1, user_id = ? WHERE id = ?";
+            try (PreparedStatement updateStmt = connection.prepareStatement(updateSql)) {
+                for (TicketInfo ticket : ticketsToSell) {
+                    updateStmt.setLong(1, customer.getId());
+                    updateStmt.setLong(2, ticket.getId());
+                    updateStmt.addBatch();
+                }
+                updateStmt.executeBatch();
+            }
+
+            connection.commit();
+            return totalCost;
+
+        } catch (SQLException e) {
+            try {
+                if (connection != null) {
+                    connection.rollback();
+                }
+            } catch (SQLException ex) {
+                throw new RepositoryException("Failed to rollback transaction " + ex.getMessage());
+            }
+            throw new RepositoryException("Error selling tickets: " + e.getMessage());
+        } finally {
+            try {
+                if (connection != null) {
+                    connection.setAutoCommit(true);
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                throw new RepositoryException(String.format("Error closing connection %s", e));
+            }
+        }
+    }
+
+    @Override
+    public List<Ticket> findTicketsBoughtByUser(User user) throws RepositoryException {
+        List<Ticket> tickets = new ArrayList<>();
+        String sql = "SELECT id, match_id, seatNumber, sold, price, user_id FROM Ticket WHERE user_id = ?";
+
+        try (Connection connection = jdbcUtils.getConnection();
+             PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setLong(1, user.getId());
+            try(ResultSet rs = stmt.executeQuery()) {
+
+                while (rs.next()) {
+                    Long ticketId = rs.getLong("id");
+                    Long matchId = rs.getLong("match_id");
+                    int seatNumber = rs.getInt("seatNumber");
+                    boolean sold = rs.getInt("sold") != 0;
+                    double price = rs.getDouble("price");
+
+
+                    // Create minimal Match object
+                    Match match = new Match();
+                    match.setId(matchId);
+
+                    tickets.add(new Ticket(ticketId, match, seatNumber, sold, price, Optional.of(user)));
+                }
+            }
+        } catch (SQLException e) {
+            log.error("Error retrieving all tickets", e);
+        }
+        return tickets;
+    }
+
+    // Helper class to store ticket info during transaction
+    private static class TicketInfo {
+        private final Long id;
+        private final Double price;
+
+        public TicketInfo(Long id, Double price) {
+            this.id = id;
+            this.price = price;
+        }
+
+        public Long getId() { return id; }
+        public Double getPrice() { return price; }
     }
 }

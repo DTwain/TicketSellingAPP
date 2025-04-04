@@ -3,30 +3,24 @@ package org.example.repository;
 import org.example.domain.Match;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.example.repository.interfaces.MatchInterface;
 
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Properties;
 
-public class MatchRepository implements Repository<Long, Match> {
+public class MatchRepository implements MatchInterface {
+    private JdbcUtils jdbcUtils;
     private static final Logger log = LogManager.getLogger(MatchRepository.class);
-    private String url;
 
-    public MatchRepository() {
+    public MatchRepository(Properties properties) {
         log.info("Initializing MatchDbRepository...");
-        Properties props = new Properties();
-        try (FileInputStream fis = new FileInputStream("db.properties")) {
-            props.load(fis);
-            this.url = props.getProperty("db.url");
-            log.debug("Loaded db.url = {}", this.url);
-        } catch (IOException e) {
-            log.error("Failed to load db.properties", e);
-        }
+        jdbcUtils = new JdbcUtils(properties);
     }
 
     @Override
@@ -34,19 +28,22 @@ public class MatchRepository implements Repository<Long, Match> {
         if (id == null) {
             throw new IllegalArgumentException("ID must not be null.");
         }
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String sql = "SELECT id, teamA, teamB, dateTime FROM Match WHERE id = ?";
-        try (Connection conn = DriverManager.getConnection(url);
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+        try (Connection connection = jdbcUtils.getConnection();
+             PreparedStatement stmt = connection.prepareStatement(sql)) {
+
             stmt.setLong(1, id);
+
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     Long matchId = rs.getLong("id");
                     String teamA = rs.getString("teamA");
                     String teamB = rs.getString("teamB");
                     String dtStr = rs.getString("dateTime");
-                    LocalDateTime dateTime = LocalDateTime.parse(dtStr);
-                    Match match = new Match(matchId, teamA, teamB, dateTime);
-                    return Optional.of(match);
+                    LocalDateTime dateTime = LocalDateTime.parse(dtStr, formatter);
+                    return Optional.of(new Match(matchId, teamA, teamB, dateTime));
                 }
             }
         } catch (SQLException e) {
@@ -59,17 +56,38 @@ public class MatchRepository implements Repository<Long, Match> {
     public Iterable<Match> findAll() {
         List<Match> matches = new ArrayList<>();
         String sql = "SELECT id, teamA, teamB, dateTime FROM Match";
-        try (Connection conn = DriverManager.getConnection(url);
-             Statement stmt = conn.createStatement();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+        try (Connection connection = jdbcUtils.getConnection();
+             Statement stmt = connection.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
+
             while (rs.next()) {
-                Long id = rs.getLong("id");
-                String teamA = rs.getString("teamA");
-                String teamB = rs.getString("teamB");
-                String dtStr = rs.getString("dateTime");
-                LocalDateTime dateTime = LocalDateTime.parse(dtStr);
-                Match match = new Match(id, teamA, teamB, dateTime);
-                matches.add(match);
+                Long id = null;
+                String teamA = null;
+                String teamB = null;
+                String dtStr = null;
+                try {
+                    id = rs.getLong("id");
+                    teamA = rs.getString("teamA");
+                    teamB = rs.getString("teamB");
+                    dtStr = rs.getString("dateTime");
+
+                    // Handle NULL values
+                    if (dtStr == null) {
+                        matches.add(new Match(id, teamA, teamB, null));
+                        continue;
+                    }
+
+                    // Parse with the specific format
+                    LocalDateTime dateTime = LocalDateTime.parse(dtStr, formatter);
+                    matches.add(new Match(id, teamA, teamB, dateTime));
+
+                } catch (DateTimeParseException e) {
+                    log.error("Failed to parse dateTime '{}' for match ID {}", dtStr, id, e);
+                    // Optionally: add with null date or current time
+                    matches.add(new Match(id, teamA, teamB, null));
+                }
             }
         } catch (SQLException e) {
             log.error("Error retrieving all matches", e);
@@ -82,14 +100,14 @@ public class MatchRepository implements Repository<Long, Match> {
         if (entity == null) {
             throw new IllegalArgumentException("Entity must not be null.");
         }
-        String sql = "INSERT INTO Match (id, teamA, teamB, dateTime) VALUES (?, ?, ?, ?)";
-        try (Connection conn = DriverManager.getConnection(url);
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        String sql = "INSERT INTO Match (teamA, teamB, dateTime) VALUES (?, ?, ?)";
 
-            stmt.setLong(1, entity.getId());
-            stmt.setString(2, entity.getTeamA());
-            stmt.setString(3, entity.getTeamB());
-            stmt.setString(4, entity.getDateTime().toString());
+        try (Connection connection = jdbcUtils.getConnection();
+             PreparedStatement stmt = connection.prepareStatement(sql)) {
+
+            stmt.setString(1, entity.getTeamA());
+            stmt.setString(2, entity.getTeamB());
+            stmt.setString(3, entity.getDateTime().toString());
 
             int rows = stmt.executeUpdate();
             log.info("Inserted {} row(s) into Match table for match id={}.", rows, entity.getId());
@@ -109,9 +127,11 @@ public class MatchRepository implements Repository<Long, Match> {
         if (matchOpt.isEmpty()) {
             return Optional.empty();
         }
+
         String sql = "DELETE FROM Match WHERE id = ?";
-        try (Connection conn = DriverManager.getConnection(url);
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection connection = jdbcUtils.getConnection();
+             PreparedStatement stmt = connection.prepareStatement(sql)) {
+
             stmt.setLong(1, id);
             int rows = stmt.executeUpdate();
             log.info("Deleted {} row(s) from Match table for match id={}.", rows, id);
@@ -127,8 +147,9 @@ public class MatchRepository implements Repository<Long, Match> {
             throw new IllegalArgumentException("Entity must not be null.");
         }
         String sql = "UPDATE Match SET teamA = ?, teamB = ?, dateTime = ? WHERE id = ?";
-        try (Connection conn = DriverManager.getConnection(url);
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+        try (Connection connection = jdbcUtils.getConnection();
+             PreparedStatement stmt = connection.prepareStatement(sql)) {
 
             stmt.setString(1, entity.getTeamA());
             stmt.setString(2, entity.getTeamB());

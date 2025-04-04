@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <util:properties id="jdbcProps1">
+        <prop key="jdbc.url">jdbc:sqlite:D:\\Facultate\\an2\\sem2\\MPP\\lab\\mpp-proiect-java-DTwain\\bileteBasket.db</prop>
+    </util:properties>
+
+    <util:properties id="jdbcProps" location="classpath:bd.config"/>
+
+    <bean id="matchRepository" class="org.example.repository.MatchRepository">
+        <constructor-arg ref="jdbcProps"/>
+    </bean>
+
+    <bean id="ticketRepository" class="org.example.repository.TicketRepository">
+        <constructor-arg ref="jdbcProps"/>
+    </bean>
+
+    <bean id="userRepository" class="org.example.repository.UserRepository">
+        <constructor-arg ref="jdbcProps"/>
+    </bean>
+
+    <bean id="matchService" class="org.example.service.MatchService">
+        <constructor-arg ref="matchRepository"></constructor-arg>
+    </bean>
+
+    <bean id="ticketService" class="org.example.service.TicketService">
+        <constructor-arg ref="ticketRepository"></constructor-arg>
+        <constructor-arg ref="userRepository"></constructor-arg>
+        <constructor-arg ref="matchRepository"></constructor-arg>
+    </bean>
+
+    <bean id="userService" class="org.example.service.UserService">
+        <constructor-arg ref="ticketService"></constructor-arg>
+        <constructor-arg ref="userRepository"></constructor-arg>
+    </bean>
+
+    <bean id="ticketShop" class="org.example.service.AllServices">
+        <constructor-arg ref="matchService"/>
+        <constructor-arg ref="ticketService"/>
+        <constructor-arg ref="userService"/>
+    </bean>
+
+
+
+
+</beans>
