@@ -215,7 +215,7 @@ public class SellerDashboardController implements Observer<EntityChangeType<?>> 
             CustomerSearchController controller = loader.getController();
             controller.setServices(services);
 
-            // Set up the stage
+            // Set up the stagegit
             searchStage.setTitle("Search Customer Tickets");
             searchStage.setScene(new Scene(root));
             searchStage.show();

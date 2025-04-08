@@ -4,12 +4,14 @@ import org.example.domain.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.example.repository.interfaces.UserInterface;
+import org.example.repository.crypto.CryptoUtil;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Properties;
+
 
 public class UserRepository implements UserInterface {
     private JdbcUtils jdbcUtils;
@@ -38,7 +40,8 @@ public class UserRepository implements UserInterface {
                     Long userId = rs.getLong("id");
                     String username = rs.getString("username");
                     String password = rs.getString("password");
-                    return Optional.of(new User(userId, username, password));
+                    String passwordDecrypted = CryptoUtil.decrypt(password);
+                    return Optional.of(new User(userId, username, passwordDecrypted));
                 }
             }
         } catch (SQLException e) {
@@ -60,7 +63,8 @@ public class UserRepository implements UserInterface {
                 Long id = rs.getLong("id");
                 String username = rs.getString("username");
                 String password = rs.getString("password");
-                users.add(new User(id, username, password));
+                String passwordDecrypted = CryptoUtil.decrypt(password);
+                users.add(new User(id, username, passwordDecrypted));
             }
         } catch (SQLException e) {
             log.error("Error retrieving all users", e);
@@ -80,7 +84,10 @@ public class UserRepository implements UserInterface {
              PreparedStatement stmt = connection.prepareStatement(sql)) {
 
             stmt.setString(1, entity.getUsername());
-            stmt.setString(2, entity.getPassword());
+
+            String password = entity.getPassword();
+            String encryptedPassword = CryptoUtil.encrypt(password);
+            stmt.setString(2, encryptedPassword);
 
             int rows = stmt.executeUpdate();
             log.info("Inserted {} row(s) into User table for user id={}.", rows, entity.getId());
@@ -128,7 +135,8 @@ public class UserRepository implements UserInterface {
              PreparedStatement stmt = connection.prepareStatement(sql)) {
 
             stmt.setString(1, entity.getUsername());
-            stmt.setString(2, entity.getPassword());
+            String encryptedPassword = CryptoUtil.encrypt(entity.getPassword());
+            stmt.setString(2, encryptedPassword);
             stmt.setLong(3, entity.getId());
 
             int rows = stmt.executeUpdate();
@@ -160,8 +168,9 @@ public class UserRepository implements UserInterface {
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     Long userId = rs.getLong("id");
-                    String password = rs.getString("password");
-                    return Optional.of(new User(userId, username, password));
+                    String passwordEntrypted = rs.getString("password");
+                    String passwordDecrypted = CryptoUtil.decrypt(passwordEntrypted);
+                    return Optional.of(new User(userId, username, passwordDecrypted));
                 }
             }
         } catch (SQLException e) {
