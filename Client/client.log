@@ -1,0 +1,210 @@
+2025-05-07 13:45:02 INFO  MainFX:30 - Client properties loaded
+2025-05-07 13:45:03 INFO  MainFX:73 - Application started successfully
+2025-05-07 13:45:06 INFO  BasketballServicesProxy:51 - Connected to server at localhost:55556
+2025-05-07 13:45:06 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"LOGIN","data":{"username":"david","password":"123"}}
+2025-05-07 13:45:06 DEBUG BasketballServicesProxy:79 - Received response: {"type":"USER","data":{"userType":"SELLER","user":{"id":1,"username":"david","password":"123"}}}
+2025-05-07 13:45:06 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"CHECK_TICKET_SELLER","data":"david"}
+2025-05-07 13:45:06 DEBUG BasketballServicesProxy:79 - Received response: {"type":"IS_TICKET_SELLER","data":true}
+2025-05-07 13:45:07 INFO  SellerDashboardController:90 - Current seller username set: david
+2025-05-07 13:45:14 INFO  MainFX:30 - Client properties loaded
+2025-05-07 13:45:15 INFO  MainFX:73 - Application started successfully
+2025-05-07 13:45:18 INFO  BasketballServicesProxy:51 - Connected to server at localhost:55556
+2025-05-07 13:45:18 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"LOGIN","data":{"username":"luca","password":"123"}}
+2025-05-07 13:45:18 DEBUG BasketballServicesProxy:79 - Received response: {"type":"USER","data":{"userType":"USER","user":{"id":2,"username":"luca","password":"123"}}}
+2025-05-07 13:45:18 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"CHECK_TICKET_SELLER","data":"luca"}
+2025-05-07 13:45:18 DEBUG BasketballServicesProxy:79 - Received response: {"type":"IS_TICKET_SELLER","data":false}
+2025-05-07 13:45:19 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"LOGIN","data":{"username":"luca"}}
+2025-05-07 13:45:19 DEBUG BasketballServicesProxy:79 - Received response: {"type":"ERROR","error":"Authentication failed"}
+2025-05-07 13:45:19 ERROR ClientDashboardController:90 - User not found: luca
+2025-05-07 13:46:35 INFO  MainFX:30 - Client properties loaded
+2025-05-07 13:46:36 INFO  MainFX:73 - Application started successfully
+2025-05-07 13:46:39 INFO  BasketballServicesProxy:51 - Connected to server at localhost:55556
+2025-05-07 13:46:39 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"LOGIN","data":{"username":"luca","password":"123"}}
+2025-05-07 13:46:39 DEBUG BasketballServicesProxy:79 - Received response: {"type":"USER","data":{"userType":"USER","user":{"id":2,"username":"luca","password":"123"}}}
+2025-05-07 13:46:39 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"CHECK_TICKET_SELLER","data":"luca"}
+2025-05-07 13:46:39 DEBUG BasketballServicesProxy:79 - Received response: {"type":"IS_TICKET_SELLER","data":false}
+2025-05-07 13:46:40 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"LOGIN","data":{"username":"luca"}}
+2025-05-07 13:46:40 DEBUG BasketballServicesProxy:79 - Received response: {"type":"ERROR","error":"Authentication failed"}
+2025-05-07 13:46:40 ERROR ClientDashboardController:90 - User not found: luca
+2025-05-07 13:47:07 INFO  MainFX:30 - Client properties loaded
+2025-05-07 13:47:07 INFO  MainFX:73 - Application started successfully
+2025-05-07 13:47:10 INFO  BasketballServicesProxy:51 - Connected to server at localhost:55556
+2025-05-07 13:47:10 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"LOGIN","data":{"username":"alex","password":"123"}}
+2025-05-07 13:47:10 DEBUG BasketballServicesProxy:79 - Received response: {"type":"USER","data":{"userType":"SELLER","user":{"id":3,"username":"alex","password":"123"}}}
+2025-05-07 13:47:10 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"CHECK_TICKET_SELLER","data":"alex"}
+2025-05-07 13:47:10 DEBUG BasketballServicesProxy:79 - Received response: {"type":"IS_TICKET_SELLER","data":true}
+2025-05-07 13:47:12 INFO  SellerDashboardController:90 - Current seller username set: alex
+2025-05-07 14:20:41 INFO  MainFX:30 - Client properties loaded
+2025-05-07 14:20:41 INFO  MainFX:73 - Application started successfully
+2025-05-07 14:20:46 INFO  BasketballServicesProxy:51 - Connected to server at localhost:55556
+2025-05-07 14:20:46 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"LOGIN","data":{"username":"luca","password":"123"}}
+2025-05-07 14:20:46 DEBUG BasketballServicesProxy:79 - Received response: {"type":"USER","data":{"userType":"USER","user":{"id":2,"username":"luca","password":"123"}}}
+2025-05-07 14:20:46 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"CHECK_TICKET_SELLER","data":"luca"}
+2025-05-07 14:20:46 DEBUG BasketballServicesProxy:79 - Received response: {"type":"IS_TICKET_SELLER","data":false}
+2025-05-07 14:20:50 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"LOGIN","data":{"username":"luca"}}
+2025-05-07 14:20:50 DEBUG BasketballServicesProxy:79 - Received response: {"type":"ERROR","error":"Authentication failed"}
+2025-05-07 14:20:50 ERROR ClientDashboardController:90 - User not found: luca
+2025-05-07 14:30:37 INFO  MainFX:30 - Client properties loaded
+2025-05-07 14:30:38 INFO  MainFX:73 - Application started successfully
+2025-05-07 14:30:42 INFO  BasketballServicesProxy:51 - Connected to server at localhost:55556
+2025-05-07 14:30:42 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"LOGIN","data":{"username":"luca","password":"123"}}
+2025-05-07 14:30:42 DEBUG BasketballServicesProxy:79 - Received response: {"type":"USER","data":{"userType":"USER","user":{"id":2,"username":"luca","password":"123"}}}
+2025-05-07 14:30:42 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"CHECK_TICKET_SELLER","data":"luca"}
+2025-05-07 14:30:42 DEBUG BasketballServicesProxy:79 - Received response: {"type":"IS_TICKET_SELLER","data":false}
+2025-05-07 14:30:43 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"LOGIN","data":{"username":"luca"}}
+2025-05-07 14:30:43 DEBUG BasketballServicesProxy:79 - Received response: {"type":"ERROR","error":"Authentication failed"}
+2025-05-07 14:30:43 ERROR ClientDashboardController:90 - User not found: luca
+2025-05-07 14:31:33 INFO  MainFX:30 - Client properties loaded
+2025-05-07 14:31:34 INFO  MainFX:73 - Application started successfully
+2025-05-07 14:31:44 INFO  MainFX:30 - Client properties loaded
+2025-05-07 14:31:44 INFO  MainFX:73 - Application started successfully
+2025-05-07 14:31:54 INFO  BasketballServicesProxy:51 - Connected to server at localhost:55556
+2025-05-07 14:31:54 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"LOGIN","data":{"username":"luca","password":"123"}}
+2025-05-07 14:31:55 DEBUG BasketballServicesProxy:79 - Received response: {"type":"USER","data":{"userType":"USER","user":{"id":2,"username":"luca","password":"123"}}}
+2025-05-07 14:31:55 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"CHECK_TICKET_SELLER","data":"luca"}
+2025-05-07 14:31:55 DEBUG BasketballServicesProxy:79 - Received response: {"type":"IS_TICKET_SELLER","data":false}
+2025-05-07 14:32:02 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"LOGIN","data":{"username":"luca"}}
+2025-05-07 14:32:02 DEBUG BasketballServicesProxy:79 - Received response: {"type":"ERROR","error":"Authentication failed"}
+2025-05-07 14:32:02 ERROR ClientDashboardController:90 - User not found: luca
+2025-05-07 14:45:15 INFO  MainFX:30 - Client properties loaded
+2025-05-07 14:45:15 INFO  MainFX:73 - Application started successfully
+2025-05-07 14:45:19 INFO  BasketballServicesProxy:51 - Connected to server at localhost:55556
+2025-05-07 14:45:19 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"LOGIN","data":{"username":"luca","password":"123"}}
+2025-05-07 14:45:19 DEBUG BasketballServicesProxy:79 - Received response: {"type":"USER","data":{"userType":"USER","user":{"id":2,"username":"luca","password":"123"}}}
+2025-05-07 14:45:19 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"CHECK_TICKET_SELLER","data":"luca"}
+2025-05-07 14:45:19 DEBUG BasketballServicesProxy:79 - Received response: {"type":"IS_TICKET_SELLER","data":false}
+2025-05-07 14:45:20 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"LOGIN","data":{"username":"luca"}}
+2025-05-07 14:45:20 DEBUG BasketballServicesProxy:79 - Received response: {"type":"ERROR","error":"Authentication failed"}
+2025-05-07 14:46:26 INFO  MainFX:30 - Client properties loaded
+2025-05-07 14:46:26 INFO  MainFX:73 - Application started successfully
+2025-05-07 14:46:29 INFO  BasketballServicesProxy:51 - Connected to server at localhost:55556
+2025-05-07 14:46:29 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"LOGIN","data":{"username":"luca","password":"123"}}
+2025-05-07 14:46:29 DEBUG BasketballServicesProxy:79 - Received response: {"type":"USER","data":{"userType":"USER","user":{"id":2,"username":"luca","password":"123"}}}
+2025-05-07 14:46:29 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"CHECK_TICKET_SELLER","data":"luca"}
+2025-05-07 14:46:29 DEBUG BasketballServicesProxy:79 - Received response: {"type":"IS_TICKET_SELLER","data":false}
+2025-05-07 14:46:43 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"LOGIN","data":{"username":"luca"}}
+2025-05-07 14:46:43 DEBUG BasketballServicesProxy:79 - Received response: {"type":"ERROR","error":"Authentication failed"}
+2025-05-07 14:48:57 INFO  MainFX:30 - Client properties loaded
+2025-05-07 14:48:58 INFO  MainFX:73 - Application started successfully
+2025-05-07 14:49:02 ERROR BasketballServicesProxy:54 - Cannot connect to server: Connection refused: connect
+2025-05-07 14:49:02 ERROR LoginController:105 - Login error
+org.example.service.ServicesException: Cannot connect to server
+	at org.example.network.rpc.BasketballServicesProxy.ensureConnected(BasketballServicesProxy.java:55) ~[Networking-1.0-SNAPSHOT.jar:?]
+	at org.example.network.rpc.BasketballServicesProxy.sendRequest(BasketballServicesProxy.java:73) ~[Networking-1.0-SNAPSHOT.jar:?]
+	at org.example.network.rpc.BasketballServicesProxy.authenticate(BasketballServicesProxy.java:245) ~[Networking-1.0-SNAPSHOT.jar:?]
+	at org.example.controller.LoginController.handleLogin(LoginController.java:90) ~[main/:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[?:?]
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:569) ~[?:?]
+	at com.sun.javafx.reflect.Trampoline.invoke(MethodUtil.java:77) ~[javafx-base-17.0.2-win.jar:?]
+	at jdk.internal.reflect.GeneratedMethodAccessor2.invoke(Unknown Source) ~[?:?]
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:569) ~[?:?]
+	at com.sun.javafx.reflect.MethodUtil.invoke(MethodUtil.java:275) ~[javafx-base-17.0.2-win.jar:?]
+	at com.sun.javafx.fxml.MethodHelper.invoke(MethodHelper.java:84) ~[javafx-fxml-17.0.2-win.jar:?]
+	at javafx.fxml.FXMLLoader$MethodHandler.invoke(FXMLLoader.java:1852) ~[javafx-fxml-17.0.2-win.jar:?]
+	at javafx.fxml.FXMLLoader$ControllerMethodEventHandler.handle(FXMLLoader.java:1724) ~[javafx-fxml-17.0.2-win.jar:?]
+	at com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:86) ~[javafx-base-17.0.2-win.jar:?]
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:234) ~[javafx-base-17.0.2-win.jar:?]
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:191) ~[javafx-base-17.0.2-win.jar:?]
+	at com.sun.javafx.event.CompositeEventDispatcher.dispatchBubblingEvent(CompositeEventDispatcher.java:59) ~[javafx-base-17.0.2-win.jar:?]
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:58) ~[javafx-base-17.0.2-win.jar:?]
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114) ~[javafx-base-17.0.2-win.jar:?]
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56) ~[javafx-base-17.0.2-win.jar:?]
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114) ~[javafx-base-17.0.2-win.jar:?]
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56) ~[javafx-base-17.0.2-win.jar:?]
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114) ~[javafx-base-17.0.2-win.jar:?]
+	at com.sun.javafx.event.EventUtil.fireEventImpl(EventUtil.java:74) ~[javafx-base-17.0.2-win.jar:?]
+	at com.sun.javafx.event.EventUtil.fireEvent(EventUtil.java:49) ~[javafx-base-17.0.2-win.jar:?]
+	at javafx.event.Event.fireEvent(Event.java:198) ~[javafx-base-17.0.2-win.jar:?]
+	at javafx.scene.Node.fireEvent(Node.java:8792) ~[javafx-graphics-17.0.2-win.jar:?]
+	at javafx.scene.control.Button.fire(Button.java:203) ~[javafx-controls-17.0.2-win.jar:?]
+	at com.sun.javafx.scene.control.behavior.ButtonBehavior.mouseReleased(ButtonBehavior.java:208) ~[javafx-controls-17.0.2-win.jar:?]
+	at com.sun.javafx.scene.control.inputmap.InputMap.handle(InputMap.java:274) ~[javafx-controls-17.0.2-win.jar:?]
+	at com.sun.javafx.event.CompositeEventHandler$NormalEventHandlerRecord.handleBubblingEvent(CompositeEventHandler.java:247) ~[javafx-base-17.0.2-win.jar:?]
+	at com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:80) ~[javafx-base-17.0.2-win.jar:?]
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:234) ~[javafx-base-17.0.2-win.jar:?]
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:191) ~[javafx-base-17.0.2-win.jar:?]
+	at com.sun.javafx.event.CompositeEventDispatcher.dispatchBubblingEvent(CompositeEventDispatcher.java:59) ~[javafx-base-17.0.2-win.jar:?]
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:58) ~[javafx-base-17.0.2-win.jar:?]
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114) ~[javafx-base-17.0.2-win.jar:?]
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56) ~[javafx-base-17.0.2-win.jar:?]
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114) ~[javafx-base-17.0.2-win.jar:?]
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56) ~[javafx-base-17.0.2-win.jar:?]
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114) ~[javafx-base-17.0.2-win.jar:?]
+	at com.sun.javafx.event.EventUtil.fireEventImpl(EventUtil.java:74) ~[javafx-base-17.0.2-win.jar:?]
+	at com.sun.javafx.event.EventUtil.fireEvent(EventUtil.java:54) ~[javafx-base-17.0.2-win.jar:?]
+	at javafx.event.Event.fireEvent(Event.java:198) ~[javafx-base-17.0.2-win.jar:?]
+	at javafx.scene.Scene$MouseHandler.process(Scene.java:3897) ~[javafx-graphics-17.0.2-win.jar:?]
+	at javafx.scene.Scene.processMouseEvent(Scene.java:1878) ~[javafx-graphics-17.0.2-win.jar:?]
+	at javafx.scene.Scene$ScenePeerListener.mouseEvent(Scene.java:2623) ~[javafx-graphics-17.0.2-win.jar:?]
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler$MouseEventNotification.run(GlassViewEventHandler.java:411) ~[javafx-graphics-17.0.2-win.jar:?]
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler$MouseEventNotification.run(GlassViewEventHandler.java:301) ~[javafx-graphics-17.0.2-win.jar:?]
+	at java.security.AccessController.doPrivileged(AccessController.java:399) ~[?:?]
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler.lambda$handleMouseEvent$2(GlassViewEventHandler.java:450) ~[javafx-graphics-17.0.2-win.jar:?]
+	at com.sun.javafx.tk.quantum.QuantumToolkit.runWithoutRenderLock(QuantumToolkit.java:424) ~[javafx-graphics-17.0.2-win.jar:?]
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler.handleMouseEvent(GlassViewEventHandler.java:449) ~[javafx-graphics-17.0.2-win.jar:?]
+	at com.sun.glass.ui.View.handleMouseEvent(View.java:557) ~[javafx-graphics-17.0.2-win.jar:?]
+	at com.sun.glass.ui.View.notifyMouse(View.java:943) ~[javafx-graphics-17.0.2-win.jar:?]
+	at com.sun.glass.ui.win.WinApplication._runLoop(Native Method) ~[javafx-graphics-17.0.2-win.jar:?]
+	at com.sun.glass.ui.win.WinApplication.lambda$runLoop$3(WinApplication.java:184) ~[javafx-graphics-17.0.2-win.jar:?]
+	at java.lang.Thread.run(Thread.java:840) ~[?:?]
+Caused by: java.net.ConnectException: Connection refused: connect
+	at sun.nio.ch.Net.connect0(Native Method) ~[?:?]
+	at sun.nio.ch.Net.connect(Net.java:579) ~[?:?]
+	at sun.nio.ch.Net.connect(Net.java:568) ~[?:?]
+	at sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:593) ~[?:?]
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:327) ~[?:?]
+	at java.net.Socket.connect(Socket.java:633) ~[?:?]
+	at java.net.Socket.connect(Socket.java:583) ~[?:?]
+	at java.net.Socket.<init>(Socket.java:507) ~[?:?]
+	at java.net.Socket.<init>(Socket.java:287) ~[?:?]
+	at org.example.network.rpc.BasketballServicesProxy.ensureConnected(BasketballServicesProxy.java:48) ~[Networking-1.0-SNAPSHOT.jar:?]
+	... 60 more
+2025-05-07 14:49:22 INFO  MainFX:30 - Client properties loaded
+2025-05-07 14:49:22 INFO  MainFX:73 - Application started successfully
+2025-05-07 14:49:26 INFO  BasketballServicesProxy:51 - Connected to server at localhost:55556
+2025-05-07 14:49:26 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"LOGIN","data":{"username":"luca","password":"123"}}
+2025-05-07 14:49:26 DEBUG BasketballServicesProxy:79 - Received response: {"type":"USER","data":{"userType":"USER","user":{"id":2,"username":"luca","password":"123"}}}
+2025-05-07 14:49:26 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"CHECK_TICKET_SELLER","data":"luca"}
+2025-05-07 14:49:26 DEBUG BasketballServicesProxy:79 - Received response: {"type":"IS_TICKET_SELLER","data":false}
+2025-05-07 14:49:27 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"LOGIN","data":{"username":"luca"}}
+2025-05-07 14:49:27 DEBUG BasketballServicesProxy:79 - Received response: {"type":"ERROR","error":"Authentication failed"}
+2025-05-07 14:49:59 INFO  MainFX:30 - Client properties loaded
+2025-05-07 14:49:59 INFO  MainFX:73 - Application started successfully
+2025-05-07 14:50:07 INFO  MainFX:30 - Client properties loaded
+2025-05-07 14:50:07 INFO  MainFX:73 - Application started successfully
+2025-05-07 14:50:11 INFO  BasketballServicesProxy:51 - Connected to server at localhost:55556
+2025-05-07 14:50:11 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"LOGIN","data":{"username":"david","password":"123"}}
+2025-05-07 14:50:12 DEBUG BasketballServicesProxy:79 - Received response: {"type":"USER","data":{"userType":"SELLER","user":{"id":1,"username":"david","password":"123"}}}
+2025-05-07 14:50:12 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"CHECK_TICKET_SELLER","data":"david"}
+2025-05-07 14:50:12 DEBUG BasketballServicesProxy:79 - Received response: {"type":"IS_TICKET_SELLER","data":true}
+2025-05-07 14:50:13 INFO  SellerDashboardController:90 - Current seller username set: david
+2025-05-07 15:08:24 INFO  MainFX:30 - Client properties loaded
+2025-05-07 15:08:25 INFO  MainFX:73 - Application started successfully
+2025-05-07 15:08:30 INFO  BasketballServicesProxy:51 - Connected to server at localhost:55556
+2025-05-07 15:08:30 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"LOGIN","data":{"username":"luca","password":"12345"}}
+2025-05-07 15:08:30 DEBUG BasketballServicesProxy:79 - Received response: {"type":"ERROR","error":"Authentication failed"}
+2025-05-07 15:08:35 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"LOGIN","data":{"username":"luca","password":"123"}}
+2025-05-07 15:08:35 DEBUG BasketballServicesProxy:79 - Received response: {"type":"USER","data":{"userType":"USER","user":{"id":2,"username":"luca","password":"123"}}}
+2025-05-07 15:08:35 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"CHECK_TICKET_SELLER","data":"luca"}
+2025-05-07 15:08:35 DEBUG BasketballServicesProxy:79 - Received response: {"type":"IS_TICKET_SELLER","data":false}
+2025-05-07 15:08:48 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"LOGIN","data":{"username":"luca"}}
+2025-05-07 15:08:48 DEBUG BasketballServicesProxy:79 - Received response: {"type":"ERROR","error":"Authentication failed"}
+2025-05-07 15:09:10 INFO  MainFX:30 - Client properties loaded
+2025-05-07 15:09:11 INFO  MainFX:73 - Application started successfully
+2025-05-07 15:09:22 INFO  MainFX:30 - Client properties loaded
+2025-05-07 15:09:23 INFO  MainFX:73 - Application started successfully
+2025-05-07 15:09:54 INFO  BasketballServicesProxy:51 - Connected to server at localhost:55556
+2025-05-07 15:09:54 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"LOGIN","data":{"username":"luca","password":"123"}}
+2025-05-07 15:09:54 DEBUG BasketballServicesProxy:79 - Received response: {"type":"USER","data":{"userType":"USER","user":{"id":2,"username":"luca","password":"123"}}}
+2025-05-07 15:11:03 INFO  MainFX:30 - Client properties loaded
+2025-05-07 15:11:03 INFO  MainFX:73 - Application started successfully
+2025-05-07 15:11:10 INFO  BasketballServicesProxy:51 - Connected to server at localhost:55556
+2025-05-07 15:11:10 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"LOGIN","data":{"username":"luca","password":"123"}}
+2025-05-07 15:11:10 DEBUG BasketballServicesProxy:79 - Received response: {"type":"USER","data":{"userType":"USER","user":{"id":2,"username":"luca","password":"123"}}}
+2025-05-07 15:11:49 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"CHECK_TICKET_SELLER","data":"luca"}
+2025-05-07 15:11:49 DEBUG BasketballServicesProxy:79 - Received response: {"type":"IS_TICKET_SELLER","data":false}
+2025-05-07 15:13:41 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"LOGIN","data":{"username":"luca"}}
+2025-05-07 15:13:41 DEBUG BasketballServicesProxy:79 - Received response: {"type":"ERROR","error":"Authentication failed"}
