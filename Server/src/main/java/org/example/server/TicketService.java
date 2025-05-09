@@ -13,6 +13,13 @@ import org.example.persistence.interfaces.UserInterface;
 import org.example.service.ServicesException;
 import org.example.service.interfaces.TicketServiceInterface;
 
+import org.example.utils.observer.TicketObserver;
+
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -21,6 +28,7 @@ public class TicketService implements TicketServiceInterface {
     private final MatchInterface matchRepository;
     private final UserInterface userRepository;
     private static final Logger logger = LogManager.getLogger(TicketService.class);
+    private Map<Long, TicketObserver> registeredObservers = new ConcurrentHashMap<>();
 
     public TicketService(TicketInterface ticketRepository, MatchInterface matchRepository, UserInterface userRepository) {
         this.ticketRepository = ticketRepository;
@@ -72,7 +80,18 @@ public class TicketService implements TicketServiceInterface {
                 throw new ServicesException("User not found");
             }
 
-            return ticketRepository.sellTickets(ticketSale, userOptional.get());
+            Double totalPrice = ticketRepository.sellTickets(ticketSale, userOptional.get());
+
+            Match match = matchOptional.get();
+            User buyer = userOptional.get();
+
+            notifyMatchUpdated(match);
+
+            // Notify the buyer about their tickets
+            notifyUserTicketsChanged(buyer);
+
+            return totalPrice;
+
         } catch (RepositoryException e) {
             logger.error("Error selling tickets for match {}", ticketSale.getMatchId(), e);
             throw new ServicesException("Error selling tickets", e);
@@ -96,6 +115,46 @@ public class TicketService implements TicketServiceInterface {
         } catch (RepositoryException e) {
             logger.error("Error finding tickets for customer {}", name, e);
             throw new ServicesException("Error retrieving customer tickets", e);
+        }
+    }
+
+    @Override
+    public void registerObserver(User user, TicketObserver client) throws ServicesException {
+        registeredObservers.put(user.getId(), client);
+    }
+
+    @Override
+    public void unregisterObserver(User user) throws ServicesException {
+        registeredObservers.remove(user.getId());
+    }
+
+    private void notifyMatchUpdated(Match match) {
+        ExecutorService executor = Executors.newFixedThreadPool(5);
+
+        for (Map.Entry<Long, TicketObserver> entry : registeredObservers.entrySet()) {
+            TicketObserver observer = entry.getValue();
+            if (observer != null) {
+                executor.execute(() -> {
+                    try {
+                        observer.matchUpdated(match);
+                    } catch (ServicesException e) {
+                        logger.error("Error notifying about match update", e);
+                    }
+                });
+            }
+        }
+
+        executor.shutdown();
+    }
+
+    private void notifyUserTicketsChanged(User user) {
+        TicketObserver observer = registeredObservers.get(user.getId());
+        if (observer != null) {
+            try {
+                observer.userTicketsChanged(user);
+            } catch (ServicesException e) {
+                logger.error("Error notifying user about ticket change", e);
+            }
         }
     }
 }

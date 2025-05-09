@@ -19,6 +19,16 @@ public class MatchDTO implements Serializable {
         this.dateTime = dateTime;
     }
 
+    public MatchDTO(Long id, String teamA, String teamB, String dateTime,
+                    Integer availableTickets, String priceRange) {
+        this.id = id;
+        this.teamA = teamA;
+        this.teamB = teamB;
+        this.dateTime = dateTime;
+        this.availableTickets = availableTickets;
+        this.priceRange = priceRange;
+    }
+
     public Long getId() {
         return id;
     }

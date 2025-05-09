@@ -1,7 +1,5 @@
 plugins {
     id 'java'
-    id 'application'
-    id 'org.openjfx.javafxplugin' version '0.1.0'
 }
 
 group = 'org.example'
@@ -12,41 +10,5 @@ repositories {
 }
 
 dependencies {
-    implementation("org.springframework:spring-context:6.2.5")
-
-    implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.17.1'
-    implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.14.1'
-
-    runtimeOnly group: 'org.xerial', name: 'sqlite-jdbc', version: '3.41.2.2'
-
-
-    testImplementation platform('org.junit:junit-bom:5.10.0')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
-}
-
-application {
-    mainClass = 'org.example.MainFX'
-}
-
-javafx {
-    version = "17"
-    modules = [ 'javafx.controls', 'javafx.fxml' ]
-}
-
-sourceSets {
-    main {
-        resources.srcDirs = ['src/main/resources']
-    }
-}
-jar {
-    manifest {
-        attributes('Main-Class':'org.example.MainFX')
-    }
-    from {
-        configurations.runtimeClasspath.collect {it.isDirectory() ? it : zipTree(it) }
-    }
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-}
-test {
-    useJUnitPlatform()
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
 }

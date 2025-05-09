@@ -341,28 +341,33 @@ public class TicketRepository implements TicketInterface {
 
         try (Connection connection = jdbcUtils.getConnection();
              PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setLong(1, user.getId());
-            try (ResultSet rs = stmt.executeQuery()) {
-                while (rs.next()) {
-                    Long ticketId = rs.getLong("id");
-                    Long matchId = rs.getLong("match_id");
-                    int seatNumber = rs.getInt("seatNumber");
-                    boolean sold = rs.getInt("sold") != 0;
-                    double price = rs.getDouble("price");
+            try {
+                stmt.setLong(1, user.getId());
+                try (ResultSet rs = stmt.executeQuery()) {
+                    while (rs.next()) {
+                        try {
+                            Long ticketId = rs.getLong("id");
+                            Long matchId = rs.getLong("match_id");
+                            int seatNumber = rs.getInt("seatNumber");
+                            boolean sold = rs.getInt("sold") != 0;
+                            double price = rs.getDouble("price");
 
-                    // Get the match
-                    Optional<Match> matchOpt = matchRepository.findOne(matchId);
-                    if (matchOpt.isEmpty()) {
-                        logger.error("Match not found for ticket with id {}", ticketId);
-                        continue;
+                            // Create minimal Match object
+                            Match match = new Match();
+                            match.setId(matchId);
+
+                            tickets.add(new Ticket(ticketId, match, seatNumber, sold, price, Optional.of(user)));
+                        } catch (Exception e) {
+                            logger.error("Error processing row: " + e.getMessage(), e);
+                        }
                     }
-                    Match match = matchOpt.get();
-
-                    tickets.add(new Ticket(ticketId, match, seatNumber, sold, price, Optional.of(user)));
                 }
+            } catch (SQLException e) {
+                throw new RepositoryException("Error finding tickets for user: " + e.getMessage(), e);
             }
         } catch (SQLException e) {
-            throw new RepositoryException("Error finding tickets for user: " + e.getMessage());
+            logger.error("Error setting up JDBC resources: " + e.getMessage(), e);
+            throw new RepositoryException("Error finding tickets for user: " + e.getMessage(), e);
         }
         return tickets;
     }
@@ -376,7 +381,9 @@ public class TicketRepository implements TicketInterface {
 
         try (Connection connection = jdbcUtils.getConnection();
              PreparedStatement stmt = connection.prepareStatement(sql)) {
+
             stmt.setString(1, name);
+
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
                     Long ticketId = rs.getLong("id");
@@ -386,22 +393,21 @@ public class TicketRepository implements TicketInterface {
                     double price = rs.getDouble("price");
                     Long userId = rs.getLong("user_id");
 
-                    // Get the match
-                    Optional<Match> matchOpt = matchRepository.findOne(matchId);
-                    if (matchOpt.isEmpty()) {
-                        logger.error("Match not found for ticket with id {}", ticketId);
-                        continue;
-                    }
-                    Match match = matchOpt.get();
+                    // Create minimal Match object
+                    Match match = new Match();
+                    match.setId(matchId);
 
-                    // Create a simple user object with just the ID and name
-                    User user = new User(userId, name, "");
+                    // Create minimal User object
+                    User user = new User(userId, name, null);
+
                     tickets.add(new Ticket(ticketId, match, seatNumber, sold, price, Optional.of(user)));
                 }
             }
         } catch (SQLException e) {
-            throw new RepositoryException("Error finding tickets for customer: " + e.getMessage());
+            logger.error("Error finding tickets for customer: {}", e.getMessage(), e);
+            throw new RepositoryException("Error finding tickets for customer: " + e.getMessage(), e);
         }
+
         return tickets;
     }
 

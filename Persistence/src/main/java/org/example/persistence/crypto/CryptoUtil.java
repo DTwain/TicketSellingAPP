@@ -66,7 +66,7 @@ public class CryptoUtil {
         String encryptedPassword = encrypt(originalPassword);
         System.out.println("Encrypted Password: " + encryptedPassword);
 
-        String decryptedPassword = decrypt(encryptedPassword);
+        String decryptedPassword = decrypt("N0seF4/lZUWleBHboj5LXg==");
         System.out.println("Decrypted Password: " + decryptedPassword);
     }
 }

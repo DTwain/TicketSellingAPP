@@ -4,6 +4,7 @@ import org.example.domain.Ticket;
 import org.example.domain.TicketSale;
 import org.example.domain.User;
 import org.example.service.ServicesException;
+import org.example.utils.observer.TicketObserver;
 
 import java.util.List;
 
@@ -13,4 +14,7 @@ public interface TicketServiceInterface {
     Double sellTickets(TicketSale ticketSale) throws ServicesException;
     List<Ticket> findTicketsBoughtByUser(User user) throws ServicesException;
     List<Ticket> findTicketsByCustomer(String name) throws ServicesException;
+
+    void registerObserver(User user, TicketObserver client) throws ServicesException;
+    void unregisterObserver(User user) throws ServicesException;
 }

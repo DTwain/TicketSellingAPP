@@ -11,4 +11,5 @@ public interface UserServiceInterface {
     boolean usernameExists(String username) throws ServicesException;
     boolean registerUser(String username, String password) throws ServicesException;
     Optional<User> getUserByUsername(String username) throws ServicesException;
+    Optional<User> getUserById(Long id) throws ServicesException;
 }

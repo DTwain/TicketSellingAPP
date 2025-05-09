@@ -1,210 +1,1120 @@
-2025-05-07 13:45:02 INFO  MainFX:30 - Client properties loaded
-2025-05-07 13:45:03 INFO  MainFX:73 - Application started successfully
-2025-05-07 13:45:06 INFO  BasketballServicesProxy:51 - Connected to server at localhost:55556
-2025-05-07 13:45:06 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"LOGIN","data":{"username":"david","password":"123"}}
-2025-05-07 13:45:06 DEBUG BasketballServicesProxy:79 - Received response: {"type":"USER","data":{"userType":"SELLER","user":{"id":1,"username":"david","password":"123"}}}
-2025-05-07 13:45:06 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"CHECK_TICKET_SELLER","data":"david"}
-2025-05-07 13:45:06 DEBUG BasketballServicesProxy:79 - Received response: {"type":"IS_TICKET_SELLER","data":true}
-2025-05-07 13:45:07 INFO  SellerDashboardController:90 - Current seller username set: david
-2025-05-07 13:45:14 INFO  MainFX:30 - Client properties loaded
-2025-05-07 13:45:15 INFO  MainFX:73 - Application started successfully
-2025-05-07 13:45:18 INFO  BasketballServicesProxy:51 - Connected to server at localhost:55556
-2025-05-07 13:45:18 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"LOGIN","data":{"username":"luca","password":"123"}}
-2025-05-07 13:45:18 DEBUG BasketballServicesProxy:79 - Received response: {"type":"USER","data":{"userType":"USER","user":{"id":2,"username":"luca","password":"123"}}}
-2025-05-07 13:45:18 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"CHECK_TICKET_SELLER","data":"luca"}
-2025-05-07 13:45:18 DEBUG BasketballServicesProxy:79 - Received response: {"type":"IS_TICKET_SELLER","data":false}
-2025-05-07 13:45:19 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"LOGIN","data":{"username":"luca"}}
-2025-05-07 13:45:19 DEBUG BasketballServicesProxy:79 - Received response: {"type":"ERROR","error":"Authentication failed"}
-2025-05-07 13:45:19 ERROR ClientDashboardController:90 - User not found: luca
-2025-05-07 13:46:35 INFO  MainFX:30 - Client properties loaded
-2025-05-07 13:46:36 INFO  MainFX:73 - Application started successfully
-2025-05-07 13:46:39 INFO  BasketballServicesProxy:51 - Connected to server at localhost:55556
-2025-05-07 13:46:39 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"LOGIN","data":{"username":"luca","password":"123"}}
-2025-05-07 13:46:39 DEBUG BasketballServicesProxy:79 - Received response: {"type":"USER","data":{"userType":"USER","user":{"id":2,"username":"luca","password":"123"}}}
-2025-05-07 13:46:39 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"CHECK_TICKET_SELLER","data":"luca"}
-2025-05-07 13:46:39 DEBUG BasketballServicesProxy:79 - Received response: {"type":"IS_TICKET_SELLER","data":false}
-2025-05-07 13:46:40 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"LOGIN","data":{"username":"luca"}}
-2025-05-07 13:46:40 DEBUG BasketballServicesProxy:79 - Received response: {"type":"ERROR","error":"Authentication failed"}
-2025-05-07 13:46:40 ERROR ClientDashboardController:90 - User not found: luca
-2025-05-07 13:47:07 INFO  MainFX:30 - Client properties loaded
-2025-05-07 13:47:07 INFO  MainFX:73 - Application started successfully
-2025-05-07 13:47:10 INFO  BasketballServicesProxy:51 - Connected to server at localhost:55556
-2025-05-07 13:47:10 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"LOGIN","data":{"username":"alex","password":"123"}}
-2025-05-07 13:47:10 DEBUG BasketballServicesProxy:79 - Received response: {"type":"USER","data":{"userType":"SELLER","user":{"id":3,"username":"alex","password":"123"}}}
-2025-05-07 13:47:10 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"CHECK_TICKET_SELLER","data":"alex"}
-2025-05-07 13:47:10 DEBUG BasketballServicesProxy:79 - Received response: {"type":"IS_TICKET_SELLER","data":true}
-2025-05-07 13:47:12 INFO  SellerDashboardController:90 - Current seller username set: alex
-2025-05-07 14:20:41 INFO  MainFX:30 - Client properties loaded
-2025-05-07 14:20:41 INFO  MainFX:73 - Application started successfully
-2025-05-07 14:20:46 INFO  BasketballServicesProxy:51 - Connected to server at localhost:55556
-2025-05-07 14:20:46 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"LOGIN","data":{"username":"luca","password":"123"}}
-2025-05-07 14:20:46 DEBUG BasketballServicesProxy:79 - Received response: {"type":"USER","data":{"userType":"USER","user":{"id":2,"username":"luca","password":"123"}}}
-2025-05-07 14:20:46 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"CHECK_TICKET_SELLER","data":"luca"}
-2025-05-07 14:20:46 DEBUG BasketballServicesProxy:79 - Received response: {"type":"IS_TICKET_SELLER","data":false}
-2025-05-07 14:20:50 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"LOGIN","data":{"username":"luca"}}
-2025-05-07 14:20:50 DEBUG BasketballServicesProxy:79 - Received response: {"type":"ERROR","error":"Authentication failed"}
-2025-05-07 14:20:50 ERROR ClientDashboardController:90 - User not found: luca
-2025-05-07 14:30:37 INFO  MainFX:30 - Client properties loaded
-2025-05-07 14:30:38 INFO  MainFX:73 - Application started successfully
-2025-05-07 14:30:42 INFO  BasketballServicesProxy:51 - Connected to server at localhost:55556
-2025-05-07 14:30:42 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"LOGIN","data":{"username":"luca","password":"123"}}
-2025-05-07 14:30:42 DEBUG BasketballServicesProxy:79 - Received response: {"type":"USER","data":{"userType":"USER","user":{"id":2,"username":"luca","password":"123"}}}
-2025-05-07 14:30:42 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"CHECK_TICKET_SELLER","data":"luca"}
-2025-05-07 14:30:42 DEBUG BasketballServicesProxy:79 - Received response: {"type":"IS_TICKET_SELLER","data":false}
-2025-05-07 14:30:43 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"LOGIN","data":{"username":"luca"}}
-2025-05-07 14:30:43 DEBUG BasketballServicesProxy:79 - Received response: {"type":"ERROR","error":"Authentication failed"}
-2025-05-07 14:30:43 ERROR ClientDashboardController:90 - User not found: luca
-2025-05-07 14:31:33 INFO  MainFX:30 - Client properties loaded
-2025-05-07 14:31:34 INFO  MainFX:73 - Application started successfully
-2025-05-07 14:31:44 INFO  MainFX:30 - Client properties loaded
-2025-05-07 14:31:44 INFO  MainFX:73 - Application started successfully
-2025-05-07 14:31:54 INFO  BasketballServicesProxy:51 - Connected to server at localhost:55556
-2025-05-07 14:31:54 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"LOGIN","data":{"username":"luca","password":"123"}}
-2025-05-07 14:31:55 DEBUG BasketballServicesProxy:79 - Received response: {"type":"USER","data":{"userType":"USER","user":{"id":2,"username":"luca","password":"123"}}}
-2025-05-07 14:31:55 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"CHECK_TICKET_SELLER","data":"luca"}
-2025-05-07 14:31:55 DEBUG BasketballServicesProxy:79 - Received response: {"type":"IS_TICKET_SELLER","data":false}
-2025-05-07 14:32:02 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"LOGIN","data":{"username":"luca"}}
-2025-05-07 14:32:02 DEBUG BasketballServicesProxy:79 - Received response: {"type":"ERROR","error":"Authentication failed"}
-2025-05-07 14:32:02 ERROR ClientDashboardController:90 - User not found: luca
-2025-05-07 14:45:15 INFO  MainFX:30 - Client properties loaded
-2025-05-07 14:45:15 INFO  MainFX:73 - Application started successfully
-2025-05-07 14:45:19 INFO  BasketballServicesProxy:51 - Connected to server at localhost:55556
-2025-05-07 14:45:19 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"LOGIN","data":{"username":"luca","password":"123"}}
-2025-05-07 14:45:19 DEBUG BasketballServicesProxy:79 - Received response: {"type":"USER","data":{"userType":"USER","user":{"id":2,"username":"luca","password":"123"}}}
-2025-05-07 14:45:19 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"CHECK_TICKET_SELLER","data":"luca"}
-2025-05-07 14:45:19 DEBUG BasketballServicesProxy:79 - Received response: {"type":"IS_TICKET_SELLER","data":false}
-2025-05-07 14:45:20 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"LOGIN","data":{"username":"luca"}}
-2025-05-07 14:45:20 DEBUG BasketballServicesProxy:79 - Received response: {"type":"ERROR","error":"Authentication failed"}
-2025-05-07 14:46:26 INFO  MainFX:30 - Client properties loaded
-2025-05-07 14:46:26 INFO  MainFX:73 - Application started successfully
-2025-05-07 14:46:29 INFO  BasketballServicesProxy:51 - Connected to server at localhost:55556
-2025-05-07 14:46:29 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"LOGIN","data":{"username":"luca","password":"123"}}
-2025-05-07 14:46:29 DEBUG BasketballServicesProxy:79 - Received response: {"type":"USER","data":{"userType":"USER","user":{"id":2,"username":"luca","password":"123"}}}
-2025-05-07 14:46:29 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"CHECK_TICKET_SELLER","data":"luca"}
-2025-05-07 14:46:29 DEBUG BasketballServicesProxy:79 - Received response: {"type":"IS_TICKET_SELLER","data":false}
-2025-05-07 14:46:43 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"LOGIN","data":{"username":"luca"}}
-2025-05-07 14:46:43 DEBUG BasketballServicesProxy:79 - Received response: {"type":"ERROR","error":"Authentication failed"}
-2025-05-07 14:48:57 INFO  MainFX:30 - Client properties loaded
-2025-05-07 14:48:58 INFO  MainFX:73 - Application started successfully
-2025-05-07 14:49:02 ERROR BasketballServicesProxy:54 - Cannot connect to server: Connection refused: connect
-2025-05-07 14:49:02 ERROR LoginController:105 - Login error
-org.example.service.ServicesException: Cannot connect to server
-	at org.example.network.rpc.BasketballServicesProxy.ensureConnected(BasketballServicesProxy.java:55) ~[Networking-1.0-SNAPSHOT.jar:?]
-	at org.example.network.rpc.BasketballServicesProxy.sendRequest(BasketballServicesProxy.java:73) ~[Networking-1.0-SNAPSHOT.jar:?]
-	at org.example.network.rpc.BasketballServicesProxy.authenticate(BasketballServicesProxy.java:245) ~[Networking-1.0-SNAPSHOT.jar:?]
-	at org.example.controller.LoginController.handleLogin(LoginController.java:90) ~[main/:?]
-	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?]
-	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[?:?]
-	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
-	at java.lang.reflect.Method.invoke(Method.java:569) ~[?:?]
-	at com.sun.javafx.reflect.Trampoline.invoke(MethodUtil.java:77) ~[javafx-base-17.0.2-win.jar:?]
-	at jdk.internal.reflect.GeneratedMethodAccessor2.invoke(Unknown Source) ~[?:?]
-	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
-	at java.lang.reflect.Method.invoke(Method.java:569) ~[?:?]
-	at com.sun.javafx.reflect.MethodUtil.invoke(MethodUtil.java:275) ~[javafx-base-17.0.2-win.jar:?]
-	at com.sun.javafx.fxml.MethodHelper.invoke(MethodHelper.java:84) ~[javafx-fxml-17.0.2-win.jar:?]
-	at javafx.fxml.FXMLLoader$MethodHandler.invoke(FXMLLoader.java:1852) ~[javafx-fxml-17.0.2-win.jar:?]
-	at javafx.fxml.FXMLLoader$ControllerMethodEventHandler.handle(FXMLLoader.java:1724) ~[javafx-fxml-17.0.2-win.jar:?]
-	at com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:86) ~[javafx-base-17.0.2-win.jar:?]
-	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:234) ~[javafx-base-17.0.2-win.jar:?]
-	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:191) ~[javafx-base-17.0.2-win.jar:?]
-	at com.sun.javafx.event.CompositeEventDispatcher.dispatchBubblingEvent(CompositeEventDispatcher.java:59) ~[javafx-base-17.0.2-win.jar:?]
-	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:58) ~[javafx-base-17.0.2-win.jar:?]
-	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114) ~[javafx-base-17.0.2-win.jar:?]
-	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56) ~[javafx-base-17.0.2-win.jar:?]
-	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114) ~[javafx-base-17.0.2-win.jar:?]
-	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56) ~[javafx-base-17.0.2-win.jar:?]
-	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114) ~[javafx-base-17.0.2-win.jar:?]
-	at com.sun.javafx.event.EventUtil.fireEventImpl(EventUtil.java:74) ~[javafx-base-17.0.2-win.jar:?]
-	at com.sun.javafx.event.EventUtil.fireEvent(EventUtil.java:49) ~[javafx-base-17.0.2-win.jar:?]
-	at javafx.event.Event.fireEvent(Event.java:198) ~[javafx-base-17.0.2-win.jar:?]
-	at javafx.scene.Node.fireEvent(Node.java:8792) ~[javafx-graphics-17.0.2-win.jar:?]
-	at javafx.scene.control.Button.fire(Button.java:203) ~[javafx-controls-17.0.2-win.jar:?]
-	at com.sun.javafx.scene.control.behavior.ButtonBehavior.mouseReleased(ButtonBehavior.java:208) ~[javafx-controls-17.0.2-win.jar:?]
-	at com.sun.javafx.scene.control.inputmap.InputMap.handle(InputMap.java:274) ~[javafx-controls-17.0.2-win.jar:?]
-	at com.sun.javafx.event.CompositeEventHandler$NormalEventHandlerRecord.handleBubblingEvent(CompositeEventHandler.java:247) ~[javafx-base-17.0.2-win.jar:?]
-	at com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:80) ~[javafx-base-17.0.2-win.jar:?]
-	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:234) ~[javafx-base-17.0.2-win.jar:?]
-	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:191) ~[javafx-base-17.0.2-win.jar:?]
-	at com.sun.javafx.event.CompositeEventDispatcher.dispatchBubblingEvent(CompositeEventDispatcher.java:59) ~[javafx-base-17.0.2-win.jar:?]
-	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:58) ~[javafx-base-17.0.2-win.jar:?]
-	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114) ~[javafx-base-17.0.2-win.jar:?]
-	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56) ~[javafx-base-17.0.2-win.jar:?]
-	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114) ~[javafx-base-17.0.2-win.jar:?]
-	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56) ~[javafx-base-17.0.2-win.jar:?]
-	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114) ~[javafx-base-17.0.2-win.jar:?]
-	at com.sun.javafx.event.EventUtil.fireEventImpl(EventUtil.java:74) ~[javafx-base-17.0.2-win.jar:?]
-	at com.sun.javafx.event.EventUtil.fireEvent(EventUtil.java:54) ~[javafx-base-17.0.2-win.jar:?]
-	at javafx.event.Event.fireEvent(Event.java:198) ~[javafx-base-17.0.2-win.jar:?]
-	at javafx.scene.Scene$MouseHandler.process(Scene.java:3897) ~[javafx-graphics-17.0.2-win.jar:?]
-	at javafx.scene.Scene.processMouseEvent(Scene.java:1878) ~[javafx-graphics-17.0.2-win.jar:?]
-	at javafx.scene.Scene$ScenePeerListener.mouseEvent(Scene.java:2623) ~[javafx-graphics-17.0.2-win.jar:?]
-	at com.sun.javafx.tk.quantum.GlassViewEventHandler$MouseEventNotification.run(GlassViewEventHandler.java:411) ~[javafx-graphics-17.0.2-win.jar:?]
-	at com.sun.javafx.tk.quantum.GlassViewEventHandler$MouseEventNotification.run(GlassViewEventHandler.java:301) ~[javafx-graphics-17.0.2-win.jar:?]
-	at java.security.AccessController.doPrivileged(AccessController.java:399) ~[?:?]
-	at com.sun.javafx.tk.quantum.GlassViewEventHandler.lambda$handleMouseEvent$2(GlassViewEventHandler.java:450) ~[javafx-graphics-17.0.2-win.jar:?]
-	at com.sun.javafx.tk.quantum.QuantumToolkit.runWithoutRenderLock(QuantumToolkit.java:424) ~[javafx-graphics-17.0.2-win.jar:?]
-	at com.sun.javafx.tk.quantum.GlassViewEventHandler.handleMouseEvent(GlassViewEventHandler.java:449) ~[javafx-graphics-17.0.2-win.jar:?]
-	at com.sun.glass.ui.View.handleMouseEvent(View.java:557) ~[javafx-graphics-17.0.2-win.jar:?]
-	at com.sun.glass.ui.View.notifyMouse(View.java:943) ~[javafx-graphics-17.0.2-win.jar:?]
-	at com.sun.glass.ui.win.WinApplication._runLoop(Native Method) ~[javafx-graphics-17.0.2-win.jar:?]
-	at com.sun.glass.ui.win.WinApplication.lambda$runLoop$3(WinApplication.java:184) ~[javafx-graphics-17.0.2-win.jar:?]
-	at java.lang.Thread.run(Thread.java:840) ~[?:?]
-Caused by: java.net.ConnectException: Connection refused: connect
-	at sun.nio.ch.Net.connect0(Native Method) ~[?:?]
-	at sun.nio.ch.Net.connect(Net.java:579) ~[?:?]
-	at sun.nio.ch.Net.connect(Net.java:568) ~[?:?]
-	at sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:593) ~[?:?]
-	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:327) ~[?:?]
-	at java.net.Socket.connect(Socket.java:633) ~[?:?]
-	at java.net.Socket.connect(Socket.java:583) ~[?:?]
-	at java.net.Socket.<init>(Socket.java:507) ~[?:?]
-	at java.net.Socket.<init>(Socket.java:287) ~[?:?]
-	at org.example.network.rpc.BasketballServicesProxy.ensureConnected(BasketballServicesProxy.java:48) ~[Networking-1.0-SNAPSHOT.jar:?]
-	... 60 more
-2025-05-07 14:49:22 INFO  MainFX:30 - Client properties loaded
-2025-05-07 14:49:22 INFO  MainFX:73 - Application started successfully
-2025-05-07 14:49:26 INFO  BasketballServicesProxy:51 - Connected to server at localhost:55556
-2025-05-07 14:49:26 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"LOGIN","data":{"username":"luca","password":"123"}}
-2025-05-07 14:49:26 DEBUG BasketballServicesProxy:79 - Received response: {"type":"USER","data":{"userType":"USER","user":{"id":2,"username":"luca","password":"123"}}}
-2025-05-07 14:49:26 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"CHECK_TICKET_SELLER","data":"luca"}
-2025-05-07 14:49:26 DEBUG BasketballServicesProxy:79 - Received response: {"type":"IS_TICKET_SELLER","data":false}
-2025-05-07 14:49:27 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"LOGIN","data":{"username":"luca"}}
-2025-05-07 14:49:27 DEBUG BasketballServicesProxy:79 - Received response: {"type":"ERROR","error":"Authentication failed"}
-2025-05-07 14:49:59 INFO  MainFX:30 - Client properties loaded
-2025-05-07 14:49:59 INFO  MainFX:73 - Application started successfully
-2025-05-07 14:50:07 INFO  MainFX:30 - Client properties loaded
-2025-05-07 14:50:07 INFO  MainFX:73 - Application started successfully
-2025-05-07 14:50:11 INFO  BasketballServicesProxy:51 - Connected to server at localhost:55556
-2025-05-07 14:50:11 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"LOGIN","data":{"username":"david","password":"123"}}
-2025-05-07 14:50:12 DEBUG BasketballServicesProxy:79 - Received response: {"type":"USER","data":{"userType":"SELLER","user":{"id":1,"username":"david","password":"123"}}}
-2025-05-07 14:50:12 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"CHECK_TICKET_SELLER","data":"david"}
-2025-05-07 14:50:12 DEBUG BasketballServicesProxy:79 - Received response: {"type":"IS_TICKET_SELLER","data":true}
-2025-05-07 14:50:13 INFO  SellerDashboardController:90 - Current seller username set: david
-2025-05-07 15:08:24 INFO  MainFX:30 - Client properties loaded
-2025-05-07 15:08:25 INFO  MainFX:73 - Application started successfully
-2025-05-07 15:08:30 INFO  BasketballServicesProxy:51 - Connected to server at localhost:55556
-2025-05-07 15:08:30 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"LOGIN","data":{"username":"luca","password":"12345"}}
-2025-05-07 15:08:30 DEBUG BasketballServicesProxy:79 - Received response: {"type":"ERROR","error":"Authentication failed"}
-2025-05-07 15:08:35 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"LOGIN","data":{"username":"luca","password":"123"}}
-2025-05-07 15:08:35 DEBUG BasketballServicesProxy:79 - Received response: {"type":"USER","data":{"userType":"USER","user":{"id":2,"username":"luca","password":"123"}}}
-2025-05-07 15:08:35 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"CHECK_TICKET_SELLER","data":"luca"}
-2025-05-07 15:08:35 DEBUG BasketballServicesProxy:79 - Received response: {"type":"IS_TICKET_SELLER","data":false}
-2025-05-07 15:08:48 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"LOGIN","data":{"username":"luca"}}
-2025-05-07 15:08:48 DEBUG BasketballServicesProxy:79 - Received response: {"type":"ERROR","error":"Authentication failed"}
-2025-05-07 15:09:10 INFO  MainFX:30 - Client properties loaded
-2025-05-07 15:09:11 INFO  MainFX:73 - Application started successfully
-2025-05-07 15:09:22 INFO  MainFX:30 - Client properties loaded
-2025-05-07 15:09:23 INFO  MainFX:73 - Application started successfully
-2025-05-07 15:09:54 INFO  BasketballServicesProxy:51 - Connected to server at localhost:55556
-2025-05-07 15:09:54 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"LOGIN","data":{"username":"luca","password":"123"}}
-2025-05-07 15:09:54 DEBUG BasketballServicesProxy:79 - Received response: {"type":"USER","data":{"userType":"USER","user":{"id":2,"username":"luca","password":"123"}}}
-2025-05-07 15:11:03 INFO  MainFX:30 - Client properties loaded
-2025-05-07 15:11:03 INFO  MainFX:73 - Application started successfully
-2025-05-07 15:11:10 INFO  BasketballServicesProxy:51 - Connected to server at localhost:55556
-2025-05-07 15:11:10 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"LOGIN","data":{"username":"luca","password":"123"}}
-2025-05-07 15:11:10 DEBUG BasketballServicesProxy:79 - Received response: {"type":"USER","data":{"userType":"USER","user":{"id":2,"username":"luca","password":"123"}}}
-2025-05-07 15:11:49 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"CHECK_TICKET_SELLER","data":"luca"}
-2025-05-07 15:11:49 DEBUG BasketballServicesProxy:79 - Received response: {"type":"IS_TICKET_SELLER","data":false}
-2025-05-07 15:13:41 DEBUG BasketballServicesProxy:75 - Sending request: {"type":"LOGIN","data":{"username":"luca"}}
-2025-05-07 15:13:41 DEBUG BasketballServicesProxy:79 - Received response: {"type":"ERROR","error":"Authentication failed"}
+2025-05-09 18:20:28 INFO  MainFX:30 - Client properties loaded
+2025-05-09 18:20:28 INFO  MainFX:73 - Application started successfully
+2025-05-09 18:20:53 INFO  BasketballServicesProxy:115 - Connected to server at localhost:55556
+2025-05-09 18:20:53 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 5 ms
+2025-05-09 18:20:53 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"LOGIN","data":{"username":"marius","password":"gigel"}}
+2025-05-09 18:20:53 DEBUG BasketballServicesProxy:320 - Received response: {"type":"USER","data":{"userType":"USER","user":{"id":4,"username":"marius","password":"gigel"}}}
+2025-05-09 18:20:53 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:20:53 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"CHECK_TICKET_SELLER","data":"marius"}
+2025-05-09 18:20:53 DEBUG BasketballServicesProxy:320 - Received response: {"type":"IS_TICKET_SELLER","data":false}
+2025-05-09 18:20:54 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:20:54 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_USER_BY_USERNAME","data":{"username":"marius"}}
+2025-05-09 18:20:54 DEBUG BasketballServicesProxy:320 - Received response: {"type":"USER","data":{"user":{"id":4,"username":"marius","password":"gigel"}}}
+2025-05-09 18:20:54 DEBUG ClientDashboardController:140 - Loading matches for client dashboard
+2025-05-09 18:20:54 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:20:54 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_ALL_MATCHES"}
+2025-05-09 18:20:54 DEBUG BasketballServicesProxy:320 - Received response: {"type":"MATCHES","data":[{"id":1,"teamA":"Los Angeles Lakers","teamB":"Boston Celtics","dateTime":"2023-11-15T19:30:00"},{"id":2,"teamA":"Chicago Bulls","teamB":"Miami Heat","dateTime":"2023-11-16T20:00:00"},{"id":3,"teamA":"Golden State Warriors","teamB":"Brooklyn Nets","dateTime":"2023-11-17T21:00:00"},{"id":4,"teamA":"Toronto Raptors","teamB":"Philadelphia 76ers","dateTime":"2023-11-18T19:00:00"},{"id":5,"teamA":"Dallas Mavericks","teamB":"Milwaukee Bucks","dateTime":"2023-11-19T20:30:00"},{"id":6,"teamA":"Denver Nuggets","teamB":"Phoenix Suns","dateTime":"2023-11-20T21:00:00"},{"id":7,"teamA":"New York Knicks","teamB":"Atlanta Hawks","dateTime":"2023-11-21T19:30:00"},{"id":8,"teamA":"Utah Jazz","teamB":"Portland Trail Blazers","dateTime":"2023-11-22T20:00:00"},{"id":9,"teamA":"Houston Rockets","teamB":"San Antonio Spurs","dateTime":"2023-11-23T20:30:00"},{"id":10,"teamA":"Oklahoma City Thunder","teamB":"Minnesota Timberwolves","dateTime":"2023-11-24T19:00:00"}]}
+2025-05-09 18:20:54 DEBUG ClientDashboardController:142 - Loaded 10 matches from service
+2025-05-09 18:20:54 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:20:54 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":1}
+2025-05-09 18:20:54 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:20:54 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:20:54 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":1}
+2025-05-09 18:20:54 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:20:54 DEBUG ClientDashboardController:150 - Match Los Angeles Lakers vs Boston Celtics has 0 available tickets
+2025-05-09 18:20:54 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:20:54 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":2}
+2025-05-09 18:20:54 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:20:54 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:20:54 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":2}
+2025-05-09 18:20:54 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:20:54 DEBUG ClientDashboardController:150 - Match Chicago Bulls vs Miami Heat has 0 available tickets
+2025-05-09 18:20:54 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:20:54 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":3}
+2025-05-09 18:20:54 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:20:54 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:20:54 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":3}
+2025-05-09 18:20:54 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:20:54 DEBUG ClientDashboardController:150 - Match Golden State Warriors vs Brooklyn Nets has 0 available tickets
+2025-05-09 18:20:54 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:20:54 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":4}
+2025-05-09 18:20:54 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:20:54 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:20:54 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":4}
+2025-05-09 18:20:54 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:20:54 DEBUG ClientDashboardController:150 - Match Toronto Raptors vs Philadelphia 76ers has 0 available tickets
+2025-05-09 18:20:54 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:20:54 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":5}
+2025-05-09 18:20:54 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":1}
+2025-05-09 18:20:54 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:20:54 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":5}
+2025-05-09 18:20:54 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$130.00 - $130.00"}
+2025-05-09 18:20:54 DEBUG ClientDashboardController:150 - Match Dallas Mavericks vs Milwaukee Bucks has 1 available tickets
+2025-05-09 18:20:54 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:20:54 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":6}
+2025-05-09 18:20:54 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":1}
+2025-05-09 18:20:54 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:20:54 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":6}
+2025-05-09 18:20:54 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$140.00 - $140.00"}
+2025-05-09 18:20:54 DEBUG ClientDashboardController:150 - Match Denver Nuggets vs Phoenix Suns has 1 available tickets
+2025-05-09 18:20:54 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:20:54 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":7}
+2025-05-09 18:20:54 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":1}
+2025-05-09 18:20:54 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:20:54 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":7}
+2025-05-09 18:20:54 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$150.00 - $150.00"}
+2025-05-09 18:20:54 DEBUG ClientDashboardController:150 - Match New York Knicks vs Atlanta Hawks has 1 available tickets
+2025-05-09 18:20:54 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:20:54 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":8}
+2025-05-09 18:20:54 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":1}
+2025-05-09 18:20:54 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:20:54 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":8}
+2025-05-09 18:20:54 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$160.00 - $160.00"}
+2025-05-09 18:20:54 DEBUG ClientDashboardController:150 - Match Utah Jazz vs Portland Trail Blazers has 1 available tickets
+2025-05-09 18:20:54 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:20:54 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":9}
+2025-05-09 18:20:54 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:20:54 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:20:54 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":9}
+2025-05-09 18:20:54 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:20:54 DEBUG ClientDashboardController:150 - Match Houston Rockets vs San Antonio Spurs has 0 available tickets
+2025-05-09 18:20:54 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:20:54 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":10}
+2025-05-09 18:20:54 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:20:54 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:20:54 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":10}
+2025-05-09 18:20:54 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:20:54 DEBUG ClientDashboardController:150 - Match Oklahoma City Thunder vs Minnesota Timberwolves has 0 available tickets
+2025-05-09 18:20:54 INFO  BaseController:81 - Registering observer for user: 4
+2025-05-09 18:20:54 INFO  BasketballServicesProxy:607 - Observer registered for user: 4
+2025-05-09 18:20:54 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:20:54 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"REGISTER_OBSERVER","data":{"id":4,"username":"marius","password":"gigel"}}
+2025-05-09 18:20:54 DEBUG BasketballServicesProxy:320 - Received response: {"type":"OK","error":"Observer registered successfully"}
+2025-05-09 18:20:54 INFO  BasketballServicesProxy:647 - Update listener started
+2025-05-09 18:20:54 INFO  BaseController:83 - Successfully registered as observer for user 4
+2025-05-09 18:20:54 INFO  BasketballServicesProxy:213 - Starting update listener thread
+2025-05-09 18:20:54 DEBUG BasketballServicesProxy:224 - Sending update listener registration: {"type":"START_UPDATE_LISTENER"}
+2025-05-09 18:20:54 INFO  BasketballServicesProxy:233 - Update listener registration response: {"type":"OK","error":"Update listener started successfully"}
+2025-05-09 18:20:54 INFO  BasketballServicesProxy:242 - Starting update listener loop
+2025-05-09 18:20:54 DEBUG ClientDashboardController:158 - Client dashboard refreshed with 10 matches
+2025-05-09 18:20:56 DEBUG TicketsViewController:30 - Initializing TicketsViewController
+2025-05-09 18:20:56 INFO  BaseController:81 - Registering observer for user: 4
+2025-05-09 18:20:56 INFO  BasketballServicesProxy:599 - Observer already registered for user: 4
+2025-05-09 18:20:56 INFO  BaseController:83 - Successfully registered as observer for user 4
+2025-05-09 18:20:56 INFO  TicketsViewController:69 - Loading tickets for user: marius
+2025-05-09 18:20:56 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:20:56 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_USER_TICKETS","data":{"id":4,"username":"marius","password":"gigel"}}
+2025-05-09 18:20:56 DEBUG BasketballServicesProxy:320 - Received response: {"type":"TICKETS","data":[]}
+2025-05-09 18:20:56 INFO  TicketsViewController:73 - Found 0 tickets for user marius
+2025-05-09 18:20:56 INFO  ClientDashboardController:190 - Opened tickets view for user marius
+2025-05-09 18:20:56 INFO  BasketballServicesProxy:599 - Observer already registered for user: 4
+2025-05-09 18:20:56 DEBUG TicketsViewController:38 - Explicitly registered TicketsViewController as observer for user 4
+2025-05-09 18:20:56 INFO  TicketsViewController:69 - Loading tickets for user: marius
+2025-05-09 18:20:56 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:20:56 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_USER_TICKETS","data":{"id":4,"username":"marius","password":"gigel"}}
+2025-05-09 18:20:56 DEBUG BasketballServicesProxy:320 - Received response: {"type":"TICKETS","data":[]}
+2025-05-09 18:20:56 INFO  TicketsViewController:73 - Found 0 tickets for user marius
+2025-05-09 18:20:56 DEBUG TicketsViewController:89 - Tickets view refreshed with 0 tickets
+2025-05-09 18:20:56 DEBUG TicketsViewController:89 - Tickets view refreshed with 0 tickets
+2025-05-09 18:21:12 INFO  MainFX:30 - Client properties loaded
+2025-05-09 18:21:13 INFO  MainFX:73 - Application started successfully
+2025-05-09 18:21:18 INFO  BasketballServicesProxy:115 - Connected to server at localhost:55556
+2025-05-09 18:21:18 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 5 ms
+2025-05-09 18:21:18 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"LOGIN","data":{"username":"alex","password":"123"}}
+2025-05-09 18:21:18 DEBUG BasketballServicesProxy:320 - Received response: {"type":"USER","data":{"userType":"SELLER","user":{"id":3,"username":"alex","password":"123"}}}
+2025-05-09 18:21:18 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:21:18 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"CHECK_TICKET_SELLER","data":"alex"}
+2025-05-09 18:21:18 DEBUG BasketballServicesProxy:320 - Received response: {"type":"IS_TICKET_SELLER","data":true}
+2025-05-09 18:21:19 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:21:19 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_USER_BY_USERNAME","data":{"username":"alex"}}
+2025-05-09 18:21:19 DEBUG BasketballServicesProxy:320 - Received response: {"type":"USER","data":{"user":{"id":3,"username":"alex","password":"123"}}}
+2025-05-09 18:21:19 DEBUG SellerDashboardController:164 - Loading matches for seller dashboard
+2025-05-09 18:21:19 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:21:19 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_ALL_MATCHES"}
+2025-05-09 18:21:19 DEBUG BasketballServicesProxy:320 - Received response: {"type":"MATCHES","data":[{"id":1,"teamA":"Los Angeles Lakers","teamB":"Boston Celtics","dateTime":"2023-11-15T19:30:00"},{"id":2,"teamA":"Chicago Bulls","teamB":"Miami Heat","dateTime":"2023-11-16T20:00:00"},{"id":3,"teamA":"Golden State Warriors","teamB":"Brooklyn Nets","dateTime":"2023-11-17T21:00:00"},{"id":4,"teamA":"Toronto Raptors","teamB":"Philadelphia 76ers","dateTime":"2023-11-18T19:00:00"},{"id":5,"teamA":"Dallas Mavericks","teamB":"Milwaukee Bucks","dateTime":"2023-11-19T20:30:00"},{"id":6,"teamA":"Denver Nuggets","teamB":"Phoenix Suns","dateTime":"2023-11-20T21:00:00"},{"id":7,"teamA":"New York Knicks","teamB":"Atlanta Hawks","dateTime":"2023-11-21T19:30:00"},{"id":8,"teamA":"Utah Jazz","teamB":"Portland Trail Blazers","dateTime":"2023-11-22T20:00:00"},{"id":9,"teamA":"Houston Rockets","teamB":"San Antonio Spurs","dateTime":"2023-11-23T20:30:00"},{"id":10,"teamA":"Oklahoma City Thunder","teamB":"Minnesota Timberwolves","dateTime":"2023-11-24T19:00:00"}]}
+2025-05-09 18:21:19 DEBUG SellerDashboardController:166 - Loaded 10 matches from service
+2025-05-09 18:21:19 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:21:19 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":1}
+2025-05-09 18:21:19 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:21:19 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:21:19 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":1}
+2025-05-09 18:21:19 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:21:19 DEBUG SellerDashboardController:174 - Match Los Angeles Lakers vs Boston Celtics has 0 available tickets
+2025-05-09 18:21:19 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:21:19 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":2}
+2025-05-09 18:21:19 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:21:19 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:21:19 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":2}
+2025-05-09 18:21:19 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:21:19 DEBUG SellerDashboardController:174 - Match Chicago Bulls vs Miami Heat has 0 available tickets
+2025-05-09 18:21:19 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:21:19 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":3}
+2025-05-09 18:21:19 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:21:19 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:21:19 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":3}
+2025-05-09 18:21:19 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:21:19 DEBUG SellerDashboardController:174 - Match Golden State Warriors vs Brooklyn Nets has 0 available tickets
+2025-05-09 18:21:19 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:21:19 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":4}
+2025-05-09 18:21:19 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:21:19 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:21:19 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":4}
+2025-05-09 18:21:19 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:21:19 DEBUG SellerDashboardController:174 - Match Toronto Raptors vs Philadelphia 76ers has 0 available tickets
+2025-05-09 18:21:19 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:21:19 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":5}
+2025-05-09 18:21:19 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":1}
+2025-05-09 18:21:19 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:21:19 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":5}
+2025-05-09 18:21:19 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$130.00 - $130.00"}
+2025-05-09 18:21:19 DEBUG SellerDashboardController:174 - Match Dallas Mavericks vs Milwaukee Bucks has 1 available tickets
+2025-05-09 18:21:19 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:21:19 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":6}
+2025-05-09 18:21:19 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":1}
+2025-05-09 18:21:19 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:21:19 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":6}
+2025-05-09 18:21:19 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$140.00 - $140.00"}
+2025-05-09 18:21:19 DEBUG SellerDashboardController:174 - Match Denver Nuggets vs Phoenix Suns has 1 available tickets
+2025-05-09 18:21:19 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:21:19 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":7}
+2025-05-09 18:21:19 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":1}
+2025-05-09 18:21:19 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:21:19 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":7}
+2025-05-09 18:21:19 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$150.00 - $150.00"}
+2025-05-09 18:21:19 DEBUG SellerDashboardController:174 - Match New York Knicks vs Atlanta Hawks has 1 available tickets
+2025-05-09 18:21:19 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:21:19 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":8}
+2025-05-09 18:21:19 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":1}
+2025-05-09 18:21:19 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:21:19 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":8}
+2025-05-09 18:21:19 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$160.00 - $160.00"}
+2025-05-09 18:21:19 DEBUG SellerDashboardController:174 - Match Utah Jazz vs Portland Trail Blazers has 1 available tickets
+2025-05-09 18:21:19 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:21:19 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":9}
+2025-05-09 18:21:19 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:21:19 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:21:19 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":9}
+2025-05-09 18:21:19 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:21:19 DEBUG SellerDashboardController:174 - Match Houston Rockets vs San Antonio Spurs has 0 available tickets
+2025-05-09 18:21:19 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:21:19 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":10}
+2025-05-09 18:21:19 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:21:19 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:21:19 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":10}
+2025-05-09 18:21:19 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:21:19 DEBUG SellerDashboardController:174 - Match Oklahoma City Thunder vs Minnesota Timberwolves has 0 available tickets
+2025-05-09 18:21:19 INFO  BaseController:81 - Registering observer for user: 3
+2025-05-09 18:21:19 INFO  BasketballServicesProxy:607 - Observer registered for user: 3
+2025-05-09 18:21:19 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:21:19 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"REGISTER_OBSERVER","data":{"id":3,"username":"alex","password":"123"}}
+2025-05-09 18:21:19 DEBUG BasketballServicesProxy:320 - Received response: {"type":"OK","error":"Observer registered successfully"}
+2025-05-09 18:21:19 INFO  BasketballServicesProxy:647 - Update listener started
+2025-05-09 18:21:19 INFO  BaseController:83 - Successfully registered as observer for user 3
+2025-05-09 18:21:19 INFO  BasketballServicesProxy:213 - Starting update listener thread
+2025-05-09 18:21:19 DEBUG BasketballServicesProxy:224 - Sending update listener registration: {"type":"START_UPDATE_LISTENER"}
+2025-05-09 18:21:19 INFO  BasketballServicesProxy:233 - Update listener registration response: {"type":"OK","error":"Update listener started successfully"}
+2025-05-09 18:21:19 INFO  BasketballServicesProxy:242 - Starting update listener loop
+2025-05-09 18:21:19 DEBUG SellerDashboardController:182 - Seller dashboard refreshed with 10 matches
+2025-05-09 18:21:24 DEBUG CustomerSearchController:33 - Initializing CustomerSearchController
+2025-05-09 18:21:24 INFO  BaseController:81 - Registering observer for user: 3
+2025-05-09 18:21:24 INFO  BasketballServicesProxy:599 - Observer already registered for user: 3
+2025-05-09 18:21:24 INFO  BaseController:83 - Successfully registered as observer for user 3
+2025-05-09 18:21:24 INFO  BasketballServicesProxy:599 - Observer already registered for user: 3
+2025-05-09 18:21:24 DEBUG CustomerSearchController:51 - Explicitly registered CustomerSearchController as observer for user 3
+2025-05-09 18:21:28 INFO  CustomerSearchController:215 - Searching for tickets purchased by customer: marius
+2025-05-09 18:21:28 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:21:28 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"SEARCH_CUSTOMER_TICKETS","data":"marius"}
+2025-05-09 18:21:28 DEBUG BasketballServicesProxy:320 - Received response: {"type":"TICKETS","data":[]}
+2025-05-09 18:21:28 INFO  CustomerSearchController:218 - Found 0 tickets for customer marius
+2025-05-09 18:21:40 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:21:40 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"SELL_TICKETS","data":{"matchId":8,"customerName":"marius","customerAddress":"sffasfa","seatsPurchased":1}}
+2025-05-09 18:21:40 DEBUG BasketballServicesProxy:320 - Received response: {"type":"TICKET_SALE_RESULT","data":160.0}
+2025-05-09 18:21:40 DEBUG BasketballServicesProxy:248 - RECEIVED UPDATE: {"type":"MATCH_UPDATED","data":{"id":8,"teamA":"Utah Jazz","teamB":"Portland Trail Blazers","dateTime":"2023-11-22T20:00:00","availableTickets":0,"priceRange":"$0.00 - $0.00"}}
+2025-05-09 18:21:40 DEBUG BasketballServicesProxy:248 - RECEIVED UPDATE: {"type":"MATCH_UPDATED","data":{"id":8,"teamA":"Utah Jazz","teamB":"Portland Trail Blazers","dateTime":"2023-11-22T20:00:00","availableTickets":0,"priceRange":"$0.00 - $0.00"}}
+2025-05-09 18:21:40 DEBUG BasketballServicesProxy:248 - RECEIVED UPDATE: {"type":"USER_TICKETS_CHANGED","data":{"id":4,"username":"marius","password":"gigel"}}
+2025-05-09 18:21:40 INFO  BasketballServicesProxy:154 - CLIENT RECEIVED UPDATE: {"type":"USER_TICKETS_CHANGED","data":{"id":4,"username":"marius","password":"gigel"}}
+2025-05-09 18:21:40 INFO  BasketballServicesProxy:154 - CLIENT RECEIVED UPDATE: {"type":"MATCH_UPDATED","data":{"id":8,"teamA":"Utah Jazz","teamB":"Portland Trail Blazers","dateTime":"2023-11-22T20:00:00","availableTickets":0,"priceRange":"$0.00 - $0.00"}}
+2025-05-09 18:21:40 DEBUG BasketballServicesProxy:248 - RECEIVED UPDATE: {"type":"USER_TICKETS_CHANGED","data":{"id":4,"username":"marius","password":"gigel"}}
+2025-05-09 18:21:40 INFO  BasketballServicesProxy:154 - CLIENT RECEIVED UPDATE: {"type":"MATCH_UPDATED","data":{"id":8,"teamA":"Utah Jazz","teamB":"Portland Trail Blazers","dateTime":"2023-11-22T20:00:00","availableTickets":0,"priceRange":"$0.00 - $0.00"}}
+2025-05-09 18:21:40 INFO  BasketballServicesProxy:154 - CLIENT RECEIVED UPDATE: {"type":"USER_TICKETS_CHANGED","data":{"id":4,"username":"marius","password":"gigel"}}
+2025-05-09 18:21:40 INFO  BasketballServicesProxy:718 - PROCESSING MATCH_UPDATED for match: 8
+2025-05-09 18:21:40 INFO  BasketballServicesProxy:760 - PROCESSING USER_TICKETS_CHANGED for user: 4
+2025-05-09 18:21:40 DEBUG BasketballServicesProxy:773 - Notifying observers about match update: 8
+2025-05-09 18:21:40 DEBUG BasketballServicesProxy:792 - Notifying observers of user tickets changed: 4
+2025-05-09 18:21:40 INFO  BasketballServicesProxy:718 - PROCESSING MATCH_UPDATED for match: 8
+2025-05-09 18:21:40 INFO  BasketballServicesProxy:760 - PROCESSING USER_TICKETS_CHANGED for user: 4
+2025-05-09 18:21:40 DEBUG BasketballServicesProxy:773 - Notifying observers about match update: 8
+2025-05-09 18:21:40 INFO  DiagnosticsManager:37 - Operation 'processUpdate' took 2 ms
+2025-05-09 18:21:40 DEBUG BasketballServicesProxy:792 - Notifying observers of user tickets changed: 4
+2025-05-09 18:21:40 INFO  DiagnosticsManager:37 - Operation 'processUpdate' took 1 ms
+2025-05-09 18:21:40 DEBUG BaseController:113 - matchUpdated: match=8, relevant=true
+2025-05-09 18:21:40 DEBUG BaseController:113 - matchUpdated: match=8, relevant=true
+2025-05-09 18:21:40 DEBUG BaseController:138 - userTicketsChanged: user=4, currentUser=4, relevant=true
+2025-05-09 18:21:40 DEBUG BaseController:138 - userTicketsChanged: user=4, currentUser=3, relevant=false
+2025-05-09 18:21:40 INFO  SellerDashboardController:128 - Updated match 8 to 0 available tickets in table
+2025-05-09 18:21:40 INFO  SellerDashboardController:139 - Match 8 not found or availability changed, performing full refresh
+2025-05-09 18:21:40 DEBUG SellerDashboardController:164 - Loading matches for seller dashboard
+2025-05-09 18:21:40 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:21:40 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_ALL_MATCHES"}
+2025-05-09 18:21:40 DEBUG BasketballServicesProxy:320 - Received response: {"type":"MATCHES","data":[{"id":1,"teamA":"Los Angeles Lakers","teamB":"Boston Celtics","dateTime":"2023-11-15T19:30:00"},{"id":2,"teamA":"Chicago Bulls","teamB":"Miami Heat","dateTime":"2023-11-16T20:00:00"},{"id":3,"teamA":"Golden State Warriors","teamB":"Brooklyn Nets","dateTime":"2023-11-17T21:00:00"},{"id":4,"teamA":"Toronto Raptors","teamB":"Philadelphia 76ers","dateTime":"2023-11-18T19:00:00"},{"id":5,"teamA":"Dallas Mavericks","teamB":"Milwaukee Bucks","dateTime":"2023-11-19T20:30:00"},{"id":6,"teamA":"Denver Nuggets","teamB":"Phoenix Suns","dateTime":"2023-11-20T21:00:00"},{"id":7,"teamA":"New York Knicks","teamB":"Atlanta Hawks","dateTime":"2023-11-21T19:30:00"},{"id":8,"teamA":"Utah Jazz","teamB":"Portland Trail Blazers","dateTime":"2023-11-22T20:00:00"},{"id":9,"teamA":"Houston Rockets","teamB":"San Antonio Spurs","dateTime":"2023-11-23T20:30:00"},{"id":10,"teamA":"Oklahoma City Thunder","teamB":"Minnesota Timberwolves","dateTime":"2023-11-24T19:00:00"}]}
+2025-05-09 18:21:40 DEBUG SellerDashboardController:166 - Loaded 10 matches from service
+2025-05-09 18:21:40 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:21:40 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":1}
+2025-05-09 18:21:40 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:21:40 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:21:40 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":1}
+2025-05-09 18:21:40 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:21:40 DEBUG SellerDashboardController:174 - Match Los Angeles Lakers vs Boston Celtics has 0 available tickets
+2025-05-09 18:21:40 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:21:40 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":2}
+2025-05-09 18:21:40 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:21:40 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:21:40 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":2}
+2025-05-09 18:21:40 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:21:40 DEBUG SellerDashboardController:174 - Match Chicago Bulls vs Miami Heat has 0 available tickets
+2025-05-09 18:21:40 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:21:40 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":3}
+2025-05-09 18:21:40 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:21:40 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:21:40 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":3}
+2025-05-09 18:21:40 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:21:40 DEBUG SellerDashboardController:174 - Match Golden State Warriors vs Brooklyn Nets has 0 available tickets
+2025-05-09 18:21:40 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:21:40 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":4}
+2025-05-09 18:21:40 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:21:40 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:21:40 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":4}
+2025-05-09 18:21:40 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:21:40 DEBUG SellerDashboardController:174 - Match Toronto Raptors vs Philadelphia 76ers has 0 available tickets
+2025-05-09 18:21:40 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:21:40 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":5}
+2025-05-09 18:21:40 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":1}
+2025-05-09 18:21:40 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:21:40 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":5}
+2025-05-09 18:21:40 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$130.00 - $130.00"}
+2025-05-09 18:21:40 DEBUG SellerDashboardController:174 - Match Dallas Mavericks vs Milwaukee Bucks has 1 available tickets
+2025-05-09 18:21:40 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:21:40 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":6}
+2025-05-09 18:21:40 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":1}
+2025-05-09 18:21:40 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:21:40 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":6}
+2025-05-09 18:21:40 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$140.00 - $140.00"}
+2025-05-09 18:21:40 DEBUG SellerDashboardController:174 - Match Denver Nuggets vs Phoenix Suns has 1 available tickets
+2025-05-09 18:21:40 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:21:40 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":7}
+2025-05-09 18:21:40 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":1}
+2025-05-09 18:21:40 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:21:40 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":7}
+2025-05-09 18:21:40 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$150.00 - $150.00"}
+2025-05-09 18:21:40 DEBUG SellerDashboardController:174 - Match New York Knicks vs Atlanta Hawks has 1 available tickets
+2025-05-09 18:21:40 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:21:40 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":8}
+2025-05-09 18:21:40 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:21:40 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:21:40 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":8}
+2025-05-09 18:21:40 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:21:40 DEBUG SellerDashboardController:174 - Match Utah Jazz vs Portland Trail Blazers has 0 available tickets
+2025-05-09 18:21:40 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:21:40 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":9}
+2025-05-09 18:21:40 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:21:40 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:21:40 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":9}
+2025-05-09 18:21:40 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:21:40 DEBUG SellerDashboardController:174 - Match Houston Rockets vs San Antonio Spurs has 0 available tickets
+2025-05-09 18:21:40 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:21:40 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":10}
+2025-05-09 18:21:40 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:21:40 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:21:40 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":10}
+2025-05-09 18:21:40 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:21:40 DEBUG SellerDashboardController:174 - Match Oklahoma City Thunder vs Minnesota Timberwolves has 0 available tickets
+2025-05-09 18:21:40 DEBUG SellerDashboardController:182 - Seller dashboard refreshed with 10 matches
+2025-05-09 18:21:59 INFO  SellerDashboardController:313 - Cleaning up seller dashboard resources
+2025-05-09 18:21:59 INFO  BaseController:99 - Unregistering observer for user: 3
+2025-05-09 18:21:59 INFO  BasketballServicesProxy:629 - Observer unregistered for user: 3
+2025-05-09 18:21:59 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:21:59 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"UNREGISTER_OBSERVER","data":{"id":3,"username":"alex","password":"123"}}
+2025-05-09 18:21:59 DEBUG BasketballServicesProxy:320 - Received response: {"type":"OK","error":"Observer unregistered successfully"}
+2025-05-09 18:22:00 INFO  CustomerSearchController:263 - Cleaning up CustomerSearchController resources
+2025-05-09 18:22:00 INFO  BaseController:99 - Unregistering observer for user: 3
+2025-05-09 18:22:00 INFO  BasketballServicesProxy:629 - Observer unregistered for user: 3
+2025-05-09 18:22:00 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:22:00 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"UNREGISTER_OBSERVER","data":{"id":3,"username":"alex","password":"123"}}
+2025-05-09 18:22:00 DEBUG BasketballServicesProxy:320 - Received response: {"type":"OK","error":"Observer unregistered successfully"}
+2025-05-09 18:22:00 INFO  ClientDashboardController:206 - Cleaning up client dashboard resources
+2025-05-09 18:22:00 INFO  BaseController:99 - Unregistering observer for user: 4
+2025-05-09 18:22:00 INFO  BasketballServicesProxy:629 - Observer unregistered for user: 4
+2025-05-09 18:22:00 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:22:00 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"UNREGISTER_OBSERVER","data":{"id":4,"username":"marius","password":"gigel"}}
+2025-05-09 18:22:00 DEBUG BasketballServicesProxy:320 - Received response: {"type":"OK","error":"Observer unregistered successfully"}
+2025-05-09 18:22:01 INFO  TicketsViewController:238 - Cleaning up TicketsViewController resources
+2025-05-09 18:22:01 INFO  BaseController:99 - Unregistering observer for user: 4
+2025-05-09 18:22:01 INFO  BasketballServicesProxy:629 - Observer unregistered for user: 4
+2025-05-09 18:22:01 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:22:01 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"UNREGISTER_OBSERVER","data":{"id":4,"username":"marius","password":"gigel"}}
+2025-05-09 18:22:01 DEBUG BasketballServicesProxy:320 - Received response: {"type":"OK","error":"Observer unregistered successfully"}
+2025-05-09 18:36:30 INFO  MainFX:30 - Client properties loaded
+2025-05-09 18:36:30 INFO  MainFX:73 - Application started successfully
+2025-05-09 18:36:43 INFO  MainFX:30 - Client properties loaded
+2025-05-09 18:36:43 INFO  MainFX:73 - Application started successfully
+2025-05-09 18:36:45 INFO  BasketballServicesProxy:115 - Connected to server at localhost:55556
+2025-05-09 18:36:45 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 5 ms
+2025-05-09 18:36:45 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"LOGIN","data":{"username":"alex","password":"123"}}
+2025-05-09 18:36:45 DEBUG BasketballServicesProxy:320 - Received response: {"type":"USER","data":{"userType":"SELLER","user":{"id":3,"username":"alex","password":"123"}}}
+2025-05-09 18:36:45 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:36:45 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"CHECK_TICKET_SELLER","data":"alex"}
+2025-05-09 18:36:45 DEBUG BasketballServicesProxy:320 - Received response: {"type":"IS_TICKET_SELLER","data":true}
+2025-05-09 18:36:46 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:36:46 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_USER_BY_USERNAME","data":{"username":"alex"}}
+2025-05-09 18:36:46 DEBUG BasketballServicesProxy:320 - Received response: {"type":"USER","data":{"user":{"id":3,"username":"alex","password":"123"}}}
+2025-05-09 18:36:46 DEBUG SellerDashboardController:164 - Loading matches for seller dashboard
+2025-05-09 18:36:46 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:36:46 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_ALL_MATCHES"}
+2025-05-09 18:36:46 DEBUG BasketballServicesProxy:320 - Received response: {"type":"MATCHES","data":[{"id":1,"teamA":"Los Angeles Lakers","teamB":"Boston Celtics","dateTime":"2023-11-15T19:30:00"},{"id":2,"teamA":"Chicago Bulls","teamB":"Miami Heat","dateTime":"2023-11-16T20:00:00"},{"id":3,"teamA":"Golden State Warriors","teamB":"Brooklyn Nets","dateTime":"2023-11-17T21:00:00"},{"id":4,"teamA":"Toronto Raptors","teamB":"Philadelphia 76ers","dateTime":"2023-11-18T19:00:00"},{"id":5,"teamA":"Dallas Mavericks","teamB":"Milwaukee Bucks","dateTime":"2023-11-19T20:30:00"},{"id":6,"teamA":"Denver Nuggets","teamB":"Phoenix Suns","dateTime":"2023-11-20T21:00:00"},{"id":7,"teamA":"New York Knicks","teamB":"Atlanta Hawks","dateTime":"2023-11-21T19:30:00"},{"id":8,"teamA":"Utah Jazz","teamB":"Portland Trail Blazers","dateTime":"2023-11-22T20:00:00"},{"id":9,"teamA":"Houston Rockets","teamB":"San Antonio Spurs","dateTime":"2023-11-23T20:30:00"},{"id":10,"teamA":"Oklahoma City Thunder","teamB":"Minnesota Timberwolves","dateTime":"2023-11-24T19:00:00"}]}
+2025-05-09 18:36:46 DEBUG SellerDashboardController:166 - Loaded 10 matches from service
+2025-05-09 18:36:46 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:36:46 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":1}
+2025-05-09 18:36:46 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:36:46 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:36:46 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":1}
+2025-05-09 18:36:46 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:36:46 DEBUG SellerDashboardController:174 - Match Los Angeles Lakers vs Boston Celtics has 0 available tickets
+2025-05-09 18:36:46 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:36:46 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":2}
+2025-05-09 18:36:46 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:36:46 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:36:46 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":2}
+2025-05-09 18:36:46 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:36:46 DEBUG SellerDashboardController:174 - Match Chicago Bulls vs Miami Heat has 0 available tickets
+2025-05-09 18:36:46 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:36:46 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":3}
+2025-05-09 18:36:46 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:36:46 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:36:46 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":3}
+2025-05-09 18:36:46 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:36:46 DEBUG SellerDashboardController:174 - Match Golden State Warriors vs Brooklyn Nets has 0 available tickets
+2025-05-09 18:36:46 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:36:46 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":4}
+2025-05-09 18:36:46 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:36:46 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:36:46 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":4}
+2025-05-09 18:36:46 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:36:46 DEBUG SellerDashboardController:174 - Match Toronto Raptors vs Philadelphia 76ers has 0 available tickets
+2025-05-09 18:36:46 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:36:46 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":5}
+2025-05-09 18:36:46 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":1}
+2025-05-09 18:36:46 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:36:46 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":5}
+2025-05-09 18:36:46 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$130.00 - $130.00"}
+2025-05-09 18:36:46 DEBUG SellerDashboardController:174 - Match Dallas Mavericks vs Milwaukee Bucks has 1 available tickets
+2025-05-09 18:36:46 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:36:46 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":6}
+2025-05-09 18:36:46 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":1}
+2025-05-09 18:36:46 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:36:46 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":6}
+2025-05-09 18:36:46 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$140.00 - $140.00"}
+2025-05-09 18:36:46 DEBUG SellerDashboardController:174 - Match Denver Nuggets vs Phoenix Suns has 1 available tickets
+2025-05-09 18:36:46 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:36:46 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":7}
+2025-05-09 18:36:46 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":1}
+2025-05-09 18:36:46 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:36:46 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":7}
+2025-05-09 18:36:46 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$150.00 - $150.00"}
+2025-05-09 18:36:46 DEBUG SellerDashboardController:174 - Match New York Knicks vs Atlanta Hawks has 1 available tickets
+2025-05-09 18:36:46 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:36:46 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":8}
+2025-05-09 18:36:46 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:36:46 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:36:46 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":8}
+2025-05-09 18:36:46 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:36:46 DEBUG SellerDashboardController:174 - Match Utah Jazz vs Portland Trail Blazers has 0 available tickets
+2025-05-09 18:36:46 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:36:46 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":9}
+2025-05-09 18:36:46 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:36:46 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:36:46 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":9}
+2025-05-09 18:36:46 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:36:46 DEBUG SellerDashboardController:174 - Match Houston Rockets vs San Antonio Spurs has 0 available tickets
+2025-05-09 18:36:46 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:36:46 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":10}
+2025-05-09 18:36:46 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:36:46 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:36:46 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":10}
+2025-05-09 18:36:46 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:36:46 DEBUG SellerDashboardController:174 - Match Oklahoma City Thunder vs Minnesota Timberwolves has 0 available tickets
+2025-05-09 18:36:46 INFO  BaseController:81 - Registering observer for user: 3
+2025-05-09 18:36:46 INFO  BasketballServicesProxy:607 - Observer registered for user: 3
+2025-05-09 18:36:46 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:36:46 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"REGISTER_OBSERVER","data":{"id":3,"username":"alex","password":"123"}}
+2025-05-09 18:36:46 DEBUG BasketballServicesProxy:320 - Received response: {"type":"OK","error":"Observer registered successfully"}
+2025-05-09 18:36:46 INFO  BasketballServicesProxy:647 - Update listener started
+2025-05-09 18:36:46 INFO  BaseController:83 - Successfully registered as observer for user 3
+2025-05-09 18:36:46 INFO  BasketballServicesProxy:213 - Starting update listener thread
+2025-05-09 18:36:46 DEBUG BasketballServicesProxy:224 - Sending update listener registration: {"type":"START_UPDATE_LISTENER"}
+2025-05-09 18:36:46 INFO  BasketballServicesProxy:233 - Update listener registration response: {"type":"OK","error":"Update listener started successfully"}
+2025-05-09 18:36:46 INFO  BasketballServicesProxy:242 - Starting update listener loop
+2025-05-09 18:36:46 DEBUG SellerDashboardController:182 - Seller dashboard refreshed with 10 matches
+2025-05-09 18:36:48 DEBUG CustomerSearchController:33 - Initializing CustomerSearchController
+2025-05-09 18:36:48 INFO  BaseController:81 - Registering observer for user: 3
+2025-05-09 18:36:48 INFO  BasketballServicesProxy:599 - Observer already registered for user: 3
+2025-05-09 18:36:48 INFO  BaseController:83 - Successfully registered as observer for user 3
+2025-05-09 18:36:48 INFO  BasketballServicesProxy:599 - Observer already registered for user: 3
+2025-05-09 18:36:48 DEBUG CustomerSearchController:51 - Explicitly registered CustomerSearchController as observer for user 3
+2025-05-09 18:36:51 INFO  CustomerSearchController:215 - Searching for tickets purchased by customer: marius
+2025-05-09 18:36:51 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:36:51 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"SEARCH_CUSTOMER_TICKETS","data":"marius"}
+2025-05-09 18:36:51 DEBUG BasketballServicesProxy:320 - Received response: {"type":"TICKETS","data":[{"id":16,"matchId":8,"seatNumber":999,"sold":true,"price":160.0,"userId":4}]}
+2025-05-09 18:36:51 DEBUG BasketballServicesProxy:407 - Cache miss for match ID: 8, fetching from server
+2025-05-09 18:36:51 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:36:51 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_MATCH","data":8}
+2025-05-09 18:36:51 DEBUG BasketballServicesProxy:320 - Received response: {"type":"MATCH","data":{"id":8,"teamA":"Utah Jazz","teamB":"Portland Trail Blazers","dateTime":"2023-11-22T20:00:00"}}
+2025-05-09 18:36:51 DEBUG BasketballServicesProxy:418 - Updated cache with match ID: 8
+2025-05-09 18:36:51 INFO  CustomerSearchController:218 - Found 1 tickets for customer marius
+2025-05-09 18:37:01 INFO  BasketballServicesProxy:115 - Connected to server at localhost:55556
+2025-05-09 18:37:01 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 5 ms
+2025-05-09 18:37:01 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"LOGIN","data":{"username":"marius","password":"gigel"}}
+2025-05-09 18:37:01 DEBUG BasketballServicesProxy:320 - Received response: {"type":"USER","data":{"userType":"USER","user":{"id":4,"username":"marius","password":"gigel"}}}
+2025-05-09 18:37:01 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:37:01 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"CHECK_TICKET_SELLER","data":"marius"}
+2025-05-09 18:37:01 DEBUG BasketballServicesProxy:320 - Received response: {"type":"IS_TICKET_SELLER","data":false}
+2025-05-09 18:37:01 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:37:01 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_USER_BY_USERNAME","data":{"username":"marius"}}
+2025-05-09 18:37:01 DEBUG BasketballServicesProxy:320 - Received response: {"type":"USER","data":{"user":{"id":4,"username":"marius","password":"gigel"}}}
+2025-05-09 18:37:01 DEBUG ClientDashboardController:140 - Loading matches for client dashboard
+2025-05-09 18:37:01 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:37:01 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_ALL_MATCHES"}
+2025-05-09 18:37:01 DEBUG BasketballServicesProxy:320 - Received response: {"type":"MATCHES","data":[{"id":1,"teamA":"Los Angeles Lakers","teamB":"Boston Celtics","dateTime":"2023-11-15T19:30:00"},{"id":2,"teamA":"Chicago Bulls","teamB":"Miami Heat","dateTime":"2023-11-16T20:00:00"},{"id":3,"teamA":"Golden State Warriors","teamB":"Brooklyn Nets","dateTime":"2023-11-17T21:00:00"},{"id":4,"teamA":"Toronto Raptors","teamB":"Philadelphia 76ers","dateTime":"2023-11-18T19:00:00"},{"id":5,"teamA":"Dallas Mavericks","teamB":"Milwaukee Bucks","dateTime":"2023-11-19T20:30:00"},{"id":6,"teamA":"Denver Nuggets","teamB":"Phoenix Suns","dateTime":"2023-11-20T21:00:00"},{"id":7,"teamA":"New York Knicks","teamB":"Atlanta Hawks","dateTime":"2023-11-21T19:30:00"},{"id":8,"teamA":"Utah Jazz","teamB":"Portland Trail Blazers","dateTime":"2023-11-22T20:00:00"},{"id":9,"teamA":"Houston Rockets","teamB":"San Antonio Spurs","dateTime":"2023-11-23T20:30:00"},{"id":10,"teamA":"Oklahoma City Thunder","teamB":"Minnesota Timberwolves","dateTime":"2023-11-24T19:00:00"}]}
+2025-05-09 18:37:01 DEBUG ClientDashboardController:142 - Loaded 10 matches from service
+2025-05-09 18:37:01 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:37:01 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":1}
+2025-05-09 18:37:01 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:37:01 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:37:01 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":1}
+2025-05-09 18:37:01 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:37:01 DEBUG ClientDashboardController:150 - Match Los Angeles Lakers vs Boston Celtics has 0 available tickets
+2025-05-09 18:37:01 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:37:01 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":2}
+2025-05-09 18:37:01 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:37:01 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:37:01 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":2}
+2025-05-09 18:37:01 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:37:01 DEBUG ClientDashboardController:150 - Match Chicago Bulls vs Miami Heat has 0 available tickets
+2025-05-09 18:37:01 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:37:01 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":3}
+2025-05-09 18:37:01 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:37:01 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:37:01 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":3}
+2025-05-09 18:37:01 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:37:01 DEBUG ClientDashboardController:150 - Match Golden State Warriors vs Brooklyn Nets has 0 available tickets
+2025-05-09 18:37:01 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:37:01 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":4}
+2025-05-09 18:37:01 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:37:01 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:37:01 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":4}
+2025-05-09 18:37:01 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:37:01 DEBUG ClientDashboardController:150 - Match Toronto Raptors vs Philadelphia 76ers has 0 available tickets
+2025-05-09 18:37:01 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:37:01 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":5}
+2025-05-09 18:37:01 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":1}
+2025-05-09 18:37:01 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:37:01 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":5}
+2025-05-09 18:37:01 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$130.00 - $130.00"}
+2025-05-09 18:37:01 DEBUG ClientDashboardController:150 - Match Dallas Mavericks vs Milwaukee Bucks has 1 available tickets
+2025-05-09 18:37:01 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:37:01 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":6}
+2025-05-09 18:37:01 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":1}
+2025-05-09 18:37:01 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:37:01 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":6}
+2025-05-09 18:37:01 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$140.00 - $140.00"}
+2025-05-09 18:37:01 DEBUG ClientDashboardController:150 - Match Denver Nuggets vs Phoenix Suns has 1 available tickets
+2025-05-09 18:37:01 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:37:01 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":7}
+2025-05-09 18:37:01 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":1}
+2025-05-09 18:37:01 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:37:01 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":7}
+2025-05-09 18:37:01 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$150.00 - $150.00"}
+2025-05-09 18:37:01 DEBUG ClientDashboardController:150 - Match New York Knicks vs Atlanta Hawks has 1 available tickets
+2025-05-09 18:37:01 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:37:01 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":8}
+2025-05-09 18:37:01 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:37:01 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:37:01 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":8}
+2025-05-09 18:37:01 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:37:01 DEBUG ClientDashboardController:150 - Match Utah Jazz vs Portland Trail Blazers has 0 available tickets
+2025-05-09 18:37:01 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:37:01 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":9}
+2025-05-09 18:37:01 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:37:01 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:37:01 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":9}
+2025-05-09 18:37:01 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:37:01 DEBUG ClientDashboardController:150 - Match Houston Rockets vs San Antonio Spurs has 0 available tickets
+2025-05-09 18:37:01 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:37:01 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":10}
+2025-05-09 18:37:01 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:37:01 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:37:01 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":10}
+2025-05-09 18:37:01 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:37:01 DEBUG ClientDashboardController:150 - Match Oklahoma City Thunder vs Minnesota Timberwolves has 0 available tickets
+2025-05-09 18:37:01 INFO  BaseController:81 - Registering observer for user: 4
+2025-05-09 18:37:01 INFO  BasketballServicesProxy:607 - Observer registered for user: 4
+2025-05-09 18:37:01 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:37:01 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"REGISTER_OBSERVER","data":{"id":4,"username":"marius","password":"gigel"}}
+2025-05-09 18:37:01 DEBUG BasketballServicesProxy:320 - Received response: {"type":"OK","error":"Observer registered successfully"}
+2025-05-09 18:37:01 INFO  BasketballServicesProxy:647 - Update listener started
+2025-05-09 18:37:01 INFO  BaseController:83 - Successfully registered as observer for user 4
+2025-05-09 18:37:01 INFO  BasketballServicesProxy:213 - Starting update listener thread
+2025-05-09 18:37:01 DEBUG BasketballServicesProxy:224 - Sending update listener registration: {"type":"START_UPDATE_LISTENER"}
+2025-05-09 18:37:01 INFO  BasketballServicesProxy:233 - Update listener registration response: {"type":"OK","error":"Update listener started successfully"}
+2025-05-09 18:37:01 INFO  BasketballServicesProxy:242 - Starting update listener loop
+2025-05-09 18:37:01 DEBUG ClientDashboardController:158 - Client dashboard refreshed with 10 matches
+2025-05-09 18:37:03 DEBUG TicketsViewController:30 - Initializing TicketsViewController
+2025-05-09 18:37:03 INFO  BaseController:81 - Registering observer for user: 4
+2025-05-09 18:37:03 INFO  BasketballServicesProxy:599 - Observer already registered for user: 4
+2025-05-09 18:37:03 INFO  BaseController:83 - Successfully registered as observer for user 4
+2025-05-09 18:37:03 INFO  TicketsViewController:69 - Loading tickets for user: marius
+2025-05-09 18:37:03 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:37:03 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_USER_TICKETS","data":{"id":4,"username":"marius","password":"gigel"}}
+2025-05-09 18:37:03 DEBUG BasketballServicesProxy:320 - Received response: {"type":"TICKETS","data":[{"id":16,"matchId":8,"seatNumber":999,"sold":true,"price":160.0,"userId":4}]}
+2025-05-09 18:37:03 DEBUG BasketballServicesProxy:407 - Cache miss for match ID: 8, fetching from server
+2025-05-09 18:37:03 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:37:03 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_MATCH","data":8}
+2025-05-09 18:37:03 DEBUG BasketballServicesProxy:320 - Received response: {"type":"MATCH","data":{"id":8,"teamA":"Utah Jazz","teamB":"Portland Trail Blazers","dateTime":"2023-11-22T20:00:00"}}
+2025-05-09 18:37:03 DEBUG BasketballServicesProxy:418 - Updated cache with match ID: 8
+2025-05-09 18:37:03 INFO  TicketsViewController:73 - Found 1 tickets for user marius
+2025-05-09 18:37:03 INFO  ClientDashboardController:190 - Opened tickets view for user marius
+2025-05-09 18:37:03 INFO  BasketballServicesProxy:599 - Observer already registered for user: 4
+2025-05-09 18:37:03 DEBUG TicketsViewController:38 - Explicitly registered TicketsViewController as observer for user 4
+2025-05-09 18:37:03 INFO  TicketsViewController:69 - Loading tickets for user: marius
+2025-05-09 18:37:03 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:37:03 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_USER_TICKETS","data":{"id":4,"username":"marius","password":"gigel"}}
+2025-05-09 18:37:03 DEBUG BasketballServicesProxy:320 - Received response: {"type":"TICKETS","data":[{"id":16,"matchId":8,"seatNumber":999,"sold":true,"price":160.0,"userId":4}]}
+2025-05-09 18:37:03 DEBUG BasketballServicesProxy:402 - Cache hit for match ID: 8
+2025-05-09 18:37:03 INFO  TicketsViewController:73 - Found 1 tickets for user marius
+2025-05-09 18:37:03 DEBUG TicketsViewController:89 - Tickets view refreshed with 1 tickets
+2025-05-09 18:37:03 DEBUG TicketsViewController:89 - Tickets view refreshed with 1 tickets
+2025-05-09 18:37:19 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:37:19 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"SELL_TICKETS","data":{"matchId":5,"customerName":"marius","customerAddress":"fsfaf","seatsPurchased":1}}
+2025-05-09 18:37:19 DEBUG BasketballServicesProxy:320 - Received response: {"type":"TICKET_SALE_RESULT","data":130.0}
+2025-05-09 18:37:19 DEBUG BasketballServicesProxy:248 - RECEIVED UPDATE: {"type":"MATCH_UPDATED","data":{"id":5,"teamA":"Dallas Mavericks","teamB":"Milwaukee Bucks","dateTime":"2023-11-19T20:30:00","availableTickets":0,"priceRange":"$0.00 - $0.00"}}
+2025-05-09 18:37:19 DEBUG BasketballServicesProxy:248 - RECEIVED UPDATE: {"type":"MATCH_UPDATED","data":{"id":5,"teamA":"Dallas Mavericks","teamB":"Milwaukee Bucks","dateTime":"2023-11-19T20:30:00","availableTickets":0,"priceRange":"$0.00 - $0.00"}}
+2025-05-09 18:37:19 DEBUG BasketballServicesProxy:248 - RECEIVED UPDATE: {"type":"USER_TICKETS_CHANGED","data":{"id":4,"username":"marius","password":"gigel"}}
+2025-05-09 18:37:19 DEBUG BasketballServicesProxy:248 - RECEIVED UPDATE: {"type":"USER_TICKETS_CHANGED","data":{"id":4,"username":"marius","password":"gigel"}}
+2025-05-09 18:37:19 INFO  BasketballServicesProxy:154 - CLIENT RECEIVED UPDATE: {"type":"MATCH_UPDATED","data":{"id":5,"teamA":"Dallas Mavericks","teamB":"Milwaukee Bucks","dateTime":"2023-11-19T20:30:00","availableTickets":0,"priceRange":"$0.00 - $0.00"}}
+2025-05-09 18:37:19 INFO  BasketballServicesProxy:154 - CLIENT RECEIVED UPDATE: {"type":"USER_TICKETS_CHANGED","data":{"id":4,"username":"marius","password":"gigel"}}
+2025-05-09 18:37:19 INFO  BasketballServicesProxy:718 - PROCESSING MATCH_UPDATED for match: 5
+2025-05-09 18:37:19 INFO  BasketballServicesProxy:760 - PROCESSING USER_TICKETS_CHANGED for user: 4
+2025-05-09 18:37:19 DEBUG BasketballServicesProxy:792 - Notifying observers of user tickets changed: 4
+2025-05-09 18:37:19 DEBUG BasketballServicesProxy:773 - Notifying observers about match update: 5
+2025-05-09 18:37:19 INFO  BasketballServicesProxy:154 - CLIENT RECEIVED UPDATE: {"type":"USER_TICKETS_CHANGED","data":{"id":4,"username":"marius","password":"gigel"}}
+2025-05-09 18:37:19 INFO  DiagnosticsManager:37 - Operation 'processUpdate' took 3 ms
+2025-05-09 18:37:19 DEBUG BaseController:113 - matchUpdated: match=5, relevant=true
+2025-05-09 18:37:19 DEBUG BaseController:138 - userTicketsChanged: user=4, currentUser=3, relevant=false
+2025-05-09 18:37:19 INFO  BasketballServicesProxy:760 - PROCESSING USER_TICKETS_CHANGED for user: 4
+2025-05-09 18:37:19 INFO  BasketballServicesProxy:154 - CLIENT RECEIVED UPDATE: {"type":"MATCH_UPDATED","data":{"id":5,"teamA":"Dallas Mavericks","teamB":"Milwaukee Bucks","dateTime":"2023-11-19T20:30:00","availableTickets":0,"priceRange":"$0.00 - $0.00"}}
+2025-05-09 18:37:19 DEBUG BasketballServicesProxy:792 - Notifying observers of user tickets changed: 4
+2025-05-09 18:37:19 INFO  SellerDashboardController:128 - Updated match 5 to 0 available tickets in table
+2025-05-09 18:37:19 INFO  SellerDashboardController:139 - Match 5 not found or availability changed, performing full refresh
+2025-05-09 18:37:19 DEBUG SellerDashboardController:164 - Loading matches for seller dashboard
+2025-05-09 18:37:19 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:37:19 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_ALL_MATCHES"}
+2025-05-09 18:37:19 INFO  BasketballServicesProxy:718 - PROCESSING MATCH_UPDATED for match: 5
+2025-05-09 18:37:19 INFO  DiagnosticsManager:37 - Operation 'processUpdate' took 0 ms
+2025-05-09 18:37:19 DEBUG BasketballServicesProxy:773 - Notifying observers about match update: 5
+2025-05-09 18:37:19 DEBUG BaseController:138 - userTicketsChanged: user=4, currentUser=4, relevant=true
+2025-05-09 18:37:19 DEBUG BaseController:113 - matchUpdated: match=5, relevant=true
+2025-05-09 18:37:19 DEBUG BasketballServicesProxy:320 - Received response: {"type":"MATCHES","data":[{"id":1,"teamA":"Los Angeles Lakers","teamB":"Boston Celtics","dateTime":"2023-11-15T19:30:00"},{"id":2,"teamA":"Chicago Bulls","teamB":"Miami Heat","dateTime":"2023-11-16T20:00:00"},{"id":3,"teamA":"Golden State Warriors","teamB":"Brooklyn Nets","dateTime":"2023-11-17T21:00:00"},{"id":4,"teamA":"Toronto Raptors","teamB":"Philadelphia 76ers","dateTime":"2023-11-18T19:00:00"},{"id":5,"teamA":"Dallas Mavericks","teamB":"Milwaukee Bucks","dateTime":"2023-11-19T20:30:00"},{"id":6,"teamA":"Denver Nuggets","teamB":"Phoenix Suns","dateTime":"2023-11-20T21:00:00"},{"id":7,"teamA":"New York Knicks","teamB":"Atlanta Hawks","dateTime":"2023-11-21T19:30:00"},{"id":8,"teamA":"Utah Jazz","teamB":"Portland Trail Blazers","dateTime":"2023-11-22T20:00:00"},{"id":9,"teamA":"Houston Rockets","teamB":"San Antonio Spurs","dateTime":"2023-11-23T20:30:00"},{"id":10,"teamA":"Oklahoma City Thunder","teamB":"Minnesota Timberwolves","dateTime":"2023-11-24T19:00:00"}]}
+2025-05-09 18:37:19 DEBUG SellerDashboardController:166 - Loaded 10 matches from service
+2025-05-09 18:37:19 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:37:19 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":1}
+2025-05-09 18:37:19 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:37:19 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:37:19 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":1}
+2025-05-09 18:37:19 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:37:19 DEBUG SellerDashboardController:174 - Match Los Angeles Lakers vs Boston Celtics has 0 available tickets
+2025-05-09 18:37:19 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:37:19 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":2}
+2025-05-09 18:37:19 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:37:19 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:37:19 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":2}
+2025-05-09 18:37:19 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:37:19 DEBUG SellerDashboardController:174 - Match Chicago Bulls vs Miami Heat has 0 available tickets
+2025-05-09 18:37:19 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:37:19 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":3}
+2025-05-09 18:37:19 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:37:19 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:37:19 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":3}
+2025-05-09 18:37:19 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:37:19 DEBUG SellerDashboardController:174 - Match Golden State Warriors vs Brooklyn Nets has 0 available tickets
+2025-05-09 18:37:19 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:37:19 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":4}
+2025-05-09 18:37:19 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:37:19 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:37:19 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":4}
+2025-05-09 18:37:19 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:37:19 DEBUG SellerDashboardController:174 - Match Toronto Raptors vs Philadelphia 76ers has 0 available tickets
+2025-05-09 18:37:19 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:37:19 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":5}
+2025-05-09 18:37:19 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:37:19 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:37:19 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":5}
+2025-05-09 18:37:19 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:37:19 DEBUG SellerDashboardController:174 - Match Dallas Mavericks vs Milwaukee Bucks has 0 available tickets
+2025-05-09 18:37:19 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:37:19 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":6}
+2025-05-09 18:37:19 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":1}
+2025-05-09 18:37:19 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:37:19 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":6}
+2025-05-09 18:37:19 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$140.00 - $140.00"}
+2025-05-09 18:37:19 DEBUG SellerDashboardController:174 - Match Denver Nuggets vs Phoenix Suns has 1 available tickets
+2025-05-09 18:37:19 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:37:19 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":7}
+2025-05-09 18:37:19 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":1}
+2025-05-09 18:37:19 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:37:19 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":7}
+2025-05-09 18:37:19 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$150.00 - $150.00"}
+2025-05-09 18:37:19 DEBUG SellerDashboardController:174 - Match New York Knicks vs Atlanta Hawks has 1 available tickets
+2025-05-09 18:37:19 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:37:19 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":8}
+2025-05-09 18:37:19 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:37:19 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:37:19 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":8}
+2025-05-09 18:37:19 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:37:19 DEBUG SellerDashboardController:174 - Match Utah Jazz vs Portland Trail Blazers has 0 available tickets
+2025-05-09 18:37:19 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:37:19 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":9}
+2025-05-09 18:37:19 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:37:19 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:37:19 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":9}
+2025-05-09 18:37:19 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:37:19 DEBUG SellerDashboardController:174 - Match Houston Rockets vs San Antonio Spurs has 0 available tickets
+2025-05-09 18:37:19 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:37:19 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":10}
+2025-05-09 18:37:19 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:37:19 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:37:19 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":10}
+2025-05-09 18:37:19 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:37:19 DEBUG SellerDashboardController:174 - Match Oklahoma City Thunder vs Minnesota Timberwolves has 0 available tickets
+2025-05-09 18:37:19 DEBUG SellerDashboardController:182 - Seller dashboard refreshed with 10 matches
+2025-05-09 18:39:11 ERROR BasketballServicesProxy:260 - ERROR in update listener: Connection reset
+2025-05-09 18:39:11 ERROR BasketballServicesProxy:260 - ERROR in update listener: Connection reset
+2025-05-09 18:39:11 INFO  BasketballServicesProxy:278 - Waiting 1000 ms before reconnection attempt 1/10
+2025-05-09 18:39:11 INFO  BasketballServicesProxy:278 - Waiting 1000 ms before reconnection attempt 1/10
+2025-05-09 18:41:01 INFO  MainFX:30 - Client properties loaded
+2025-05-09 18:41:01 INFO  MainFX:73 - Application started successfully
+2025-05-09 18:41:06 INFO  MainFX:30 - Client properties loaded
+2025-05-09 18:41:06 INFO  MainFX:73 - Application started successfully
+2025-05-09 18:41:16 INFO  BasketballServicesProxy:115 - Connected to server at localhost:55556
+2025-05-09 18:41:16 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 5 ms
+2025-05-09 18:41:16 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"LOGIN","data":{"username":"marius","password":"gigel"}}
+2025-05-09 18:41:16 DEBUG BasketballServicesProxy:320 - Received response: {"type":"USER","data":{"userType":"USER","user":{"id":4,"username":"marius","password":"gigel"}}}
+2025-05-09 18:41:16 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:41:16 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"CHECK_TICKET_SELLER","data":"marius"}
+2025-05-09 18:41:16 DEBUG BasketballServicesProxy:320 - Received response: {"type":"IS_TICKET_SELLER","data":false}
+2025-05-09 18:41:17 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:41:17 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_USER_BY_USERNAME","data":{"username":"marius"}}
+2025-05-09 18:41:17 DEBUG BasketballServicesProxy:320 - Received response: {"type":"USER","data":{"user":{"id":4,"username":"marius","password":"gigel"}}}
+2025-05-09 18:41:17 DEBUG ClientDashboardController:140 - Loading matches for client dashboard
+2025-05-09 18:41:17 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:41:17 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_ALL_MATCHES"}
+2025-05-09 18:41:17 DEBUG BasketballServicesProxy:320 - Received response: {"type":"MATCHES","data":[{"id":1,"teamA":"Los Angeles Lakers","teamB":"Boston Celtics","dateTime":"2023-11-15T19:30:00"},{"id":2,"teamA":"Chicago Bulls","teamB":"Miami Heat","dateTime":"2023-11-16T20:00:00"},{"id":3,"teamA":"Golden State Warriors","teamB":"Brooklyn Nets","dateTime":"2023-11-17T21:00:00"},{"id":4,"teamA":"Toronto Raptors","teamB":"Philadelphia 76ers","dateTime":"2023-11-18T19:00:00"},{"id":5,"teamA":"Dallas Mavericks","teamB":"Milwaukee Bucks","dateTime":"2023-11-19T20:30:00"},{"id":6,"teamA":"Denver Nuggets","teamB":"Phoenix Suns","dateTime":"2023-11-20T21:00:00"},{"id":7,"teamA":"New York Knicks","teamB":"Atlanta Hawks","dateTime":"2023-11-21T19:30:00"},{"id":8,"teamA":"Utah Jazz","teamB":"Portland Trail Blazers","dateTime":"2023-11-22T20:00:00"},{"id":9,"teamA":"Houston Rockets","teamB":"San Antonio Spurs","dateTime":"2023-11-23T20:30:00"},{"id":10,"teamA":"Oklahoma City Thunder","teamB":"Minnesota Timberwolves","dateTime":"2023-11-24T19:00:00"}]}
+2025-05-09 18:41:17 DEBUG ClientDashboardController:142 - Loaded 10 matches from service
+2025-05-09 18:41:17 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:41:17 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":1}
+2025-05-09 18:41:17 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:41:17 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:41:17 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":1}
+2025-05-09 18:41:17 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:41:17 DEBUG ClientDashboardController:150 - Match Los Angeles Lakers vs Boston Celtics has 0 available tickets
+2025-05-09 18:41:17 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:41:17 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":2}
+2025-05-09 18:41:17 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:41:17 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:41:17 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":2}
+2025-05-09 18:41:17 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:41:17 DEBUG ClientDashboardController:150 - Match Chicago Bulls vs Miami Heat has 0 available tickets
+2025-05-09 18:41:17 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:41:17 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":3}
+2025-05-09 18:41:17 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:41:17 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:41:17 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":3}
+2025-05-09 18:41:17 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:41:17 DEBUG ClientDashboardController:150 - Match Golden State Warriors vs Brooklyn Nets has 0 available tickets
+2025-05-09 18:41:17 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:41:17 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":4}
+2025-05-09 18:41:17 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:41:17 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:41:17 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":4}
+2025-05-09 18:41:17 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:41:17 DEBUG ClientDashboardController:150 - Match Toronto Raptors vs Philadelphia 76ers has 0 available tickets
+2025-05-09 18:41:17 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:41:17 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":5}
+2025-05-09 18:41:17 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:41:17 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:41:17 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":5}
+2025-05-09 18:41:17 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:41:17 DEBUG ClientDashboardController:150 - Match Dallas Mavericks vs Milwaukee Bucks has 0 available tickets
+2025-05-09 18:41:17 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:41:17 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":6}
+2025-05-09 18:41:17 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":1}
+2025-05-09 18:41:17 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:41:17 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":6}
+2025-05-09 18:41:17 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$140.00 - $140.00"}
+2025-05-09 18:41:17 DEBUG ClientDashboardController:150 - Match Denver Nuggets vs Phoenix Suns has 1 available tickets
+2025-05-09 18:41:17 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:41:17 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":7}
+2025-05-09 18:41:17 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":1}
+2025-05-09 18:41:17 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:41:17 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":7}
+2025-05-09 18:41:17 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$150.00 - $150.00"}
+2025-05-09 18:41:17 DEBUG ClientDashboardController:150 - Match New York Knicks vs Atlanta Hawks has 1 available tickets
+2025-05-09 18:41:17 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:41:17 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":8}
+2025-05-09 18:41:17 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:41:17 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:41:17 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":8}
+2025-05-09 18:41:17 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:41:17 DEBUG ClientDashboardController:150 - Match Utah Jazz vs Portland Trail Blazers has 0 available tickets
+2025-05-09 18:41:17 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:41:17 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":9}
+2025-05-09 18:41:17 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:41:17 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:41:17 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":9}
+2025-05-09 18:41:18 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:41:18 DEBUG ClientDashboardController:150 - Match Houston Rockets vs San Antonio Spurs has 0 available tickets
+2025-05-09 18:41:18 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:41:18 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":10}
+2025-05-09 18:41:18 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:41:18 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:41:18 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":10}
+2025-05-09 18:41:18 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:41:18 DEBUG ClientDashboardController:150 - Match Oklahoma City Thunder vs Minnesota Timberwolves has 0 available tickets
+2025-05-09 18:41:18 INFO  BaseController:81 - Registering observer for user: 4
+2025-05-09 18:41:18 INFO  BasketballServicesProxy:607 - Observer registered for user: 4
+2025-05-09 18:41:18 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:41:18 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"REGISTER_OBSERVER","data":{"id":4,"username":"marius","password":"gigel"}}
+2025-05-09 18:41:18 DEBUG BasketballServicesProxy:320 - Received response: {"type":"OK","error":"Observer registered successfully"}
+2025-05-09 18:41:18 INFO  BasketballServicesProxy:647 - Update listener started
+2025-05-09 18:41:18 INFO  BaseController:83 - Successfully registered as observer for user 4
+2025-05-09 18:41:18 INFO  BasketballServicesProxy:213 - Starting update listener thread
+2025-05-09 18:41:18 DEBUG BasketballServicesProxy:224 - Sending update listener registration: {"type":"START_UPDATE_LISTENER"}
+2025-05-09 18:41:18 INFO  BasketballServicesProxy:233 - Update listener registration response: {"type":"OK","error":"Update listener started successfully"}
+2025-05-09 18:41:18 INFO  BasketballServicesProxy:242 - Starting update listener loop
+2025-05-09 18:41:18 DEBUG ClientDashboardController:158 - Client dashboard refreshed with 10 matches
+2025-05-09 18:41:24 DEBUG TicketsViewController:30 - Initializing TicketsViewController
+2025-05-09 18:41:24 INFO  BaseController:81 - Registering observer for user: 4
+2025-05-09 18:41:24 INFO  BasketballServicesProxy:599 - Observer already registered for user: 4
+2025-05-09 18:41:24 INFO  BaseController:83 - Successfully registered as observer for user 4
+2025-05-09 18:41:24 INFO  TicketsViewController:69 - Loading tickets for user: marius
+2025-05-09 18:41:24 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:41:24 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_USER_TICKETS","data":{"id":4,"username":"marius","password":"gigel"}}
+2025-05-09 18:41:24 DEBUG BasketballServicesProxy:320 - Received response: {"type":"TICKETS","data":[{"id":13,"matchId":5,"seatNumber":525,"sold":true,"price":130.0,"userId":4},{"id":16,"matchId":8,"seatNumber":999,"sold":true,"price":160.0,"userId":4}]}
+2025-05-09 18:41:24 DEBUG BasketballServicesProxy:407 - Cache miss for match ID: 5, fetching from server
+2025-05-09 18:41:24 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:41:24 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_MATCH","data":5}
+2025-05-09 18:41:24 DEBUG BasketballServicesProxy:320 - Received response: {"type":"MATCH","data":{"id":5,"teamA":"Dallas Mavericks","teamB":"Milwaukee Bucks","dateTime":"2023-11-19T20:30:00"}}
+2025-05-09 18:41:24 DEBUG BasketballServicesProxy:418 - Updated cache with match ID: 5
+2025-05-09 18:41:24 DEBUG BasketballServicesProxy:407 - Cache miss for match ID: 8, fetching from server
+2025-05-09 18:41:24 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:41:24 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_MATCH","data":8}
+2025-05-09 18:41:24 DEBUG BasketballServicesProxy:320 - Received response: {"type":"MATCH","data":{"id":8,"teamA":"Utah Jazz","teamB":"Portland Trail Blazers","dateTime":"2023-11-22T20:00:00"}}
+2025-05-09 18:41:24 DEBUG BasketballServicesProxy:418 - Updated cache with match ID: 8
+2025-05-09 18:41:24 INFO  TicketsViewController:73 - Found 2 tickets for user marius
+2025-05-09 18:41:24 INFO  ClientDashboardController:190 - Opened tickets view for user marius
+2025-05-09 18:41:24 INFO  BasketballServicesProxy:599 - Observer already registered for user: 4
+2025-05-09 18:41:24 DEBUG TicketsViewController:38 - Explicitly registered TicketsViewController as observer for user 4
+2025-05-09 18:41:24 INFO  TicketsViewController:69 - Loading tickets for user: marius
+2025-05-09 18:41:24 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:41:24 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_USER_TICKETS","data":{"id":4,"username":"marius","password":"gigel"}}
+2025-05-09 18:41:24 DEBUG BasketballServicesProxy:320 - Received response: {"type":"TICKETS","data":[{"id":13,"matchId":5,"seatNumber":525,"sold":true,"price":130.0,"userId":4},{"id":16,"matchId":8,"seatNumber":999,"sold":true,"price":160.0,"userId":4}]}
+2025-05-09 18:41:24 DEBUG BasketballServicesProxy:402 - Cache hit for match ID: 5
+2025-05-09 18:41:24 DEBUG BasketballServicesProxy:402 - Cache hit for match ID: 8
+2025-05-09 18:41:24 INFO  TicketsViewController:73 - Found 2 tickets for user marius
+2025-05-09 18:41:24 DEBUG TicketsViewController:89 - Tickets view refreshed with 2 tickets
+2025-05-09 18:41:24 DEBUG TicketsViewController:89 - Tickets view refreshed with 2 tickets
+2025-05-09 18:41:37 INFO  BasketballServicesProxy:115 - Connected to server at localhost:55556
+2025-05-09 18:41:37 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 6 ms
+2025-05-09 18:41:37 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"LOGIN","data":{"username":"alex","password":"123"}}
+2025-05-09 18:41:37 DEBUG BasketballServicesProxy:320 - Received response: {"type":"USER","data":{"userType":"SELLER","user":{"id":3,"username":"alex","password":"123"}}}
+2025-05-09 18:41:37 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:41:37 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"CHECK_TICKET_SELLER","data":"alex"}
+2025-05-09 18:41:37 DEBUG BasketballServicesProxy:320 - Received response: {"type":"IS_TICKET_SELLER","data":true}
+2025-05-09 18:41:38 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:41:38 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_USER_BY_USERNAME","data":{"username":"alex"}}
+2025-05-09 18:41:38 DEBUG BasketballServicesProxy:320 - Received response: {"type":"USER","data":{"user":{"id":3,"username":"alex","password":"123"}}}
+2025-05-09 18:41:38 DEBUG SellerDashboardController:164 - Loading matches for seller dashboard
+2025-05-09 18:41:38 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:41:38 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_ALL_MATCHES"}
+2025-05-09 18:41:38 DEBUG BasketballServicesProxy:320 - Received response: {"type":"MATCHES","data":[{"id":1,"teamA":"Los Angeles Lakers","teamB":"Boston Celtics","dateTime":"2023-11-15T19:30:00"},{"id":2,"teamA":"Chicago Bulls","teamB":"Miami Heat","dateTime":"2023-11-16T20:00:00"},{"id":3,"teamA":"Golden State Warriors","teamB":"Brooklyn Nets","dateTime":"2023-11-17T21:00:00"},{"id":4,"teamA":"Toronto Raptors","teamB":"Philadelphia 76ers","dateTime":"2023-11-18T19:00:00"},{"id":5,"teamA":"Dallas Mavericks","teamB":"Milwaukee Bucks","dateTime":"2023-11-19T20:30:00"},{"id":6,"teamA":"Denver Nuggets","teamB":"Phoenix Suns","dateTime":"2023-11-20T21:00:00"},{"id":7,"teamA":"New York Knicks","teamB":"Atlanta Hawks","dateTime":"2023-11-21T19:30:00"},{"id":8,"teamA":"Utah Jazz","teamB":"Portland Trail Blazers","dateTime":"2023-11-22T20:00:00"},{"id":9,"teamA":"Houston Rockets","teamB":"San Antonio Spurs","dateTime":"2023-11-23T20:30:00"},{"id":10,"teamA":"Oklahoma City Thunder","teamB":"Minnesota Timberwolves","dateTime":"2023-11-24T19:00:00"}]}
+2025-05-09 18:41:38 DEBUG SellerDashboardController:166 - Loaded 10 matches from service
+2025-05-09 18:41:38 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:41:38 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":1}
+2025-05-09 18:41:38 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:41:38 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:41:38 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":1}
+2025-05-09 18:41:38 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:41:38 DEBUG SellerDashboardController:174 - Match Los Angeles Lakers vs Boston Celtics has 0 available tickets
+2025-05-09 18:41:38 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:41:38 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":2}
+2025-05-09 18:41:38 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:41:38 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:41:38 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":2}
+2025-05-09 18:41:38 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:41:38 DEBUG SellerDashboardController:174 - Match Chicago Bulls vs Miami Heat has 0 available tickets
+2025-05-09 18:41:38 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:41:38 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":3}
+2025-05-09 18:41:38 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:41:38 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:41:38 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":3}
+2025-05-09 18:41:38 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:41:38 DEBUG SellerDashboardController:174 - Match Golden State Warriors vs Brooklyn Nets has 0 available tickets
+2025-05-09 18:41:38 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:41:38 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":4}
+2025-05-09 18:41:38 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:41:38 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:41:38 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":4}
+2025-05-09 18:41:38 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:41:38 DEBUG SellerDashboardController:174 - Match Toronto Raptors vs Philadelphia 76ers has 0 available tickets
+2025-05-09 18:41:38 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:41:38 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":5}
+2025-05-09 18:41:38 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:41:38 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:41:38 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":5}
+2025-05-09 18:41:38 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:41:38 DEBUG SellerDashboardController:174 - Match Dallas Mavericks vs Milwaukee Bucks has 0 available tickets
+2025-05-09 18:41:38 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:41:38 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":6}
+2025-05-09 18:41:38 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":1}
+2025-05-09 18:41:38 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:41:38 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":6}
+2025-05-09 18:41:38 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$140.00 - $140.00"}
+2025-05-09 18:41:38 DEBUG SellerDashboardController:174 - Match Denver Nuggets vs Phoenix Suns has 1 available tickets
+2025-05-09 18:41:38 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:41:38 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":7}
+2025-05-09 18:41:38 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":1}
+2025-05-09 18:41:38 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:41:38 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":7}
+2025-05-09 18:41:38 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$150.00 - $150.00"}
+2025-05-09 18:41:38 DEBUG SellerDashboardController:174 - Match New York Knicks vs Atlanta Hawks has 1 available tickets
+2025-05-09 18:41:38 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:41:38 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":8}
+2025-05-09 18:41:38 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:41:38 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:41:38 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":8}
+2025-05-09 18:41:38 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:41:38 DEBUG SellerDashboardController:174 - Match Utah Jazz vs Portland Trail Blazers has 0 available tickets
+2025-05-09 18:41:38 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:41:38 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":9}
+2025-05-09 18:41:38 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:41:38 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:41:38 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":9}
+2025-05-09 18:41:38 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:41:38 DEBUG SellerDashboardController:174 - Match Houston Rockets vs San Antonio Spurs has 0 available tickets
+2025-05-09 18:41:38 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:41:38 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":10}
+2025-05-09 18:41:38 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:41:38 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:41:38 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":10}
+2025-05-09 18:41:38 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:41:38 DEBUG SellerDashboardController:174 - Match Oklahoma City Thunder vs Minnesota Timberwolves has 0 available tickets
+2025-05-09 18:41:38 INFO  BaseController:81 - Registering observer for user: 3
+2025-05-09 18:41:38 INFO  BasketballServicesProxy:607 - Observer registered for user: 3
+2025-05-09 18:41:38 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:41:38 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"REGISTER_OBSERVER","data":{"id":3,"username":"alex","password":"123"}}
+2025-05-09 18:41:38 DEBUG BasketballServicesProxy:320 - Received response: {"type":"OK","error":"Observer registered successfully"}
+2025-05-09 18:41:38 INFO  BasketballServicesProxy:647 - Update listener started
+2025-05-09 18:41:38 INFO  BaseController:83 - Successfully registered as observer for user 3
+2025-05-09 18:41:38 INFO  BasketballServicesProxy:213 - Starting update listener thread
+2025-05-09 18:41:38 DEBUG BasketballServicesProxy:224 - Sending update listener registration: {"type":"START_UPDATE_LISTENER"}
+2025-05-09 18:41:38 INFO  BasketballServicesProxy:233 - Update listener registration response: {"type":"OK","error":"Update listener started successfully"}
+2025-05-09 18:41:38 INFO  BasketballServicesProxy:242 - Starting update listener loop
+2025-05-09 18:41:38 DEBUG SellerDashboardController:182 - Seller dashboard refreshed with 10 matches
+2025-05-09 18:41:42 DEBUG CustomerSearchController:33 - Initializing CustomerSearchController
+2025-05-09 18:41:42 INFO  BaseController:81 - Registering observer for user: 3
+2025-05-09 18:41:42 INFO  BasketballServicesProxy:599 - Observer already registered for user: 3
+2025-05-09 18:41:42 INFO  BaseController:83 - Successfully registered as observer for user 3
+2025-05-09 18:41:42 INFO  BasketballServicesProxy:599 - Observer already registered for user: 3
+2025-05-09 18:41:42 DEBUG CustomerSearchController:51 - Explicitly registered CustomerSearchController as observer for user 3
+2025-05-09 18:41:46 INFO  CustomerSearchController:215 - Searching for tickets purchased by customer: marius
+2025-05-09 18:41:46 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:41:46 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"SEARCH_CUSTOMER_TICKETS","data":"marius"}
+2025-05-09 18:41:46 DEBUG BasketballServicesProxy:320 - Received response: {"type":"TICKETS","data":[{"id":13,"matchId":5,"seatNumber":525,"sold":true,"price":130.0,"userId":4},{"id":16,"matchId":8,"seatNumber":999,"sold":true,"price":160.0,"userId":4}]}
+2025-05-09 18:41:46 DEBUG BasketballServicesProxy:407 - Cache miss for match ID: 5, fetching from server
+2025-05-09 18:41:46 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:41:46 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_MATCH","data":5}
+2025-05-09 18:41:46 DEBUG BasketballServicesProxy:320 - Received response: {"type":"MATCH","data":{"id":5,"teamA":"Dallas Mavericks","teamB":"Milwaukee Bucks","dateTime":"2023-11-19T20:30:00"}}
+2025-05-09 18:41:46 DEBUG BasketballServicesProxy:418 - Updated cache with match ID: 5
+2025-05-09 18:41:46 DEBUG BasketballServicesProxy:407 - Cache miss for match ID: 8, fetching from server
+2025-05-09 18:41:46 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:41:46 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_MATCH","data":8}
+2025-05-09 18:41:46 DEBUG BasketballServicesProxy:320 - Received response: {"type":"MATCH","data":{"id":8,"teamA":"Utah Jazz","teamB":"Portland Trail Blazers","dateTime":"2023-11-22T20:00:00"}}
+2025-05-09 18:41:46 DEBUG BasketballServicesProxy:418 - Updated cache with match ID: 8
+2025-05-09 18:41:46 INFO  CustomerSearchController:218 - Found 2 tickets for customer marius
+2025-05-09 18:42:03 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:42:03 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"SELL_TICKETS","data":{"matchId":6,"customerName":"marius","customerAddress":"safasfa","seatsPurchased":1}}
+2025-05-09 18:43:34 DEBUG BasketballServicesProxy:248 - RECEIVED UPDATE: {"type":"MATCH_UPDATED","data":{"id":6,"teamA":"Denver Nuggets","teamB":"Phoenix Suns","dateTime":"2023-11-20T21:00:00"}}
+2025-05-09 18:43:34 DEBUG BasketballServicesProxy:248 - RECEIVED UPDATE: {"type":"MATCH_UPDATED","data":{"id":6,"teamA":"Denver Nuggets","teamB":"Phoenix Suns","dateTime":"2023-11-20T21:00:00"}}
+2025-05-09 18:43:34 INFO  BasketballServicesProxy:154 - CLIENT RECEIVED UPDATE: {"type":"MATCH_UPDATED","data":{"id":6,"teamA":"Denver Nuggets","teamB":"Phoenix Suns","dateTime":"2023-11-20T21:00:00"}}
+2025-05-09 18:43:34 INFO  BasketballServicesProxy:154 - CLIENT RECEIVED UPDATE: {"type":"MATCH_UPDATED","data":{"id":6,"teamA":"Denver Nuggets","teamB":"Phoenix Suns","dateTime":"2023-11-20T21:00:00"}}
+2025-05-09 18:43:34 INFO  BasketballServicesProxy:718 - PROCESSING MATCH_UPDATED for match: 6
+2025-05-09 18:43:34 DEBUG BasketballServicesProxy:773 - Notifying observers about match update: 6
+2025-05-09 18:43:34 INFO  BasketballServicesProxy:718 - PROCESSING MATCH_UPDATED for match: 6
+2025-05-09 18:43:34 DEBUG BasketballServicesProxy:773 - Notifying observers about match update: 6
+2025-05-09 18:43:34 INFO  DiagnosticsManager:37 - Operation 'processUpdate' took 2 ms
+2025-05-09 18:43:34 INFO  DiagnosticsManager:37 - Operation 'processUpdate' took 2 ms
+2025-05-09 18:43:34 DEBUG BaseController:113 - matchUpdated: match=6, relevant=true
+2025-05-09 18:43:34 DEBUG BaseController:113 - matchUpdated: match=6, relevant=true
+2025-05-09 18:43:34 INFO  SellerDashboardController:128 - Updated match 6 to null available tickets in table
+2025-05-09 18:43:34 INFO  SellerDashboardController:139 - Match 6 not found or availability changed, performing full refresh
+2025-05-09 18:43:34 DEBUG SellerDashboardController:164 - Loading matches for seller dashboard
+2025-05-09 18:43:34 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:43:34 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_ALL_MATCHES"}
+2025-05-09 18:43:56 DEBUG BasketballServicesProxy:248 - RECEIVED UPDATE: {"type":"USER_TICKETS_CHANGED","data":{"id":4,"username":"marius","password":"gigel"}}
+2025-05-09 18:43:56 DEBUG BasketballServicesProxy:248 - RECEIVED UPDATE: {"type":"USER_TICKETS_CHANGED","data":{"id":4,"username":"marius","password":"gigel"}}
+2025-05-09 18:43:56 INFO  BasketballServicesProxy:154 - CLIENT RECEIVED UPDATE: {"type":"USER_TICKETS_CHANGED","data":{"id":4,"username":"marius","password":"gigel"}}
+2025-05-09 18:43:56 INFO  BasketballServicesProxy:154 - CLIENT RECEIVED UPDATE: {"type":"USER_TICKETS_CHANGED","data":{"id":4,"username":"marius","password":"gigel"}}
+2025-05-09 18:43:56 INFO  BasketballServicesProxy:760 - PROCESSING USER_TICKETS_CHANGED for user: 4
+2025-05-09 18:43:56 DEBUG BasketballServicesProxy:792 - Notifying observers of user tickets changed: 4
+2025-05-09 18:43:56 INFO  BasketballServicesProxy:760 - PROCESSING USER_TICKETS_CHANGED for user: 4
+2025-05-09 18:43:56 DEBUG BasketballServicesProxy:792 - Notifying observers of user tickets changed: 4
+2025-05-09 18:43:56 INFO  DiagnosticsManager:37 - Operation 'processUpdate' took 0 ms
+2025-05-09 18:43:56 DEBUG BaseController:138 - userTicketsChanged: user=4, currentUser=3, relevant=false
+2025-05-09 18:43:56 INFO  DiagnosticsManager:37 - Operation 'processUpdate' took 1 ms
+2025-05-09 18:43:56 DEBUG BaseController:138 - userTicketsChanged: user=4, currentUser=4, relevant=true
+2025-05-09 18:46:55 DEBUG BasketballServicesProxy:248 - RECEIVED UPDATE: {"type":"MATCH_UPDATED","data":{"id":6,"teamA":"Denver Nuggets","teamB":"Phoenix Suns","dateTime":"2023-11-20T21:00:00","availableTickets":0,"priceRange":"$0.00 - $0.00"}}
+2025-05-09 18:46:55 DEBUG BasketballServicesProxy:248 - RECEIVED UPDATE: {"type":"MATCH_UPDATED","data":{"id":6,"teamA":"Denver Nuggets","teamB":"Phoenix Suns","dateTime":"2023-11-20T21:00:00","availableTickets":0,"priceRange":"$0.00 - $0.00"}}
+2025-05-09 18:46:55 INFO  BasketballServicesProxy:154 - CLIENT RECEIVED UPDATE: {"type":"MATCH_UPDATED","data":{"id":6,"teamA":"Denver Nuggets","teamB":"Phoenix Suns","dateTime":"2023-11-20T21:00:00","availableTickets":0,"priceRange":"$0.00 - $0.00"}}
+2025-05-09 18:46:55 INFO  BasketballServicesProxy:718 - PROCESSING MATCH_UPDATED for match: 6
+2025-05-09 18:46:55 INFO  BasketballServicesProxy:154 - CLIENT RECEIVED UPDATE: {"type":"MATCH_UPDATED","data":{"id":6,"teamA":"Denver Nuggets","teamB":"Phoenix Suns","dateTime":"2023-11-20T21:00:00","availableTickets":0,"priceRange":"$0.00 - $0.00"}}
+2025-05-09 18:46:55 DEBUG BasketballServicesProxy:773 - Notifying observers about match update: 6
+2025-05-09 18:46:55 INFO  DiagnosticsManager:37 - Operation 'processUpdate' took 0 ms
+2025-05-09 18:46:55 INFO  BasketballServicesProxy:718 - PROCESSING MATCH_UPDATED for match: 6
+2025-05-09 18:46:55 DEBUG BaseController:113 - matchUpdated: match=6, relevant=true
+2025-05-09 18:46:55 DEBUG BasketballServicesProxy:773 - Notifying observers about match update: 6
+2025-05-09 18:46:55 INFO  DiagnosticsManager:37 - Operation 'processUpdate' took 1 ms
+2025-05-09 18:46:55 DEBUG BaseController:113 - matchUpdated: match=6, relevant=true
+2025-05-09 18:47:18 DEBUG BasketballServicesProxy:248 - RECEIVED UPDATE: {"type":"USER_TICKETS_CHANGED","data":{"id":4,"username":"marius","password":"gigel"}}
+2025-05-09 18:47:18 INFO  BasketballServicesProxy:154 - CLIENT RECEIVED UPDATE: {"type":"USER_TICKETS_CHANGED","data":{"id":4,"username":"marius","password":"gigel"}}
+2025-05-09 18:47:18 DEBUG BasketballServicesProxy:248 - RECEIVED UPDATE: {"type":"USER_TICKETS_CHANGED","data":{"id":4,"username":"marius","password":"gigel"}}
+2025-05-09 18:47:18 INFO  BasketballServicesProxy:154 - CLIENT RECEIVED UPDATE: {"type":"USER_TICKETS_CHANGED","data":{"id":4,"username":"marius","password":"gigel"}}
+2025-05-09 18:47:18 INFO  BasketballServicesProxy:760 - PROCESSING USER_TICKETS_CHANGED for user: 4
+2025-05-09 18:47:18 DEBUG BasketballServicesProxy:792 - Notifying observers of user tickets changed: 4
+2025-05-09 18:47:18 INFO  BasketballServicesProxy:760 - PROCESSING USER_TICKETS_CHANGED for user: 4
+2025-05-09 18:47:18 DEBUG BasketballServicesProxy:792 - Notifying observers of user tickets changed: 4
+2025-05-09 18:47:18 INFO  DiagnosticsManager:37 - Operation 'processUpdate' took 0 ms
+2025-05-09 18:47:18 INFO  DiagnosticsManager:37 - Operation 'processUpdate' took 1 ms
+2025-05-09 18:47:18 DEBUG BaseController:138 - userTicketsChanged: user=4, currentUser=3, relevant=false
+2025-05-09 18:47:18 DEBUG BaseController:138 - userTicketsChanged: user=4, currentUser=4, relevant=true
+2025-05-09 18:47:29 DEBUG BasketballServicesProxy:320 - Received response: {"type":"TICKET_SALE_RESULT","data":140.0}
+2025-05-09 18:47:32 DEBUG BasketballServicesProxy:320 - Received response: {"type":"MATCHES","data":[{"id":1,"teamA":"Los Angeles Lakers","teamB":"Boston Celtics","dateTime":"2023-11-15T19:30:00"},{"id":2,"teamA":"Chicago Bulls","teamB":"Miami Heat","dateTime":"2023-11-16T20:00:00"},{"id":3,"teamA":"Golden State Warriors","teamB":"Brooklyn Nets","dateTime":"2023-11-17T21:00:00"},{"id":4,"teamA":"Toronto Raptors","teamB":"Philadelphia 76ers","dateTime":"2023-11-18T19:00:00"},{"id":5,"teamA":"Dallas Mavericks","teamB":"Milwaukee Bucks","dateTime":"2023-11-19T20:30:00"},{"id":6,"teamA":"Denver Nuggets","teamB":"Phoenix Suns","dateTime":"2023-11-20T21:00:00"},{"id":7,"teamA":"New York Knicks","teamB":"Atlanta Hawks","dateTime":"2023-11-21T19:30:00"},{"id":8,"teamA":"Utah Jazz","teamB":"Portland Trail Blazers","dateTime":"2023-11-22T20:00:00"},{"id":9,"teamA":"Houston Rockets","teamB":"San Antonio Spurs","dateTime":"2023-11-23T20:30:00"},{"id":10,"teamA":"Oklahoma City Thunder","teamB":"Minnesota Timberwolves","dateTime":"2023-11-24T19:00:00"}]}
+2025-05-09 18:47:32 DEBUG SellerDashboardController:166 - Loaded 10 matches from service
+2025-05-09 18:47:32 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:47:32 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":1}
+2025-05-09 18:47:35 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:47:35 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:47:35 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":1}
+2025-05-09 18:47:40 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:47:40 DEBUG SellerDashboardController:174 - Match Los Angeles Lakers vs Boston Celtics has 0 available tickets
+2025-05-09 18:47:40 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:47:40 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":2}
+2025-05-09 18:47:45 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:47:45 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:47:45 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":2}
+2025-05-09 18:47:45 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:47:45 DEBUG SellerDashboardController:174 - Match Chicago Bulls vs Miami Heat has 0 available tickets
+2025-05-09 18:47:45 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:47:45 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":3}
+2025-05-09 18:47:45 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:47:45 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:47:45 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":3}
+2025-05-09 18:47:45 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:47:45 DEBUG SellerDashboardController:174 - Match Golden State Warriors vs Brooklyn Nets has 0 available tickets
+2025-05-09 18:47:45 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:47:45 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":4}
+2025-05-09 18:47:45 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:47:45 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:47:45 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":4}
+2025-05-09 18:47:45 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:47:45 DEBUG SellerDashboardController:174 - Match Toronto Raptors vs Philadelphia 76ers has 0 available tickets
+2025-05-09 18:47:45 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:47:45 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":5}
+2025-05-09 18:47:45 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:47:45 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:47:45 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":5}
+2025-05-09 18:47:45 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:47:45 DEBUG SellerDashboardController:174 - Match Dallas Mavericks vs Milwaukee Bucks has 0 available tickets
+2025-05-09 18:47:45 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:47:45 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":6}
+2025-05-09 18:47:45 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:47:45 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:47:45 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":6}
+2025-05-09 18:47:45 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:47:45 DEBUG SellerDashboardController:174 - Match Denver Nuggets vs Phoenix Suns has 0 available tickets
+2025-05-09 18:47:45 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:47:45 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":7}
+2025-05-09 18:47:45 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":1}
+2025-05-09 18:47:45 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:47:45 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":7}
+2025-05-09 18:47:45 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$150.00 - $150.00"}
+2025-05-09 18:47:45 DEBUG SellerDashboardController:174 - Match New York Knicks vs Atlanta Hawks has 1 available tickets
+2025-05-09 18:47:45 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:47:45 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":8}
+2025-05-09 18:47:45 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:47:45 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:47:45 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":8}
+2025-05-09 18:47:45 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:47:45 DEBUG SellerDashboardController:174 - Match Utah Jazz vs Portland Trail Blazers has 0 available tickets
+2025-05-09 18:47:45 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:47:45 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":9}
+2025-05-09 18:47:45 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:47:45 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:47:45 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":9}
+2025-05-09 18:47:45 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:47:45 DEBUG SellerDashboardController:174 - Match Houston Rockets vs San Antonio Spurs has 0 available tickets
+2025-05-09 18:47:45 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:47:45 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_AVAILABLE_TICKETS","data":10}
+2025-05-09 18:47:45 DEBUG BasketballServicesProxy:320 - Received response: {"type":"AVAILABLE_TICKETS","data":0}
+2025-05-09 18:47:45 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:47:45 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_PRICE_RANGE","data":10}
+2025-05-09 18:47:45 DEBUG BasketballServicesProxy:320 - Received response: {"type":"PRICE_RANGE","error":"$0.00 - $0.00"}
+2025-05-09 18:47:45 DEBUG SellerDashboardController:174 - Match Oklahoma City Thunder vs Minnesota Timberwolves has 0 available tickets
+2025-05-09 18:47:45 DEBUG SellerDashboardController:182 - Seller dashboard refreshed with 10 matches
+2025-05-09 18:47:45 INFO  SellerDashboardController:128 - Updated match 6 to 0 available tickets in table
+2025-05-09 18:48:16 DEBUG TicketsViewController:30 - Initializing TicketsViewController
+2025-05-09 18:48:16 INFO  BaseController:81 - Registering observer for user: 4
+2025-05-09 18:48:16 INFO  BasketballServicesProxy:599 - Observer already registered for user: 4
+2025-05-09 18:48:16 INFO  BaseController:83 - Successfully registered as observer for user 4
+2025-05-09 18:48:16 INFO  TicketsViewController:69 - Loading tickets for user: marius
+2025-05-09 18:48:16 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:48:16 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_USER_TICKETS","data":{"id":4,"username":"marius","password":"gigel"}}
+2025-05-09 18:48:16 DEBUG BasketballServicesProxy:320 - Received response: {"type":"TICKETS","data":[{"id":13,"matchId":5,"seatNumber":525,"sold":true,"price":130.0,"userId":4},{"id":14,"matchId":6,"seatNumber":667,"sold":true,"price":140.0,"userId":4},{"id":16,"matchId":8,"seatNumber":999,"sold":true,"price":160.0,"userId":4}]}
+2025-05-09 18:48:16 DEBUG BasketballServicesProxy:407 - Cache miss for match ID: 5, fetching from server
+2025-05-09 18:48:16 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:48:16 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_MATCH","data":5}
+2025-05-09 18:48:16 DEBUG BasketballServicesProxy:320 - Received response: {"type":"MATCH","data":{"id":5,"teamA":"Dallas Mavericks","teamB":"Milwaukee Bucks","dateTime":"2023-11-19T20:30:00"}}
+2025-05-09 18:48:16 DEBUG BasketballServicesProxy:418 - Updated cache with match ID: 5
+2025-05-09 18:48:16 DEBUG BasketballServicesProxy:407 - Cache miss for match ID: 6, fetching from server
+2025-05-09 18:48:16 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:48:16 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_MATCH","data":6}
+2025-05-09 18:48:16 DEBUG BasketballServicesProxy:320 - Received response: {"type":"MATCH","data":{"id":6,"teamA":"Denver Nuggets","teamB":"Phoenix Suns","dateTime":"2023-11-20T21:00:00"}}
+2025-05-09 18:48:16 DEBUG BasketballServicesProxy:418 - Updated cache with match ID: 6
+2025-05-09 18:48:16 DEBUG BasketballServicesProxy:402 - Cache hit for match ID: 8
+2025-05-09 18:48:16 INFO  TicketsViewController:73 - Found 3 tickets for user marius
+2025-05-09 18:48:16 INFO  ClientDashboardController:190 - Opened tickets view for user marius
+2025-05-09 18:48:16 INFO  BasketballServicesProxy:599 - Observer already registered for user: 4
+2025-05-09 18:48:16 DEBUG TicketsViewController:38 - Explicitly registered TicketsViewController as observer for user 4
+2025-05-09 18:48:16 INFO  TicketsViewController:69 - Loading tickets for user: marius
+2025-05-09 18:48:16 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:48:16 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"GET_USER_TICKETS","data":{"id":4,"username":"marius","password":"gigel"}}
+2025-05-09 18:48:16 DEBUG BasketballServicesProxy:320 - Received response: {"type":"TICKETS","data":[{"id":13,"matchId":5,"seatNumber":525,"sold":true,"price":130.0,"userId":4},{"id":14,"matchId":6,"seatNumber":667,"sold":true,"price":140.0,"userId":4},{"id":16,"matchId":8,"seatNumber":999,"sold":true,"price":160.0,"userId":4}]}
+2025-05-09 18:48:16 DEBUG BasketballServicesProxy:402 - Cache hit for match ID: 5
+2025-05-09 18:48:16 DEBUG BasketballServicesProxy:402 - Cache hit for match ID: 6
+2025-05-09 18:48:16 DEBUG BasketballServicesProxy:402 - Cache hit for match ID: 8
+2025-05-09 18:48:16 INFO  TicketsViewController:73 - Found 3 tickets for user marius
+2025-05-09 18:48:16 DEBUG TicketsViewController:89 - Tickets view refreshed with 3 tickets
+2025-05-09 18:48:16 DEBUG TicketsViewController:89 - Tickets view refreshed with 3 tickets
+2025-05-09 18:48:18 INFO  TicketsViewController:238 - Cleaning up TicketsViewController resources
+2025-05-09 18:48:18 INFO  BaseController:99 - Unregistering observer for user: 4
+2025-05-09 18:48:18 INFO  BasketballServicesProxy:629 - Observer unregistered for user: 4
+2025-05-09 18:48:18 INFO  DiagnosticsManager:37 - Operation 'ensureConnected' took 0 ms
+2025-05-09 18:48:18 DEBUG BasketballServicesProxy:316 - Sending request: {"type":"UNREGISTER_OBSERVER","data":{"id":4,"username":"marius","password":"gigel"}}
+2025-05-09 18:48:18 DEBUG BasketballServicesProxy:320 - Received response: {"type":"OK","error":"Observer unregistered successfully"}

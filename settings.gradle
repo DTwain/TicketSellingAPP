@@ -1,2 +1,8 @@
 rootProject.name = 'projectPB10'
+include 'Model'
+include 'Services'
+include 'Networking'
+include 'Persistence'
+include 'Server'
+include 'Client'
 

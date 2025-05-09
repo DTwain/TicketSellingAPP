@@ -1,87 +1,166 @@
 package org.example.controller;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.example.domain.Match;
+import org.example.domain.Ticket;
 import org.example.domain.User;
+import org.example.network.rpc.BasketballServicesProxy;
 import org.example.service.ServicesException;
-import org.example.service.interfaces.MatchServiceInterface;
-import org.example.service.interfaces.TicketServiceInterface;
-import org.example.service.interfaces.UserServiceInterface;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
-public class ClientDashboardController {
+public class ClientDashboardController extends BaseController {
     @FXML private TableView<Match> matchesTable;
-
-    private MatchServiceInterface matchService;
-    private TicketServiceInterface ticketService;
-    private UserServiceInterface userService;
-    private User currentUser;
 
     private static final Logger logger = LogManager.getLogger(ClientDashboardController.class);
 
     @FXML
     private void initialize() {
-        // Initialize any components if needed
+        // Add row styling based on available tickets
+        matchesTable.setRowFactory(tv -> {
+            TableRow<Match> row = new TableRow<Match>() {
+                @Override
+                protected void updateItem(Match match, boolean empty) {
+                    super.updateItem(match, empty);
+
+                    if (empty || match == null) {
+                        setStyle("");
+                    } else if (match.getAvailableTickets() <= 0) {
+                        setStyle("-fx-background-color: #ffeeee;"); // Light red for sold out
+                    } else {
+                        setStyle("");
+                    }
+                }
+            };
+            return row;
+        });
+
+        // Add window close handler
+        Platform.runLater(() -> {
+            if (matchesTable.getScene() != null && matchesTable.getScene().getWindow() != null) {
+                initializeCloseHandler((Stage) matchesTable.getScene().getWindow());
+            }
+        });
     }
 
-    public void setServices(UserServiceInterface userService) {
-        this.userService = userService;
-        // In a real application, you would get the other services from a shared service provider
-        // For now, we'll simulate this by having them injected separately
-    }
-
-    public void setMatchService(MatchServiceInterface matchService) {
-        this.matchService = matchService;
+    @Override
+    public void setServices(BasketballServicesProxy basketballServicesProxy) {
+        super.setServices(basketballServicesProxy);
         loadMatches();
     }
 
-    public void setTicketService(TicketServiceInterface ticketService) {
-        this.ticketService = ticketService;
+    @Override
+    protected boolean isRelevantMatch(Match match) {
+        // All matches are relevant to the client dashboard
+        return true;
+    }
+
+    @Override
+    protected boolean isRelevantTicket(Ticket ticket) {
+        // Only tickets for matches displayed in the table are relevant
+        if (ticket == null || ticket.getMatch() == null) {
+            return false;
+        }
+
+        Long matchId = ticket.getMatch().getId();
+        return matchesTable.getItems().stream()
+                .anyMatch(m -> m.getId().equals(matchId));
+    }
+
+    @Override
+    protected void updateUIForMatch(Match match) {
+        Platform.runLater(() -> {
+            boolean matchFound = false;
+            for (Match existingMatch : matchesTable.getItems()) {
+                if (existingMatch.getId().equals(match.getId())) {
+                    // Create a new match object instead of modifying in-place
+                    int index = matchesTable.getItems().indexOf(existingMatch);
+                    Match updatedMatch = new Match(
+                            existingMatch.getId(),
+                            existingMatch.getTeamA(),
+                            existingMatch.getTeamB(),
+                            existingMatch.getDateTime()
+                    );
+                    updatedMatch.setAvailableTickets(match.getAvailableTickets());
+                    updatedMatch.setPriceRange(match.getPriceRange());
+
+                    // Replace in the list to force property change events
+                    matchesTable.getItems().set(index, updatedMatch);
+                    matchFound = true;
+                    break;
+                }
+            }
+
+            if (!matchFound) {
+                loadMatches();
+            } else {
+                matchesTable.refresh();
+            }
+        });
+    }
+
+    @Override
+    protected void updateUIForTicket(Ticket ticket) {
+        // For ticket updates, we just need to update the related match
+        try {
+            Optional<Match> matchOpt = basketballServicesProxy.findOne(ticket.getMatch().getId());
+            matchOpt.ifPresent(this::updateUIForMatch);
+        } catch (Exception e) {
+            logger.error("Error getting match data for ticket update", e);
+        }
+    }
+
+    @Override
+    protected void updateUIForUserTickets(User user) {
+        // No direct UI update needed since this controller doesn't show user tickets
+        // However, we could show a notification
+        Platform.runLater(() -> {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Tickets Updated");
+            alert.setHeaderText(null);
+            alert.setContentText("Your tickets have been updated. Check 'My Tickets' to see changes.");
+            alert.show();
+        });
     }
 
     private void loadMatches() {
         try {
-            List<Match> matches = matchService.findAll();
+            logger.debug("Loading matches for client dashboard");
+            List<Match> matches = basketballServicesProxy.findAll();
+            logger.debug("Loaded {} matches from service", matches.size());
 
             // For each match, get available tickets count and price range
             for (Match match : matches) {
-                int availableTickets = ticketService.countAvailableTicketsByMatch(match.getId());
-                String priceRange = ticketService.ticketPriceRangePerMatch(match.getId());
+                int availableTickets = basketballServicesProxy.countAvailableTicketsByMatch(match.getId());
+                String priceRange = basketballServicesProxy.ticketPriceRangePerMatch(match.getId());
                 match.setAvailableTickets(availableTickets);
                 match.setPriceRange(priceRange);
+                logger.debug("Match {} has {} available tickets", match.getMatchDescription(), availableTickets);
             }
 
-            matchesTable.setItems(FXCollections.observableArrayList(matches));
+            // Replace the entire table content
+            Platform.runLater(() -> {
+                matchesTable.getItems().clear();
+                matchesTable.getItems().addAll(matches);
+                matchesTable.refresh();
+                logger.debug("Client dashboard refreshed with {} matches", matches.size());
+            });
         } catch (ServicesException e) {
-            logger.error("Error loading matches", e);
+            logger.error("Error loading matches for client dashboard", e);
             showErrorAlert("Error Loading Matches", e.getMessage());
         }
-    }
-
-    private void showErrorAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
-
-    public void setCurrentUser(User user) {
-        this.currentUser = user;
     }
 
     @FXML
@@ -91,13 +170,24 @@ public class ClientDashboardController {
             Parent root = loader.load();
 
             TicketsViewController controller = loader.getController();
-            controller.setTicketService(ticketService);
+
+            // Set services and current user
+            controller.setServices(basketballServicesProxy);
             controller.setCurrentUser(currentUser);
+
+            // Force initial load of tickets
+            controller.loadTickets();
 
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.setTitle("My Tickets");
+
+            // Set up close handler
+            controller.initializeCloseHandler(stage);
+
             stage.show();
+
+            logger.info("Opened tickets view for user {}", currentUser.getUsername());
         } catch (IOException e) {
             logger.error("Error loading tickets view", e);
             showErrorAlert("Error Loading Tickets View", e.getMessage());
@@ -106,25 +196,14 @@ public class ClientDashboardController {
 
     @FXML
     private void handleLogout() {
-        // Close the current window
+        cleanup();
         Stage stage = (Stage) matchesTable.getScene().getWindow();
         stage.close();
+    }
 
-        // Open the login window again
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/loginAndSignUp.fxml"));
-            Parent root = loader.load();
-
-            LoginController controller = loader.getController();
-            controller.setServices(userService);
-
-            Stage loginStage = new Stage();
-            loginStage.setScene(new Scene(root));
-            loginStage.setTitle("Basketball Ticket Shop");
-            loginStage.show();
-        } catch (IOException e) {
-            logger.error("Error returning to login screen", e);
-            showErrorAlert("Error", "Could not return to login screen");
-        }
+    @Override
+    protected void cleanup() {
+        logger.info("Cleaning up client dashboard resources");
+        super.cleanup();
     }
 }

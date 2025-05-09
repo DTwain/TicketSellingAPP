@@ -85,4 +85,14 @@ public class UserService implements UserServiceInterface {
             throw new ServicesException("Error retrieving user", e);
         }
     }
+
+    @Override
+    public Optional<User> getUserById(Long id) throws ServicesException {
+        try {
+            return userRepository.findOne(id);
+        } catch (RepositoryException e) {
+            logger.error("Error fetching user by id: {}", id, e);
+            throw new ServicesException("Error retrieving user", e);
+        }
+    }
 }

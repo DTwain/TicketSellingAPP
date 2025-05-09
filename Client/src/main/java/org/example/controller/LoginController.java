@@ -14,6 +14,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.example.domain.User;
 import org.example.domain.UserType;
+import org.example.network.rpc.BasketballServicesProxy;
 import org.example.service.ServicesException;
 import org.example.service.interfaces.UserServiceInterface;
 
@@ -28,7 +29,7 @@ public class LoginController {
     @FXML private PasswordField signupPassword;
     @FXML private PasswordField signupConfirmPassword;
 
-    private UserServiceInterface userService;
+    private BasketballServicesProxy basketballServicesProxy;
     private Parent clientView;
     private Parent sellerView;
     private ClientDashboardController clientController;
@@ -45,8 +46,8 @@ public class LoginController {
         }
     }
 
-    public void setServices(UserServiceInterface userService) {
-        this.userService = userService;
+    public void setServices(BasketballServicesProxy basketballServicesProxy) {
+        this.basketballServicesProxy = basketballServicesProxy;
     }
 
     public void setClientView(Parent view, ClientDashboardController controller) {
@@ -87,7 +88,7 @@ public class LoginController {
         }
 
         try {
-            UserType userType = userService.authenticate(username, password);
+            UserType userType = basketballServicesProxy.authenticate(username, password);
 
             if (userType == UserType.SELLER) {
                 showAlert(Alert.AlertType.INFORMATION, "Login Success", "Welcome Seller",
@@ -129,14 +130,14 @@ public class LoginController {
 
         try {
             // Check if username already exists
-            if (userService.usernameExists(username)) {
+            if (basketballServicesProxy.usernameExists(username)) {
                 showAlert(Alert.AlertType.ERROR, "Signup Failed", "Username Taken",
                         "This username is already in use. Please choose another one.");
                 return;
             }
 
             // Create new user
-            boolean signupSuccess = userService.registerUser(username, password);
+            boolean signupSuccess = basketballServicesProxy.registerUser(username, password);
             if (signupSuccess) {
                 showAlert(Alert.AlertType.INFORMATION, "Signup Success", "Account Created",
                         "Your account has been successfully created!");
@@ -174,7 +175,7 @@ public class LoginController {
 
     private void openClientInterface(String username) {
         try {
-            Optional<User> userOptional = userService.getUserByUsername(username);
+            Optional<User> userOptional = basketballServicesProxy.getUserByUsername(username);
             if (userOptional.isEmpty()) {
                 showAlert(Alert.AlertType.ERROR, "Error", "User data not found",
                         "Could not retrieve user information");
@@ -183,7 +184,7 @@ public class LoginController {
             Stage clientStage = new Stage();
 
             // Set up the controller
-            clientController.setServices(userService);
+            clientController.setServices(basketballServicesProxy);
             clientController.setCurrentUser(userOptional.get());
 
             clientStage.setScene(new Scene(clientView));
@@ -201,11 +202,17 @@ public class LoginController {
 
     private void openSellerInterface(String username) {
         try {
+            Optional<User> userOptional = basketballServicesProxy.getUserByUsername(username);
+            if (userOptional.isEmpty()) {
+                showAlert(Alert.AlertType.ERROR, "Error", "User data not found",
+                        "Could not retrieve user information");
+                return;
+            }
             Stage sellerStage = new Stage();
 
             // Set up the controller
-            sellerController.setServices(userService);
-            sellerController.setCurrentUsername(username);
+            sellerController.setServices(basketballServicesProxy);
+            sellerController.setCurrentUser(userOptional.get());
 
             sellerStage.setScene(new Scene(sellerView));
             sellerStage.setTitle("Ticket Seller Dashboard");
