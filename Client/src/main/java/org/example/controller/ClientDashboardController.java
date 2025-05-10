@@ -27,7 +27,7 @@ public class ClientDashboardController extends BaseController {
     private static final Logger logger = LogManager.getLogger(ClientDashboardController.class);
 
     @FXML
-    private void initialize() {
+    public void initialize() {
         // Add row styling based on available tickets
         matchesTable.setRowFactory(tv -> {
             TableRow<Match> row = new TableRow<Match>() {

@@ -11,7 +11,9 @@ import org.apache.logging.log4j.Logger;
 import org.example.domain.Match;
 import org.example.domain.Ticket;
 import org.example.domain.User;
+import org.example.network.rpc.BasketballServicesProxy;
 import org.example.service.ServicesException;
+import org.example.utils.observer.TicketObserver;
 
 import java.util.List;
 import java.util.Set;
@@ -28,6 +30,38 @@ public class TicketsViewController extends BaseController {
     @FXML
     public void initialize() {
         logger.debug("Initializing TicketsViewController");
+
+
+        logger.debug("Initializing TicketsViewController");
+
+        // Add a direct observer for ticket updates
+        if (BasketballServicesProxy.getInstance() != null) {
+            BasketballServicesProxy.getInstance().addObserverListener(new TicketObserver() {
+                @Override
+                public void ticketSold(Ticket ticket) throws ServicesException {
+                    // Refresh if the ticket is for the current user
+                    if (currentUser != null && ticket.getUser().isPresent() &&
+                            ticket.getUser().get().getId().equals(currentUser.getId())) {
+                        logger.info("Direct observer: New ticket sold to current user, refreshing");
+                        Platform.runLater(TicketsViewController.this::loadTickets);
+                    }
+                }
+
+                @Override
+                public void matchUpdated(Match match) throws ServicesException {
+                    // No direct action needed for match updates in tickets view
+                }
+
+                @Override
+                public void userTicketsChanged(User user) throws ServicesException {
+                    // Refresh if this update is for the current user
+                    if (currentUser != null && user.getId().equals(currentUser.getId())) {
+                        logger.info("Direct observer: User tickets changed for current user, refreshing");
+                        Platform.runLater(TicketsViewController.this::loadTickets);
+                    }
+                }
+            });
+        }
 
         // Ensure we get registered as an observer
         Platform.runLater(() -> {

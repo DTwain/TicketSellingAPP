@@ -10,7 +10,9 @@ import org.apache.logging.log4j.Logger;
 import org.example.domain.Match;
 import org.example.domain.Ticket;
 import org.example.domain.User;
+import org.example.network.rpc.BasketballServicesProxy;
 import org.example.service.ServicesException;
+import org.example.utils.observer.TicketObserver;
 
 import java.util.List;
 import java.util.Set;
@@ -28,8 +30,8 @@ public class CustomerSearchController extends BaseController {
 
     private static final Logger logger = LogManager.getLogger(CustomerSearchController.class);
 
-    @FXML
-    private void initialize() {
+    @Override
+    public void initialize() {
         logger.debug("Initializing CustomerSearchController");
 
         // Add listener to track when search is active
@@ -42,24 +44,33 @@ public class CustomerSearchController extends BaseController {
             }
         });
 
-        // Ensure we're registered as an observer when loaded
-        Platform.runLater(() -> {
-            if (basketballServicesProxy != null && currentUser != null) {
-                try {
-                    // Re-register to ensure we're in the observer list
-                    basketballServicesProxy.registerTicketObserver(currentUser, this);
-                    logger.debug("Explicitly registered CustomerSearchController as observer for user {}",
-                            currentUser.getId());
-                } catch (Exception e) {
-                    logger.error("Failed to register observer in initialize: {}", e.getMessage());
+        if (BasketballServicesProxy.getInstance() != null) {
+            BasketballServicesProxy.getInstance().addObserverListener(new TicketObserver() {
+                @Override
+                public void ticketSold(Ticket ticket) throws ServicesException {
+                    // If we have an active search, refresh the results
+                    if (hasActiveSearch && !currentSearchTerm.isEmpty()) {
+                        logger.info("Direct observer: Ticket sold, refreshing search for: {}", currentSearchTerm);
+                        Platform.runLater(CustomerSearchController.this::handleSearch);
+                    }
                 }
-            }
 
-            // Window close handler setup
-            if (resultsTable.getScene() != null && resultsTable.getScene().getWindow() != null) {
-                initializeCloseHandler((Stage) resultsTable.getScene().getWindow());
-            }
-        });
+                @Override
+                public void matchUpdated(Match match) throws ServicesException {
+                    // No action needed for match updates in search view
+                }
+
+                @Override
+                public void userTicketsChanged(User user) throws ServicesException {
+                    // If we have an active search and it matches this user's name, refresh the results
+                    if (hasActiveSearch && !currentSearchTerm.isEmpty() &&
+                            user.getUsername().equalsIgnoreCase(currentSearchTerm)) {
+                        logger.info("Direct observer: User tickets changed, refreshing search");
+                        Platform.runLater(CustomerSearchController.this::handleSearch);
+                    }
+                }
+            });
+        }
     }
 
 

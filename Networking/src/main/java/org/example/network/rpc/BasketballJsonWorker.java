@@ -416,30 +416,30 @@ public class BasketballJsonWorker implements Runnable {
         }
     }
 
-     /**
-      *Sends an update to the client if this worker is an update listener
-      */
-     public void sendUpdate(Response update) {
-         if (isUpdateListener && output != null) {
-             try {
-                 String updateJson = gson.toJson(update);
-                 logger.debug("DIRECTLY sending update type {} to client", update.getType());
+    /**
+     *Sends an update to the client if this worker is an update listener
+     */
+    public void sendUpdate(Response update) {
+        if (isUpdateListener && output != null) {
+            try {
+                String updateJson = gson.toJson(update);
+                logger.debug("DIRECTLY sending update type {} to client", update.getType());
 
-                 // CRITICAL: Make sure this actually sends the data
-                 output.println(updateJson);
-                 output.flush(); // Force flush the output stream to ensure delivery
+                // CRITICAL: Make sure this actually sends the data
+                output.println(updateJson);
+                output.flush(); // Force flush the output stream to ensure delivery
 
-                 logger.debug("Update sent: {}", updateJson);
-             } catch (Exception e) {
-                 logger.error("ERROR sending update to client: {}", e.getMessage(), e);
-                 // Mark connection as invalid
-                 this.connected = false;
-             }
-         } else {
-             logger.warn("Cannot send update: isUpdateListener={}, output={}",
-                     isUpdateListener, (output != null ? "available" : "null"));
-         }
-     }
+                logger.debug("Update sent: {}", updateJson);
+            } catch (Exception e) {
+                logger.error("ERROR sending update to client: {}", e.getMessage(), e);
+                // Mark connection as invalid
+                this.connected = false;
+            }
+        } else {
+            logger.warn("Cannot send update: isUpdateListener={}, output={}",
+                    isUpdateListener, (output != null ? "available" : "null"));
+        }
+    }
     /**
      * Inner class representing an observer that forwards events to the client
      */

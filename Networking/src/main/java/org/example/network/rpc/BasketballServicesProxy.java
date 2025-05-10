@@ -41,6 +41,9 @@ public class BasketballServicesProxy implements UserServiceInterface, MatchServi
 
     private final Map<Long, TicketObserver> registeredObservers = new ConcurrentHashMap<>();
     private final Map<Long, TicketObserver> observers = new ConcurrentHashMap<>();
+    private static BasketballServicesProxy instance;
+    private final List<TicketObserver> directObservers = new ArrayList<>();
+
     private boolean listenerStarted = false;
     private final ExecutorService executorService = Executors.newCachedThreadPool();
     private final Set<Long> registeredObserverIds = ConcurrentHashMap.newKeySet();
@@ -57,18 +60,24 @@ public class BasketballServicesProxy implements UserServiceInterface, MatchServi
         this.host = host;
         this.port = port;
         this.gson = new Gson();
+        instance = this;
     }
 
+    public static BasketballServicesProxy getInstance() {
+        return instance;
+    }
 
     public interface ConnectionStatusListener {
         void onConnectionStatusChanged(ConnectionStatus status);
     }
 
-    public void addConnectionStatusListener(ConnectionStatusListener listener) {
-        if (listener != null) {
-            connectionListeners.add(listener);
+    public void addObserverListener(TicketObserver observer) {
+        if (observer != null && !directObservers.contains(observer)) {
+            directObservers.add(observer);
+            logger.info("Added direct observer, current count: {}", directObservers.size());
         }
     }
+
 
     /**
      * Update connection status and notify listeners
@@ -87,12 +96,6 @@ public class BasketballServicesProxy implements UserServiceInterface, MatchServi
         }
     }
 
-    /**
-     * Remove connection status listener
-     */
-    public void removeConnectionStatusListener(ConnectionStatusListener listener) {
-        connectionListeners.remove(listener);
-    }
 
     /**
      * Improved connection handling with retry mechanism
@@ -772,13 +775,24 @@ public class BasketballServicesProxy implements UserServiceInterface, MatchServi
     private void notifyMatchUpdated(Match match) {
         logger.debug("Notifying observers about match update: {}", match.getId());
 
-        // Notify EVERY registered observer
+        // Notify registered observers
         for (TicketObserver observer : registeredObservers.values()) {
             executorService.submit(() -> {
                 try {
                     observer.matchUpdated(match);
                 } catch (Exception e) {
                     logger.error("Error delivering match update: {}", e.getMessage());
+                }
+            });
+        }
+
+        // Also notify direct observers
+        for (TicketObserver observer : directObservers) {
+            executorService.submit(() -> {
+                try {
+                    observer.matchUpdated(match);
+                } catch (Exception e) {
+                    logger.error("Error delivering match update to direct observer: {}", e.getMessage());
                 }
             });
         }
@@ -790,13 +804,25 @@ public class BasketballServicesProxy implements UserServiceInterface, MatchServi
      */
     private void notifyUserTicketsChanged(User user) {
         logger.debug("Notifying observers of user tickets changed: {}", user.getId());
-        // Notify all observers (they'll filter by relevance)
+
+        // Notify registered observers
         for (Map.Entry<Long, TicketObserver> entry : registeredObservers.entrySet()) {
             executorService.submit(() -> {
                 try {
                     entry.getValue().userTicketsChanged(user);
                 } catch (Exception e) {
                     logger.error("Error notifying observer {}: {}", entry.getKey(), e.getMessage(), e);
+                }
+            });
+        }
+
+        // Also notify direct observers
+        for (TicketObserver observer : directObservers) {
+            executorService.submit(() -> {
+                try {
+                    observer.userTicketsChanged(user);
+                } catch (Exception e) {
+                    logger.error("Error notifying direct observer: {}", e.getMessage(), e);
                 }
             });
         }
@@ -807,7 +833,8 @@ public class BasketballServicesProxy implements UserServiceInterface, MatchServi
      */
     private void notifyTicketSold(Ticket ticket) {
         logger.debug("BasketballServicesProxy: Notifying ALL observers about ticket sold: {}", ticket.getId());
-        // Notify EVERY registered observer
+
+        // Notify registered observers
         for (TicketObserver observer : registeredObservers.values()) {
             executorService.submit(() -> {
                 try {
@@ -815,6 +842,17 @@ public class BasketballServicesProxy implements UserServiceInterface, MatchServi
                     observer.ticketSold(ticket);
                 } catch (Exception e) {
                     logger.error("Error delivering ticket sold update: {}", e.getMessage());
+                }
+            });
+        }
+
+        // Also notify direct observers
+        for (TicketObserver observer : directObservers) {
+            executorService.submit(() -> {
+                try {
+                    observer.ticketSold(ticket);
+                } catch (Exception e) {
+                    logger.error("Error delivering ticket sold update to direct observer: {}", e.getMessage());
                 }
             });
         }

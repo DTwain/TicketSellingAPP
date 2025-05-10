@@ -116,6 +116,8 @@ public abstract class BaseController implements TicketObserver {
         }
     }
 
+    public abstract void initialize();
+
     /**
      * Handle ticket sold updates
      */
