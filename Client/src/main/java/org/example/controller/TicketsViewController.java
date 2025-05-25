@@ -11,7 +11,7 @@ import org.apache.logging.log4j.Logger;
 import org.example.domain.Match;
 import org.example.domain.Ticket;
 import org.example.domain.User;
-import org.example.network.rpc.BasketballServicesProxy;
+import org.example.network.grpc.BasketballGrpcServicesProxy;
 import org.example.service.ServicesException;
 import org.example.utils.observer.TicketObserver;
 
@@ -31,52 +31,8 @@ public class TicketsViewController extends BaseController {
     public void initialize() {
         logger.debug("Initializing TicketsViewController");
 
-
-        logger.debug("Initializing TicketsViewController");
-
-        // Add a direct observer for ticket updates
-        if (BasketballServicesProxy.getInstance() != null) {
-            BasketballServicesProxy.getInstance().addObserverListener(new TicketObserver() {
-                @Override
-                public void ticketSold(Ticket ticket) throws ServicesException {
-                    // Refresh if the ticket is for the current user
-                    if (currentUser != null && ticket.getUser().isPresent() &&
-                            ticket.getUser().get().getId().equals(currentUser.getId())) {
-                        logger.info("Direct observer: New ticket sold to current user, refreshing");
-                        Platform.runLater(TicketsViewController.this::loadTickets);
-                    }
-                }
-
-                @Override
-                public void matchUpdated(Match match) throws ServicesException {
-                    // No direct action needed for match updates in tickets view
-                }
-
-                @Override
-                public void userTicketsChanged(User user) throws ServicesException {
-                    // Refresh if this update is for the current user
-                    if (currentUser != null && user.getId().equals(currentUser.getId())) {
-                        logger.info("Direct observer: User tickets changed for current user, refreshing");
-                        Platform.runLater(TicketsViewController.this::loadTickets);
-                    }
-                }
-            });
-        }
-
-        // Ensure we get registered as an observer
+        // Add window close handler
         Platform.runLater(() -> {
-            if (basketballServicesProxy != null && currentUser != null) {
-                try {
-                    // Re-register to ensure we're in the observer list
-                    basketballServicesProxy.registerTicketObserver(currentUser, this);
-                    logger.debug("Explicitly registered TicketsViewController as observer for user {}",
-                            currentUser.getId());
-                } catch (Exception e) {
-                    logger.error("Failed to register observer in initialize: {}", e.getMessage());
-                }
-            }
-
-            // Window close handler
             if (ticketsTable.getScene() != null && ticketsTable.getScene().getWindow() != null) {
                 initializeCloseHandler((Stage) ticketsTable.getScene().getWindow());
             }
@@ -84,10 +40,21 @@ public class TicketsViewController extends BaseController {
     }
 
     @Override
+    public void setServices(BasketballGrpcServicesProxy basketballServicesProxy) {
+        super.setServices(basketballServicesProxy);
+
+        // Add this controller as a direct observer
+        if (basketballServicesProxy != null) {
+            basketballServicesProxy.addObserverListener(this);
+            logger.info("TicketsViewController registered as direct observer");
+        }
+    }
+
+    @Override
     public void setCurrentUser(User user) {
         super.setCurrentUser(user);
 
-        // Explicitly load tickets after user is set
+        // Load tickets after user is set
         if (basketballServicesProxy != null && user != null) {
             Platform.runLater(this::loadTickets);
         }
@@ -95,16 +62,16 @@ public class TicketsViewController extends BaseController {
 
     public void loadTickets() {
         if (basketballServicesProxy == null || currentUser == null) {
-            logger.warn("Cannot load tickets - service or user not set");
+            logger.warn("Cannot load tickets via gRPC - service or user not set");
             return;
         }
 
         try {
-            logger.info("Loading tickets for user: {}", currentUser.getUsername());
+            logger.info("Loading tickets via gRPC for user: {}", currentUser.getUsername());
 
-            // Fetch tickets from service
+            // Fetch tickets from gRPC service
             List<Ticket> tickets = basketballServicesProxy.findTicketsBoughtByUser(currentUser);
-            logger.info("Found {} tickets for user {}", tickets.size(), currentUser.getUsername());
+            logger.info("Found {} tickets via gRPC for user {}", tickets.size(), currentUser.getUsername());
 
             // Update set of displayed ticket IDs
             displayedTicketIds.clear();
@@ -120,24 +87,21 @@ public class TicketsViewController extends BaseController {
                 ticketsTable.getItems().addAll(tickets);
                 ticketsTable.refresh();
 
-                logger.debug("Tickets view refreshed with {} tickets", tickets.size());
+                logger.debug("Tickets view refreshed with {} tickets via gRPC", tickets.size());
             });
         } catch (ServicesException e) {
-            logger.error("Error loading tickets: {}", e.getMessage(), e);
-            showErrorAlert("Error Loading Tickets", e.getMessage());
+            logger.error("gRPC error loading tickets: {}", e.getMessage(), e);
+            showErrorAlert("Error Loading Tickets", "gRPC connection error: " + e.getMessage());
         }
     }
 
     @Override
     protected boolean isRelevantMatch(Match match) {
-        // Simplify this to accept all matches for the current user
-        // This will capture new tickets for matches we don't already display
         return match != null && currentUser != null;
     }
 
     @Override
     protected boolean isRelevantTicket(Ticket ticket) {
-        // Accept any ticket for the current user
         return ticket != null &&
                 ticket.getUser().isPresent() &&
                 currentUser != null &&
@@ -146,7 +110,6 @@ public class TicketsViewController extends BaseController {
 
     @Override
     protected boolean isRelevantUser(User user) {
-        // Always consider updates for the current user as relevant
         boolean relevant = currentUser != null && user != null &&
                 currentUser.getId().equals(user.getId());
 
@@ -189,8 +152,8 @@ public class TicketsViewController extends BaseController {
                 }
             }
             ticketsTable.refresh();
-        } else {
-            // This is a new ticket, reload all tickets
+        } else if (isRelevantTicket(ticket)) {
+            // This is a new ticket for current user, reload all tickets
             loadTickets();
         }
     }
@@ -198,31 +161,43 @@ public class TicketsViewController extends BaseController {
     @Override
     protected void updateUIForUserTickets(User user) {
         logger.info("Updating tickets UI for user change: {}", user.getUsername());
-        forceReloadTickets(); // Use the more robust method
-    }
-
-    private Ticket findTicketById(Long ticketId) {
-        for (Ticket ticket : ticketsTable.getItems()) {
-            if (ticket.getId().equals(ticketId)) {
-                return ticket;
-            }
+        if (isRelevantUser(user)) {
+            forceReloadTickets();
         }
-        return null;
     }
-
 
     @Override
     public void userTicketsChanged(User user) throws ServicesException {
-        logger.debug("userTicketsChanged in TicketsViewController: userId={}, currentUser={}",
+        logger.info("TicketsViewController.userTicketsChanged: userId={}, currentUser={}",
                 user.getId(), currentUser != null ? currentUser.getId() : "null");
 
-        // CHANGE: Use forceReloadTickets instead of loadTickets
-        if (currentUser != null && user != null &&
-                user.getId().equals(currentUser.getId())) {
-            logger.info("Force reloading tickets for current user: {}", currentUser.getUsername());
-            safelyUpdateUI(this::forceReloadTickets);  // Call the more robust method
+        // Force a reload if this update is for our user
+        if (isRelevantUser(user)) {
+            logger.info("FORCING IMMEDIATE RELOAD of tickets for user {}", currentUser.getId());
+
+            Platform.runLater(() -> {
+                logger.info("Executing ticket reload on JavaFX thread for user {}", currentUser.getId());
+                forceReloadTickets();
+            });
         } else {
+            logger.debug("UserTicketsChanged not relevant: update for user {}, current user {}",
+                    user.getId(), currentUser != null ? currentUser.getId() : "null");
             super.userTicketsChanged(user);
+        }
+    }
+
+    @Override
+    public void ticketSold(Ticket ticket) throws ServicesException {
+        logger.debug("TicketsViewController.ticketSold: ticketId={}, userId={}, currentUserId={}",
+                ticket.getId(),
+                ticket.getUser().isPresent() ? ticket.getUser().get().getId() : "null",
+                currentUser != null ? currentUser.getId() : "null");
+
+        if (isRelevantTicket(ticket)) {
+            logger.info("Ticket sold for current user - forcing immediate reload");
+            Platform.runLater(this::forceReloadTickets);
+        } else {
+            super.ticketSold(ticket);
         }
     }
 
@@ -236,23 +211,25 @@ public class TicketsViewController extends BaseController {
                 logger.info("Force reload: Found {} tickets for user {}",
                         tickets.size(), currentUser.getUsername());
 
-                // Important: Update on JavaFX thread!
-                Platform.runLater(() -> {
-                    // Update ID tracking
-                    displayedTicketIds.clear();
-                    displayedTicketIds.addAll(tickets.stream()
-                            .map(Ticket::getId)
-                            .collect(Collectors.toSet()));
+                // Update ID tracking
+                displayedTicketIds.clear();
+                displayedTicketIds.addAll(tickets.stream()
+                        .map(Ticket::getId)
+                        .collect(Collectors.toSet()));
 
-                    // Update table - force a complete refresh
-                    ticketsTable.getItems().clear();
-                    ticketsTable.getItems().addAll(tickets);
-                    ticketsTable.refresh();
-                    logger.debug("Tickets view force refreshed with {} tickets", tickets.size());
-                });
+                // Update table - force a complete refresh
+                ticketsTable.getItems().clear();
+                ticketsTable.getItems().addAll(tickets);
+                ticketsTable.refresh();
+                logger.info("Tickets view force refreshed with {} tickets", tickets.size());
+
+                // Show user feedback
+                showSuccessAlert("Tickets Updated",
+                        "Your tickets have been updated! You now have " + tickets.size() + " tickets.");
             }
         } catch (Exception e) {
             logger.error("Error force-reloading tickets: {}", e.getMessage(), e);
+            showErrorAlert("Error Loading Tickets", "Failed to reload tickets: " + e.getMessage());
         }
     }
 

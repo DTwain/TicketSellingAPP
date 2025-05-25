@@ -3,13 +3,12 @@ package org.example.controller;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.example.domain.Match;
 import org.example.domain.Ticket;
 import org.example.domain.User;
-import org.example.network.rpc.BasketballServicesProxy;
+import org.example.network.grpc.BasketballGrpcServicesProxy;
 import org.example.service.ServicesException;
 import org.example.utils.observer.TicketObserver;
 
@@ -18,17 +17,17 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
- * Base controller that handles common UI update behaviors
+ * Base controller that handles common UI update behaviors with gRPC support
  * All controllers should extend this class to benefit from network-based updates
  */
 public abstract class BaseController implements TicketObserver {
     protected final AtomicBoolean updateInProgress = new AtomicBoolean(false);
-    protected BasketballServicesProxy basketballServicesProxy;
+    protected BasketballGrpcServicesProxy basketballServicesProxy;
     protected User currentUser;
 
     protected static final Logger logger = LogManager.getLogger(BaseController.class);
 
-    // Add below the existing fields (underneath "protected User currentUser;" line)
+    // Update queue management
     private final Queue<Runnable> pendingUpdates = new ConcurrentLinkedQueue<>();
     private final AtomicBoolean processingUpdates = new AtomicBoolean(false);
 
@@ -37,7 +36,6 @@ public abstract class BaseController implements TicketObserver {
      */
     protected void initializeCloseHandler(Stage stage) {
         if (stage != null) {
-            // Use a more reliable method to track when the window is closed
             stage.setOnCloseRequest(event -> {
                 logger.info("Window close requested - cleaning up resources");
                 cleanup();
@@ -48,9 +46,9 @@ public abstract class BaseController implements TicketObserver {
     }
 
     /**
-     * Set the services proxy and register as observer if user is set
+     * Set the gRPC services proxy and register as observer if user is set
      */
-    public void setServices(BasketballServicesProxy basketballServicesProxy) {
+    public void setServices(BasketballGrpcServicesProxy basketballServicesProxy) {
         this.basketballServicesProxy = basketballServicesProxy;
 
         // Register as observer if user is already set
@@ -72,14 +70,13 @@ public abstract class BaseController implements TicketObserver {
     }
 
     /**
-     * Register as observer with the service
+     * Register as observer with the gRPC service
      */
     protected void registerAsObserver() {
         try {
             if (basketballServicesProxy != null && currentUser != null) {
-                // Check if we've already registered to avoid duplicate registrations
                 logger.info("Registering observer for user: {}", currentUser.getId());
-                basketballServicesProxy.registerTicketObserver(currentUser, this);
+                basketballServicesProxy.registerObserver(currentUser, this);
                 logger.info("Successfully registered as observer for user {}", currentUser.getId());
             } else {
                 logger.warn("Cannot register as observer - service or user not set");
@@ -91,13 +88,13 @@ public abstract class BaseController implements TicketObserver {
     }
 
     /**
-     * Unregister from service
+     * Unregister from gRPC service
      */
     protected void unregisterAsObserver() {
         try {
             if (basketballServicesProxy != null && currentUser != null) {
                 logger.info("Unregistering observer for user: {}", currentUser.getId());
-                basketballServicesProxy.unregisterTicketObserver(currentUser);
+                basketballServicesProxy.unregisterObserver(currentUser);
             }
         } catch (ServicesException e) {
             logger.error("Error unregistering observer", e);
@@ -125,7 +122,7 @@ public abstract class BaseController implements TicketObserver {
     public void ticketSold(Ticket ticket) throws ServicesException {
         boolean relevant = isRelevantTicket(ticket);
         logger.debug("ticketSold: ticket={}, match={}, relevant={}",
-                ticket.getId(), ticket.getMatch().getId(), relevant);
+                ticket.getId(), ticket.getMatch() != null ? ticket.getMatch().getId() : "null", relevant);
         if (relevant) {
             safelyUpdateUI(() -> updateUIForTicket(ticket));
         }

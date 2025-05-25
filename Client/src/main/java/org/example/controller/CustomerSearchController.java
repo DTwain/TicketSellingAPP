@@ -10,9 +10,8 @@ import org.apache.logging.log4j.Logger;
 import org.example.domain.Match;
 import org.example.domain.Ticket;
 import org.example.domain.User;
-import org.example.network.rpc.BasketballServicesProxy;
+import org.example.network.grpc.BasketballGrpcServicesProxy;
 import org.example.service.ServicesException;
-import org.example.utils.observer.TicketObserver;
 
 import java.util.List;
 import java.util.Set;
@@ -43,36 +42,18 @@ public class CustomerSearchController extends BaseController {
                 currentSearchTerm = "";
             }
         });
-
-        if (BasketballServicesProxy.getInstance() != null) {
-            BasketballServicesProxy.getInstance().addObserverListener(new TicketObserver() {
-                @Override
-                public void ticketSold(Ticket ticket) throws ServicesException {
-                    // If we have an active search, refresh the results
-                    if (hasActiveSearch && !currentSearchTerm.isEmpty()) {
-                        logger.info("Direct observer: Ticket sold, refreshing search for: {}", currentSearchTerm);
-                        Platform.runLater(CustomerSearchController.this::handleSearch);
-                    }
-                }
-
-                @Override
-                public void matchUpdated(Match match) throws ServicesException {
-                    // No action needed for match updates in search view
-                }
-
-                @Override
-                public void userTicketsChanged(User user) throws ServicesException {
-                    // If we have an active search and it matches this user's name, refresh the results
-                    if (hasActiveSearch && !currentSearchTerm.isEmpty() &&
-                            user.getUsername().equalsIgnoreCase(currentSearchTerm)) {
-                        logger.info("Direct observer: User tickets changed, refreshing search");
-                        Platform.runLater(CustomerSearchController.this::handleSearch);
-                    }
-                }
-            });
-        }
     }
 
+    @Override
+    public void setServices(BasketballGrpcServicesProxy basketballServicesProxy) {
+        super.setServices(basketballServicesProxy);
+
+        // Add this controller as a direct observer
+        if (basketballServicesProxy != null) {
+            basketballServicesProxy.addObserverListener(this);
+            logger.info("CustomerSearchController registered as direct observer");
+        }
+    }
 
     @Override
     public void ticketSold(Ticket ticket) throws ServicesException {
@@ -88,6 +69,21 @@ public class CustomerSearchController extends BaseController {
             safelyUpdateUI(this::forceRefreshSearch);
         } else {
             super.ticketSold(ticket);
+        }
+    }
+
+    @Override
+    public void userTicketsChanged(User user) throws ServicesException {
+        logger.debug("userTicketsChanged in CustomerSearchController: userId={}, searchTerm={}, hasActiveSearch={}",
+                user.getId(), currentSearchTerm, hasActiveSearch);
+
+        // If we have an active search and this user matches our search term, refresh
+        if (hasActiveSearch && !currentSearchTerm.isEmpty() &&
+                user.getUsername().equalsIgnoreCase(currentSearchTerm)) {
+            logger.info("Force refreshing search for term: {}", currentSearchTerm);
+            safelyUpdateUI(this::forceRefreshSearch);
+        } else {
+            super.userTicketsChanged(user);
         }
     }
 
@@ -120,7 +116,6 @@ public class CustomerSearchController extends BaseController {
         }
     }
 
-
     @Override
     protected boolean isRelevantMatch(Match match) {
         // A match is relevant if it appears in any displayed ticket
@@ -132,17 +127,14 @@ public class CustomerSearchController extends BaseController {
 
     @Override
     protected boolean isRelevantTicket(Ticket ticket) {
-        // Make this more permissive - accept tickets even if no search is active
         if (ticket == null || ticket.getUser().isEmpty()) {
             return false;
         }
 
         String ticketCustomerName = ticket.getUser().get().getUsername();
 
-        // Either it's in the current display...
+        // Either it's in the current display or it matches the search term
         boolean isInCurrentResults = displayedTicketIds.contains(ticket.getId());
-
-        // ...or it matches the search term (if search is active)
         boolean matchesSearch = hasActiveSearch &&
                 !currentSearchTerm.isEmpty() &&
                 ticketCustomerName != null &&
@@ -192,9 +184,7 @@ public class CustomerSearchController extends BaseController {
             resultsTable.refresh();
         }
         // If this might be a new ticket for our current search, refresh the search
-        else if (hasActiveSearch && ticket.getUser().isPresent() &&
-                ticket.getUser().get().getUsername().equalsIgnoreCase(currentSearchTerm)) {
-            // Use safelyUpdateUI to avoid threading issues
+        else if (isRelevantTicket(ticket)) {
             safelyUpdateUI(this::handleSearch);
         }
     }
@@ -202,11 +192,7 @@ public class CustomerSearchController extends BaseController {
     @Override
     protected void updateUIForUserTickets(User user) {
         // If we're searching for this user, refresh results
-        if (hasActiveSearch &&
-                user != null &&
-                user.getUsername() != null &&
-                user.getUsername().equalsIgnoreCase(currentSearchTerm)) {
-            // Use safelyUpdateUI to queue the update
+        if (isRelevantUser(user)) {
             safelyUpdateUI(this::handleSearch);
         }
     }
@@ -223,10 +209,10 @@ public class CustomerSearchController extends BaseController {
         }
 
         try {
-            logger.info("Searching for tickets purchased by customer: {}", name);
+            logger.info("Searching for tickets via gRPC purchased by customer: {}", name);
             List<Ticket> results = basketballServicesProxy.findTicketsByCustomer(name);
 
-            logger.info("Found {} tickets for customer {}", results.size(), name);
+            logger.info("Found {} tickets via gRPC for customer {}", results.size(), name);
 
             // Update set of displayed ticket IDs
             displayedTicketIds.clear();
@@ -244,22 +230,8 @@ public class CustomerSearchController extends BaseController {
             });
 
         } catch (ServicesException e) {
-            logger.error("Search failed: {}", e.getMessage(), e);
-            showErrorAlert("Search Failed", e.getMessage());
-        }
-    }
-
-    @Override
-    public void userTicketsChanged(User user) throws ServicesException {
-        logger.debug("userTicketsChanged in CustomerSearchController: userId={}, searchTerm={}, hasActiveSearch={}",
-                user.getId(), currentSearchTerm, hasActiveSearch);
-
-        // Simplify condition - if we're actively searching and any user's tickets change, refresh
-        if (hasActiveSearch && !currentSearchTerm.isEmpty()) {
-            logger.info("Force refreshing search for term: {}", currentSearchTerm);
-            safelyUpdateUI(this::forceRefreshSearch);
-        } else {
-            super.userTicketsChanged(user);
+            logger.error("gRPC search failed: {}", e.getMessage(), e);
+            showErrorAlert("Search Failed", "gRPC connection error: " + e.getMessage());
         }
     }
 

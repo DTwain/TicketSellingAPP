@@ -2,7 +2,6 @@ package org.example.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -14,9 +13,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.example.domain.User;
 import org.example.domain.UserType;
-import org.example.network.rpc.BasketballServicesProxy;
+import org.example.network.grpc.BasketballGrpcServicesProxy;
 import org.example.service.ServicesException;
-import org.example.service.interfaces.UserServiceInterface;
 
 import java.util.Optional;
 
@@ -29,7 +27,7 @@ public class LoginController {
     @FXML private PasswordField signupPassword;
     @FXML private PasswordField signupConfirmPassword;
 
-    private BasketballServicesProxy basketballServicesProxy;
+    private BasketballGrpcServicesProxy basketballServicesProxy;
     private Parent clientView;
     private Parent sellerView;
     private ClientDashboardController clientController;
@@ -46,7 +44,7 @@ public class LoginController {
         }
     }
 
-    public void setServices(BasketballServicesProxy basketballServicesProxy) {
+    public void setServices(BasketballGrpcServicesProxy basketballServicesProxy) {
         this.basketballServicesProxy = basketballServicesProxy;
     }
 
@@ -88,6 +86,7 @@ public class LoginController {
         }
 
         try {
+            logger.info("Attempting gRPC authentication for user: {}", username);
             UserType userType = basketballServicesProxy.authenticate(username, password);
 
             if (userType == UserType.SELLER) {
@@ -103,9 +102,9 @@ public class LoginController {
                         "The username or password is incorrect");
             }
         } catch (ServicesException e) {
-            logger.error("Login error", e);
-            showAlert(Alert.AlertType.ERROR, "Login Error", "Service Error",
-                    "Failed to verify credentials: " + e.getMessage());
+            logger.error("gRPC Login error", e);
+            showAlert(Alert.AlertType.ERROR, "Login Error", "Connection Error",
+                    "Failed to verify credentials via gRPC: " + e.getMessage());
         }
     }
 
@@ -129,6 +128,8 @@ public class LoginController {
         }
 
         try {
+            logger.info("Attempting gRPC registration for user: {}", username);
+
             // Check if username already exists
             if (basketballServicesProxy.usernameExists(username)) {
                 showAlert(Alert.AlertType.ERROR, "Signup Failed", "Username Taken",
@@ -140,7 +141,7 @@ public class LoginController {
             boolean signupSuccess = basketballServicesProxy.registerUser(username, password);
             if (signupSuccess) {
                 showAlert(Alert.AlertType.INFORMATION, "Signup Success", "Account Created",
-                        "Your account has been successfully created!");
+                        "Your account has been successfully created via gRPC!");
                 toggleForms(); // Switch back to login form
                 clearSignupFields();
             } else {
@@ -148,9 +149,9 @@ public class LoginController {
                         "Failed to create account. Please try again.");
             }
         } catch (ServicesException e) {
-            logger.error("Signup error", e);
-            showAlert(Alert.AlertType.ERROR, "Signup Error", "Service Error",
-                    "Failed to register user: " + e.getMessage());
+            logger.error("gRPC Signup error", e);
+            showAlert(Alert.AlertType.ERROR, "Signup Error", "Connection Error",
+                    "Failed to register user via gRPC: " + e.getMessage());
         }
     }
 
@@ -175,55 +176,63 @@ public class LoginController {
 
     private void openClientInterface(String username) {
         try {
+            logger.info("Opening client interface for user: {}", username);
             Optional<User> userOptional = basketballServicesProxy.getUserByUsername(username);
             if (userOptional.isEmpty()) {
                 showAlert(Alert.AlertType.ERROR, "Error", "User data not found",
-                        "Could not retrieve user information");
+                        "Could not retrieve user information via gRPC");
                 return;
             }
+
             Stage clientStage = new Stage();
 
-            // Set up the controller
+            // Set up the controller with gRPC proxy
             clientController.setServices(basketballServicesProxy);
             clientController.setCurrentUser(userOptional.get());
 
             clientStage.setScene(new Scene(clientView));
-            clientStage.setTitle("Client Dashboard");
+            clientStage.setTitle("Client Dashboard - gRPC");
             clientStage.show();
 
             // Hide the login window
             ((Stage) loginUsername.getScene().getWindow()).close();
+
+            logger.info("Client interface opened successfully for user: {}", username);
         } catch (Exception e) {
-            logger.error("Error opening client interface", e);
+            logger.error("Error opening client interface via gRPC", e);
             showAlert(Alert.AlertType.ERROR, "Error", "Failed to open client interface",
-                    e.getMessage());
+                    "gRPC connection error: " + e.getMessage());
         }
     }
 
     private void openSellerInterface(String username) {
         try {
+            logger.info("Opening seller interface for user: {}", username);
             Optional<User> userOptional = basketballServicesProxy.getUserByUsername(username);
             if (userOptional.isEmpty()) {
                 showAlert(Alert.AlertType.ERROR, "Error", "User data not found",
-                        "Could not retrieve user information");
+                        "Could not retrieve user information via gRPC");
                 return;
             }
+
             Stage sellerStage = new Stage();
 
-            // Set up the controller
+            // Set up the controller with gRPC proxy
             sellerController.setServices(basketballServicesProxy);
             sellerController.setCurrentUser(userOptional.get());
 
             sellerStage.setScene(new Scene(sellerView));
-            sellerStage.setTitle("Ticket Seller Dashboard");
+            sellerStage.setTitle("Ticket Seller Dashboard - gRPC");
             sellerStage.show();
 
             // Hide the login window
             ((Stage) loginUsername.getScene().getWindow()).close();
+
+            logger.info("Seller interface opened successfully for user: {}", username);
         } catch (Exception e) {
-            logger.error("Error opening seller interface", e);
+            logger.error("Error opening seller interface via gRPC", e);
             showAlert(Alert.AlertType.ERROR, "Error", "Failed to open seller interface",
-                    e.getMessage());
+                    "gRPC connection error: " + e.getMessage());
         }
     }
 }

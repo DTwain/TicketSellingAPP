@@ -14,7 +14,7 @@ import org.apache.logging.log4j.Logger;
 import org.example.domain.Match;
 import org.example.domain.Ticket;
 import org.example.domain.User;
-import org.example.network.rpc.BasketballServicesProxy;
+import org.example.network.grpc.BasketballGrpcServicesProxy;
 import org.example.service.ServicesException;
 
 import java.io.IOException;
@@ -56,8 +56,15 @@ public class ClientDashboardController extends BaseController {
     }
 
     @Override
-    public void setServices(BasketballServicesProxy basketballServicesProxy) {
+    public void setServices(BasketballGrpcServicesProxy basketballServicesProxy) {
         super.setServices(basketballServicesProxy);
+
+        // Add this controller as a direct observer
+        if (basketballServicesProxy != null) {
+            basketballServicesProxy.addObserverListener(this);
+            logger.info("ClientDashboardController registered as direct observer");
+        }
+
         loadMatches();
     }
 
@@ -80,13 +87,39 @@ public class ClientDashboardController extends BaseController {
     }
 
     @Override
+    public void matchUpdated(Match match) throws ServicesException {
+        logger.debug("ClientDashboard matchUpdated: match={}, availableTickets={}",
+                match.getId(), match.getAvailableTickets());
+        super.matchUpdated(match);
+    }
+
+    @Override
+    public void userTicketsChanged(User user) throws ServicesException {
+        logger.debug("ClientDashboard userTicketsChanged: userId={}, currentUserId={}",
+                user.getId(), currentUser != null ? currentUser.getId() : "null");
+
+        // Show notification if this is for current user
+        if (isRelevantUser(user)) {
+            Platform.runLater(() -> {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Tickets Updated");
+                alert.setHeaderText(null);
+                alert.setContentText("Your tickets have been updated. Check 'My Tickets' to see changes.");
+                alert.show();
+            });
+        }
+
+        super.userTicketsChanged(user);
+    }
+
+    @Override
     protected void updateUIForMatch(Match match) {
         Platform.runLater(() -> {
             boolean matchFound = false;
-            for (Match existingMatch : matchesTable.getItems()) {
+            for (int i = 0; i < matchesTable.getItems().size(); i++) {
+                Match existingMatch = matchesTable.getItems().get(i);
                 if (existingMatch.getId().equals(match.getId())) {
                     // Create a new match object instead of modifying in-place
-                    int index = matchesTable.getItems().indexOf(existingMatch);
                     Match updatedMatch = new Match(
                             existingMatch.getId(),
                             existingMatch.getTeamA(),
@@ -97,7 +130,7 @@ public class ClientDashboardController extends BaseController {
                     updatedMatch.setPriceRange(match.getPriceRange());
 
                     // Replace in the list to force property change events
-                    matchesTable.getItems().set(index, updatedMatch);
+                    matchesTable.getItems().set(i, updatedMatch);
                     matchFound = true;
                     break;
                 }
@@ -107,6 +140,8 @@ public class ClientDashboardController extends BaseController {
                 loadMatches();
             } else {
                 matchesTable.refresh();
+                logger.debug("Client dashboard updated match {} with {} available tickets",
+                        match.getId(), match.getAvailableTickets());
             }
         });
     }
@@ -125,41 +160,27 @@ public class ClientDashboardController extends BaseController {
     @Override
     protected void updateUIForUserTickets(User user) {
         // No direct UI update needed since this controller doesn't show user tickets
-        // However, we could show a notification
-        Platform.runLater(() -> {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Tickets Updated");
-            alert.setHeaderText(null);
-            alert.setContentText("Your tickets have been updated. Check 'My Tickets' to see changes.");
-            alert.show();
-        });
+        // The notification is already shown in userTicketsChanged override
     }
 
     private void loadMatches() {
         try {
-            logger.debug("Loading matches for client dashboard");
+            logger.debug("Loading matches via gRPC for client dashboard");
             List<Match> matches = basketballServicesProxy.findAll();
-            logger.debug("Loaded {} matches from service", matches.size());
+            logger.debug("Loaded {} matches from gRPC service", matches.size());
 
-            // For each match, get available tickets count and price range
-            for (Match match : matches) {
-                int availableTickets = basketballServicesProxy.countAvailableTicketsByMatch(match.getId());
-                String priceRange = basketballServicesProxy.ticketPriceRangePerMatch(match.getId());
-                match.setAvailableTickets(availableTickets);
-                match.setPriceRange(priceRange);
-                logger.debug("Match {} has {} available tickets", match.getMatchDescription(), availableTickets);
-            }
+            // Matches already include available tickets and price range from gRPC service
 
             // Replace the entire table content
             Platform.runLater(() -> {
                 matchesTable.getItems().clear();
                 matchesTable.getItems().addAll(matches);
                 matchesTable.refresh();
-                logger.debug("Client dashboard refreshed with {} matches", matches.size());
+                logger.debug("Client dashboard refreshed with {} matches via gRPC", matches.size());
             });
         } catch (ServicesException e) {
-            logger.error("Error loading matches for client dashboard", e);
-            showErrorAlert("Error Loading Matches", e.getMessage());
+            logger.error("gRPC error loading matches for client dashboard", e);
+            showErrorAlert("Error Loading Matches", "gRPC connection error: " + e.getMessage());
         }
     }
 

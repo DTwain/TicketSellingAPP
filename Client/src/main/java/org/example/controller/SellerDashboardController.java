@@ -16,7 +16,7 @@ import org.example.domain.Match;
 import org.example.domain.Ticket;
 import org.example.domain.TicketSale;
 import org.example.domain.User;
-import org.example.network.rpc.BasketballServicesProxy;
+import org.example.network.grpc.BasketballGrpcServicesProxy;
 import org.example.service.ServicesException;
 
 import java.io.IOException;
@@ -89,8 +89,15 @@ public class SellerDashboardController extends BaseController {
     }
 
     @Override
-    public void setServices(BasketballServicesProxy basketballServicesProxy) {
+    public void setServices(BasketballGrpcServicesProxy basketballServicesProxy) {
         super.setServices(basketballServicesProxy);
+
+        // Add this controller as a direct observer
+        if (basketballServicesProxy != null) {
+            basketballServicesProxy.addObserverListener(this);
+            logger.info("SellerDashboardController registered as direct observer");
+        }
+
         loadMatches();
     }
 
@@ -107,38 +114,64 @@ public class SellerDashboardController extends BaseController {
     }
 
     @Override
+    public void matchUpdated(Match match) throws ServicesException {
+        logger.debug("SellerDashboard matchUpdated: match={}, availableTickets={}",
+                match.getId(), match.getAvailableTickets());
+        super.matchUpdated(match);
+    }
+
+    @Override
+    public void ticketSold(Ticket ticket) throws ServicesException {
+        logger.debug("SellerDashboard ticketSold: ticket={}, matchId={}",
+                ticket.getId(), ticket.getMatch() != null ? ticket.getMatch().getId() : "null");
+        super.ticketSold(ticket);
+    }
+
+    @Override
     protected void updateUIForMatch(Match match) {
-        boolean matchFound = false;
-        boolean availabilityChanged = false;
+        Platform.runLater(() -> {
+            boolean matchFound = false;
+            boolean availabilityChanged = false;
 
-        // First try to update the specific match in the table
-        for (Match existingMatch : matchesTable.getItems()) {
-            if (existingMatch.getId().equals(match.getId())) {
-                matchFound = true;
+            // First try to update the specific match in the table
+            for (int i = 0; i < matchesTable.getItems().size(); i++) {
+                Match existingMatch = matchesTable.getItems().get(i);
+                if (existingMatch.getId().equals(match.getId())) {
+                    matchFound = true;
 
-                // Check if availability has changed
-                if (existingMatch.getAvailableTickets() != match.getAvailableTickets()) {
-                    availabilityChanged = true;
+                    // Check if availability has changed
+                    if (existingMatch.getAvailableTickets() != match.getAvailableTickets()) {
+                        availabilityChanged = true;
+                    }
+
+                    // Create new match object to force UI update
+                    Match updatedMatch = new Match(
+                            existingMatch.getId(),
+                            existingMatch.getTeamA(),
+                            existingMatch.getTeamB(),
+                            existingMatch.getDateTime()
+                    );
+                    updatedMatch.setAvailableTickets(match.getAvailableTickets());
+                    updatedMatch.setPriceRange(match.getPriceRange());
+
+                    // Replace in the list to force property change events
+                    matchesTable.getItems().set(i, updatedMatch);
+
+                    logger.info("Updated match {} to {} available tickets in table",
+                            match.getId(), match.getAvailableTickets());
+                    break;
                 }
-
-                // Update match data
-                existingMatch.setAvailableTickets(match.getAvailableTickets());
-                existingMatch.setPriceRange(match.getPriceRange());
-
-                logger.info("Updated match {} to {} available tickets in table",
-                        match.getId(), match.getAvailableTickets());
-                break;
             }
-        }
 
-        // Refresh the table UI
-        matchesTable.refresh();
+            // Refresh the table UI
+            matchesTable.refresh();
 
-        // If match wasn't found OR availability changed (important UI update), do a full refresh
-        if (!matchFound || availabilityChanged) {
-            logger.info("Match {} not found or availability changed, performing full refresh", match.getId());
-            loadMatches();
-        }
+            // If match wasn't found OR availability changed (important UI update), do a full refresh
+            if (!matchFound || availabilityChanged) {
+                logger.info("Match {} not found or availability changed, performing full refresh", match.getId());
+                loadMatches();
+            }
+        });
     }
 
     @Override
@@ -161,48 +194,39 @@ public class SellerDashboardController extends BaseController {
 
     private void loadMatches() {
         try {
-            logger.debug("Loading matches for seller dashboard");
+            logger.debug("Loading matches via gRPC for seller dashboard");
             List<Match> matches = basketballServicesProxy.findAll();
-            logger.debug("Loaded {} matches from service", matches.size());
+            logger.debug("Loaded {} matches from gRPC service", matches.size());
 
-            // For each match, get available tickets count and price range
-            for (Match match : matches) {
-                int availableTickets = basketballServicesProxy.countAvailableTicketsByMatch(match.getId());
-                String priceRange = basketballServicesProxy.ticketPriceRangePerMatch(match.getId());
-                match.setAvailableTickets(availableTickets);
-                match.setPriceRange(priceRange);
-                logger.debug("Match {} has {} available tickets", match.getMatchDescription(), availableTickets);
-            }
+            // Matches already include available tickets and price range from gRPC service
 
             // Replace the entire table content
             Platform.runLater(() -> {
                 matchesTable.getItems().clear();
                 matchesTable.getItems().addAll(matches);
                 matchesTable.refresh();
-                logger.debug("Seller dashboard refreshed with {} matches", matches.size());
+                logger.debug("Seller dashboard refreshed with {} matches via gRPC", matches.size());
             });
         } catch (ServicesException e) {
-            logger.error("Error loading matches for seller dashboard", e);
-            showErrorAlert("Error Loading Matches", e.getMessage());
+            logger.error("gRPC error loading matches for seller dashboard", e);
+            showErrorAlert("Error Loading Matches", "gRPC connection error: " + e.getMessage());
         }
     }
 
     private void showSellTicketsDialog(Match match) {
         Dialog<TicketSale> dialog = new Dialog<>();
-        dialog.setTitle("Sell Tickets");
+        dialog.setTitle("Sell Tickets via gRPC");
         dialog.setHeaderText("Sell tickets for: " + match.getMatchDescription());
 
-        // Set up form fields
+        // Set up form fields (same as before)
         TextField nameField = new TextField();
         nameField.setPromptText("Customer Name");
         TextField addressField = new TextField();
         addressField.setPromptText("Customer Address");
 
-        // Make sure we respect available tickets limit
         int maxTickets = Math.max(1, match.getAvailableTickets());
         Spinner<Integer> seatsSpinner = new Spinner<>(1, maxTickets, 1);
 
-        // Show warning if match is close to sold out
         Label warningLabel = new Label();
         warningLabel.setStyle("-fx-text-fill: #d9534f;");
         if (match.getAvailableTickets() < 5) {
@@ -217,11 +241,9 @@ public class SellerDashboardController extends BaseController {
         content.setPadding(new Insets(20));
         dialog.getDialogPane().setContent(content);
 
-        // Add buttons
         ButtonType sellButtonType = new ButtonType("Sell", ButtonBar.ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().addAll(sellButtonType, ButtonType.CANCEL);
 
-        // Convert result to TicketSale when Sell button is clicked
         dialog.setResultConverter(buttonType -> {
             if (buttonType == sellButtonType) {
                 return new TicketSale(
@@ -234,7 +256,7 @@ public class SellerDashboardController extends BaseController {
             return null;
         });
 
-        // Process the sale
+        // Process the sale via gRPC
         dialog.showAndWait().ifPresent(ticketSale -> {
             try {
                 if (ticketSale.getCustomerName().isEmpty() || ticketSale.getCustomerAddress().isEmpty()) {
@@ -245,33 +267,35 @@ public class SellerDashboardController extends BaseController {
                 // Display processing indicator
                 ProgressIndicator progress = new ProgressIndicator();
                 Stage progressStage = new Stage();
-                progressStage.setScene(new Scene(new VBox(10, new Label("Processing sale..."), progress), 200, 100));
+                progressStage.setScene(new Scene(new VBox(10, new Label("Processing gRPC sale..."), progress), 200, 100));
                 progressStage.show();
 
-                // Process sale in background
+                // Process sale in background via gRPC
                 new Thread(() -> {
                     try {
+                        logger.info("Processing ticket sale via gRPC for match: {}", match.getId());
                         Double ticketsValue = basketballServicesProxy.sellTickets(ticketSale);
 
-                        // Update UI on success - but network notification will handle actual UI update
+                        // Update UI on success - gRPC real-time updates will handle UI refresh
                         Platform.runLater(() -> {
                             progressStage.close();
-                            showSuccessAlert("Success", "Successfully sold " + ticketSale.getSeatsPurchased() +
-                                    " ticket(s) to " + ticketSale.getCustomerName() +
-                                    " for $" + String.format("%.2f", ticketsValue));
+                            showSuccessAlert("gRPC Sale Success",
+                                    "Successfully sold " + ticketSale.getSeatsPurchased() +
+                                            " ticket(s) to " + ticketSale.getCustomerName() +
+                                            " for $" + String.format("%.2f", ticketsValue) + " via gRPC");
                         });
                     } catch (ServicesException e) {
                         Platform.runLater(() -> {
                             progressStage.close();
-                            logger.error("Error selling tickets", e);
-                            showErrorAlert("Sale Failed", e.getMessage());
+                            logger.error("gRPC error selling tickets", e);
+                            showErrorAlert("gRPC Sale Failed", "gRPC connection error: " + e.getMessage());
                         });
                     }
                 }).start();
 
             } catch (Exception e) {
-                logger.error("Error processing ticket sale", e);
-                showErrorAlert("Sale Failed", "An unexpected error occurred: " + e.getMessage());
+                logger.error("Error processing gRPC ticket sale", e);
+                showErrorAlert("Sale Failed", "An unexpected gRPC error occurred: " + e.getMessage());
             }
         });
     }
@@ -308,9 +332,4 @@ public class SellerDashboardController extends BaseController {
         }
     }
 
-    @Override
-    protected void cleanup() {
-        logger.info("Cleaning up seller dashboard resources");
-        super.cleanup();
-    }
 }
