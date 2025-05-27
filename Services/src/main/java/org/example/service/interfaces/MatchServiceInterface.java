@@ -9,4 +9,7 @@ import java.util.Optional;
 public interface MatchServiceInterface {
     List<Match> findAll() throws ServicesException;
     Optional<Match> findOne(Long id) throws ServicesException;
+    Match save(Match match) throws ServicesException;
+    Match update(Match match) throws ServicesException;
+    void delete(Long id) throws ServicesException;
 }
