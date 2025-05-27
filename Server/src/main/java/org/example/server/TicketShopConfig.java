@@ -2,6 +2,8 @@ package org.example.server;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.example.persistence.hibernate.HibernateMatchRepository;
+import org.example.persistence.hibernate.HibernateTicketRepository;
 import org.example.persistence.interfaces.MatchInterface;
 import org.example.persistence.interfaces.TicketInterface;
 import org.example.persistence.interfaces.TicketSellerRepoInterface;
@@ -41,12 +43,30 @@ public class TicketShopConfig {
 
     @Bean
     public MatchInterface matchRepository() {
-        return new MatchRepository(getProperties());
+        // Choose between JDBC and Hibernate implementation
+        boolean useHibernate = Boolean.parseBoolean(
+                getProperties().getProperty("use.hibernate", "false")
+        );
+
+        if (useHibernate) {
+            return new HibernateMatchRepository(getProperties());
+        } else {
+            return new MatchRepository(getProperties());
+        }
     }
 
     @Bean
     public TicketInterface ticketRepository() {
-        return new TicketRepository(getProperties(), matchRepository());
+        // Choose between JDBC and Hibernate implementation
+        boolean useHibernate = Boolean.parseBoolean(
+                getProperties().getProperty("use.hibernate", "false")
+        );
+
+        if (useHibernate) {
+            return new HibernateTicketRepository(getProperties(), matchRepository());
+        } else {
+            return new TicketRepository(getProperties(), matchRepository());
+        }
     }
 
     @Bean
