@@ -15,7 +15,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/matches")
-@CrossOrigin
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 public class MatchRestController {
 
     @Autowired
@@ -43,6 +43,7 @@ public class MatchRestController {
             if (match.isPresent()) {
                 return ResponseEntity.ok(match.get());
             } else {
+                logger.warn("Match with id {} not found", id);
                 return ResponseEntity.notFound().build();
             }
         } catch (ServicesException e) {
@@ -72,9 +73,10 @@ public class MatchRestController {
         try {
             logger.info("REST: Updating match with id: {}", id);
 
-            // Check if match exists
+            // Check if match exists first
             Optional<Match> existingMatch = matchService.findOne(id);
             if (existingMatch.isEmpty()) {
+                logger.warn("Cannot update - match with id {} not found", id);
                 return ResponseEntity.notFound().build();
             }
 
@@ -82,6 +84,7 @@ public class MatchRestController {
             match.setId(id);
 
             Match updatedMatch = matchService.update(match);
+            logger.info("REST: Successfully updated match with id: {}", id);
             return ResponseEntity.ok(updatedMatch);
         } catch (ServicesException e) {
             logger.error("Error updating match with id {}: {}", id, e.getMessage());
@@ -94,13 +97,15 @@ public class MatchRestController {
         try {
             logger.info("REST: Deleting match with id: {}", id);
 
-            // Check if match exists
+            // Check if match exists first
             Optional<Match> existingMatch = matchService.findOne(id);
             if (existingMatch.isEmpty()) {
+                logger.warn("Cannot delete - match with id {} not found", id);
                 return ResponseEntity.notFound().build();
             }
 
             matchService.delete(id);
+            logger.info("REST: Successfully deleted match with id: {}", id);
             return ResponseEntity.noContent().build();
         } catch (ServicesException e) {
             logger.error("Error deleting match with id {}: {}", id, e.getMessage());

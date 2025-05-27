@@ -5,9 +5,12 @@ import org.apache.logging.log4j.Logger;
 import org.example.server.TicketShopConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @SpringBootApplication
+@EnableWebMvc
 @Import(TicketShopConfig.class)
 public class StartRestServer {
     private static final Logger logger = LogManager.getLogger(StartRestServer.class);
