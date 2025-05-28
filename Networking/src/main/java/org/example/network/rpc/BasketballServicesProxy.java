@@ -426,6 +426,21 @@ public class BasketballServicesProxy implements UserServiceInterface, MatchServi
         return Optional.empty();
     }
 
+    @Override
+    public Match save(Match match) throws ServicesException {
+        return null;
+    }
+
+    @Override
+    public Match update(Match match) throws ServicesException {
+        return null;
+    }
+
+    @Override
+    public void delete(Long id) throws ServicesException {
+
+    }
+
     // TicketServiceInterface implementations
     @Override
     public int countAvailableTicketsByMatch(Long matchId) throws ServicesException {
