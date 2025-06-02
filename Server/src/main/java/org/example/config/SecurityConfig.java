@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -25,22 +26,22 @@ public class SecurityConfig {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
 
-                // Configure authorization
-                .authorizeHttpRequests(authz -> authz
+                // Configure authorization using antMatchers (Spring Security 5.x)
+                .authorizeRequests(authz -> authz
                         // Allow authentication endpoints
-                        .requestMatchers("/api/auth/**").permitAll()
+                        .antMatchers("/api/auth/**").permitAll()
 
                         // Allow WebSocket connections
-                        .requestMatchers("/ws/**").permitAll()
+                        .antMatchers("/ws/**").permitAll()
 
                         // Allow static resources
-                        .requestMatchers("/static/**", "/*.html", "/*.js", "/*.css").permitAll()
+                        .antMatchers("/static/**", "/*.html", "/*.js", "/*.css").permitAll()
 
                         // Allow all API endpoints for now (we'll handle authorization via JWT manually)
-                        .requestMatchers("/api/**").permitAll()
+                        .antMatchers("/api/**").permitAll()
 
                         // Allow health check endpoints
-                        .requestMatchers("/actuator/**").permitAll()
+                        .antMatchers("/actuator/**").permitAll()
 
                         // Require authentication for all other requests
                         .anyRequest().permitAll()

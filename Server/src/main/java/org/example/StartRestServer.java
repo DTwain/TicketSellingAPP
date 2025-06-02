@@ -22,18 +22,22 @@ public class StartRestServer {
     private static final Logger logger = LogManager.getLogger(StartRestServer.class);
 
     public static void main(String[] args) {
-        logger.info("Starting REST server with WebSocket support...");
+        logger.info("Starting REST server with WebSocket and JWT authentication support...");
 
         SpringApplication app = new SpringApplication(StartRestServer.class);
 
-        // Add additional properties for WebSocket
+        // Add additional properties for WebSocket and Security
         System.setProperty("server.port", "8080");
         System.setProperty("logging.level.org.example.websocket", "DEBUG");
+        System.setProperty("logging.level.org.example.security", "DEBUG");
+        System.setProperty("logging.level.org.springframework.security", "DEBUG");
 
         app.run(args);
 
-        logger.info("REST server with WebSocket support started successfully");
-        logger.info("WebSocket endpoint available at: ws://localhost:8080/ws/matches");
-        logger.info("REST API available at: http://localhost:8080/api/matches");
+        logger.info("REST server started successfully with:");
+        logger.info("- WebSocket endpoint: ws://localhost:8080/ws/matches");
+        logger.info("- REST API: http://localhost:8080/api/matches");
+        logger.info("- Authentication: http://localhost:8080/api/auth/*");
+        logger.info("- Web Client: Open basketball-web-client.html in browser");
     }
 }
