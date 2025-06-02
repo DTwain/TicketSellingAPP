@@ -1,11 +1,19 @@
 package org.example.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Match extends Entity<Long> {
     private String teamA;
     private String teamB;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     private LocalDateTime dateTime;
     private transient Integer availableTickets;
     private transient String priceRange;
@@ -44,6 +52,9 @@ public class Match extends Entity<Long> {
     }
 
     public String getFormattedDate() {
+        if (this.dateTime == null) {
+            return "TBD"; // or "Not scheduled" or whatever you prefer
+        }
         return this.dateTime.format(DateTimeFormatter.ofPattern("MMM dd, yyyy HH:mm"));
     }
 
@@ -66,5 +77,9 @@ public class Match extends Entity<Long> {
 
     public void setPriceRange(String priceRange) {
         this.priceRange = priceRange;
+    }
+
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
     }
 }

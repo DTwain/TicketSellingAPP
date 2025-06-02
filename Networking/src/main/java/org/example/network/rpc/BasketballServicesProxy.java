@@ -415,7 +415,6 @@ public class BasketballServicesProxy implements UserServiceInterface, MatchServi
             MatchDTO matchDTO = gson.fromJson(gson.toJson(response.getData()), MatchDTO.class);
             Match match = DTOUtils.fromDTO(matchDTO);
 
-            // Update cache with the fetched match
             matchCache.put(id, match);
             lastMatchCacheUpdate = System.currentTimeMillis();
             logger.debug("Updated cache with match ID: {}", id);
@@ -424,6 +423,21 @@ public class BasketballServicesProxy implements UserServiceInterface, MatchServi
         }
 
         return Optional.empty();
+    }
+
+    @Override
+    public Match save(Match match) throws ServicesException {
+        return null;
+    }
+
+    @Override
+    public Match update(Match match) throws ServicesException {
+        return null;
+    }
+
+    @Override
+    public void delete(Long id) throws ServicesException {
+
     }
 
     // TicketServiceInterface implementations

@@ -7,6 +7,7 @@ import org.example.domain.UserType;
 import org.example.security.JwtUtil;
 import org.example.service.ServicesException;
 import org.example.service.interfaces.MatchServiceInterface;
+import org.example.service.interfaces.TicketServiceInterface;
 import org.example.service.interfaces.UserServiceInterface;
 import org.example.websocket.MatchWebSocketHandler;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,9 @@ public class MatchRestController {
     private UserServiceInterface userService;
 
     @Autowired
+    private TicketServiceInterface ticketService;
+
+    @Autowired
     private JwtUtil jwtUtil;
 
     private static final Logger logger = LogManager.getLogger(MatchRestController.class);
@@ -48,6 +52,20 @@ public class MatchRestController {
 
             logger.info("REST: Getting all matches");
             List<Match> matches = matchService.findAll();
+
+            // Populate ticket information for each match
+            for (Match match : matches) {
+                try {
+                    int availableTickets = ticketService.countAvailableTicketsByMatch(match.getId());
+                    String priceRange = ticketService.ticketPriceRangePerMatch(match.getId());
+                    match.setAvailableTickets(availableTickets);
+                    match.setPriceRange(priceRange);
+                } catch (ServicesException e) {
+                    logger.warn("Could not load ticket information for match {}: {}", match.getId(), e.getMessage());
+                    match.setAvailableTickets(0);
+                    match.setPriceRange("N/A");
+                }
+            }
 
             // Log WebSocket connection count
             int wsConnections = MatchWebSocketHandler.getConnectedClientsCount();
@@ -76,9 +94,26 @@ public class MatchRestController {
             }
 
             logger.info("REST: Getting match by id: {}", id);
-            Optional<Match> match = matchService.findOne(id);
-            if (match.isPresent()) {
-                return ResponseEntity.ok(match.get());
+            Optional<Match> matchOpt = matchService.findOne(id);
+            if (matchOpt.isPresent()) {
+                Match match = matchOpt.get();
+
+                // Populate ticket information
+                try {
+                    int availableTickets = ticketService.countAvailableTicketsByMatch(match.getId());
+                    String priceRange = ticketService.ticketPriceRangePerMatch(match.getId());
+                    match.setAvailableTickets(availableTickets);
+                    match.setPriceRange(priceRange);
+                    logger.debug("Match {} has {} available tickets, price range: {}",
+                            match.getId(), availableTickets, priceRange);
+                } catch (ServicesException e) {
+                    logger.warn("Could not load ticket information for match {}: {}", id, e.getMessage());
+                    // Continue without ticket info rather than failing the whole request
+                    match.setAvailableTickets(0);
+                    match.setPriceRange("N/A");
+                }
+
+                return ResponseEntity.ok(match);
             } else {
                 logger.warn("Match with id {} not found", id);
                 return ResponseEntity.notFound().build();

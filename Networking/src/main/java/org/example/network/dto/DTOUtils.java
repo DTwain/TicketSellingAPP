@@ -51,11 +51,21 @@ public class DTOUtils {
 
     public static Match fromDTO(MatchDTO dto) {
         if (dto == null) return null;
+        LocalDateTime dateTime = null;
+        if (dto.getDateTime() != null && !dto.getDateTime().trim().isEmpty()) {
+            try {
+                dateTime = LocalDateTime.parse(dto.getDateTime(), FORMATTER);
+            } catch (Exception e) {
+                // Log error and leave dateTime as null
+                System.err.println("Error parsing date: " + dto.getDateTime());
+            }
+        }
+
         Match match = new Match(
                 dto.getId(),
                 dto.getTeamA(),
                 dto.getTeamB(),
-                dto.getDateTime() != null ? LocalDateTime.parse(dto.getDateTime(), FORMATTER) : null
+                dateTime
         );
         match.setAvailableTickets(dto.getAvailableTickets());
         match.setPriceRange(dto.getPriceRange());
