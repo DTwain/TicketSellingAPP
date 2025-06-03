@@ -486,6 +486,15 @@
         }, []);
 
         const checkAuthentication = async () => {
+            // Check for force logout parameter
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('logout') === 'true') {
+                AuthUtils.removeToken();
+                AuthUtils.removeUser();
+                setLoading(false);
+                return;
+            }
+
             const token = AuthUtils.getToken();
             if (!token) {
                 setLoading(false);
@@ -520,13 +529,23 @@
         };
 
         const handleLogin = (userData) => {
+            console.log('🔑 LOGIN: Starting handleLogin process');
+            console.log('🔑 LOGIN: User data received:', userData);
+
             setIsAuthenticated(true);
             setCurrentUser(userData.user);
             AuthUtils.setToken(userData.token);
             AuthUtils.setUser(userData.user);
             setSuccess('Login successful! Welcome to Basketball Ticket Shop!');
+
+            console.log('🔑 LOGIN: About to load matches');
             loadMatches();
+
+            console.log('🔑 LOGIN: About to init WebSocket');
+            console.log('🔑 LOGIN: isAuthenticated before initWebSocket:', isAuthenticated);
             initWebSocket();
+
+            console.log('🔑 LOGIN: handleLogin completed');
         };
 
         const handleLogout = () => {
@@ -575,64 +594,77 @@
         };
 
         // Initialize WebSocket connection
+        // Initialize WebSocket connection
         const initWebSocket = () => {
-            if (!isAuthenticated) return;
+            console.log('🚀 WEBSOCKET: initWebSocket called');
+            console.log('🚀 WEBSOCKET: isAuthenticated =', isAuthenticated);
+            console.log('🚀 WEBSOCKET: currentUser =', currentUser);
+            console.log('🚀 WEBSOCKET: WS_URL =', WS_URL);
+
+            if (!isAuthenticated) {
+                console.log('❌ WEBSOCKET: Skipping - not authenticated');
+                return;
+            }
 
             try {
+                console.log('🔗 WEBSOCKET: Setting status to connecting');
                 setWebsocketStatus('connecting');
                 setStatusMessage('Connecting to real-time updates...');
 
+                console.log('🔗 WEBSOCKET: Creating WebSocket object');
                 websocket.current = new WebSocket(WS_URL);
+                console.log('🔗 WEBSOCKET: WebSocket object created:', websocket.current);
 
                 websocket.current.onopen = () => {
+                    console.log('✅ WEBSOCKET: onopen event fired');
                     setWebsocketStatus('connected');
                     setStatusMessage('Real-time updates enabled! 🚀');
-                    console.log('WebSocket connected successfully');
                 };
 
                 websocket.current.onmessage = (event) => {
                     try {
+                        console.log('📨 WEBSOCKET: Message received:', event.data);
                         const data = JSON.parse(event.data);
-                        console.log('WebSocket message received:', data);
 
                         if (data.type === 'MATCH_UPDATED') {
-                            loadMatches(); // Refresh the matches list
+                            console.log('🔄 WEBSOCKET: Match updated, refreshing');
+                            loadMatches();
                             const action = data.operation.toLowerCase();
                             setStatusMessage(`Match ${action} - Data refreshed automatically!`);
                         } else if (data.type === 'CONNECTION_ESTABLISHED') {
-                            console.log('WebSocket connection confirmed by server');
+                            console.log('🔗 WEBSOCKET: Connection confirmed');
                         }
                     } catch (err) {
-                        console.error('Error parsing WebSocket message:', err);
+                        console.error('❌ WEBSOCKET: Error parsing message:', err);
                     }
                 };
 
                 websocket.current.onerror = (error) => {
+                    console.error('❌ WEBSOCKET: Error event:', error);
                     setWebsocketStatus('error');
                     setStatusMessage('Real-time updates connection failed');
-                    console.error('WebSocket error:', error);
                 };
 
                 websocket.current.onclose = (event) => {
+                    console.log('🔌 WEBSOCKET: Close event. Code:', event.code, 'Reason:', event.reason);
                     setWebsocketStatus('disconnected');
-                    console.log('WebSocket disconnected. Code:', event.code, 'Reason:', event.reason);
 
-                    if (event.code !== 1000) { // Not a normal closure
+                    if (event.code !== 1000) {
                         setStatusMessage('Connection lost. Retrying...');
-
-                        // Attempt reconnection after delay
                         setTimeout(() => {
                             if (isAuthenticated && (!websocket.current || websocket.current.readyState === WebSocket.CLOSED)) {
-                                console.log('Attempting WebSocket reconnection...');
+                                console.log('🔄 WEBSOCKET: Attempting reconnection...');
                                 initWebSocket();
                             }
                         }, 3000);
                     }
                 };
+
+                console.log('🔗 WEBSOCKET: Event handlers attached');
             } catch (err) {
+                console.error('❌ WEBSOCKET: Initialization error:', err);
                 setWebsocketStatus('error');
                 setStatusMessage(`Connection failed: ${err.message}`);
-                console.error('WebSocket initialization error:', err);
             }
         };
 

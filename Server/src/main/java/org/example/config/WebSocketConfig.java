@@ -20,8 +20,7 @@ public class WebSocketConfig implements WebSocketConfigurer {
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
         logger.info("Registering WebSocket handlers");
         registry.addHandler(new MatchWebSocketHandler(), "/ws/matches")
-                .setAllowedOriginPatterns("*") // Use setAllowedOriginPatterns instead of setAllowedOrigins
-                .withSockJS(); // Add SockJS fallback support
+                .setAllowedOriginPatterns("*");
     }
 
     @Bean
