@@ -25,19 +25,21 @@ public class MatchWebSocketHandler extends TextWebSocketHandler {
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         sessions.add(session);
-        logger.info("WebSocket connection established. Session ID: {}, Total connections: {}",
-                session.getId(), sessions.size());
+        logger.info("WebSocket connection established from {}. Session ID: {}, Total connections: {}",
+                session.getRemoteAddress(), session.getId(), sessions.size());
 
         // Send welcome message
         Map<String, Object> welcomeMessage = Map.of(
                 "type", "CONNECTION_ESTABLISHED",
                 "message", "Connected to Basketball Ticket Shop WebSocket",
-                "sessionId", session.getId()
+                "sessionId", session.getId(),
+                "totalConnections", sessions.size()
         );
 
         try {
             String jsonMessage = objectMapper.writeValueAsString(welcomeMessage);
             session.sendMessage(new TextMessage(jsonMessage));
+            logger.info("Welcome message sent to session {}", session.getId());
         } catch (Exception e) {
             logger.error("Error sending welcome message to session {}: {}", session.getId(), e.getMessage());
         }

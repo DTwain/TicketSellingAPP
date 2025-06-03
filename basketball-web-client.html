@@ -587,7 +587,7 @@
                 websocket.current.onopen = () => {
                     setWebsocketStatus('connected');
                     setStatusMessage('Real-time updates enabled! 🚀');
-                    console.log('WebSocket connected');
+                    console.log('WebSocket connected successfully');
                 };
 
                 websocket.current.onmessage = (event) => {
@@ -596,9 +596,11 @@
                         console.log('WebSocket message received:', data);
 
                         if (data.type === 'MATCH_UPDATED') {
-                            loadMatches();
+                            loadMatches(); // Refresh the matches list
                             const action = data.operation.toLowerCase();
                             setStatusMessage(`Match ${action} - Data refreshed automatically!`);
+                        } else if (data.type === 'CONNECTION_ESTABLISHED') {
+                            console.log('WebSocket connection confirmed by server');
                         }
                     } catch (err) {
                         console.error('Error parsing WebSocket message:', err);
@@ -607,20 +609,25 @@
 
                 websocket.current.onerror = (error) => {
                     setWebsocketStatus('error');
-                    setStatusMessage('Real-time updates unavailable');
+                    setStatusMessage('Real-time updates connection failed');
                     console.error('WebSocket error:', error);
                 };
 
-                websocket.current.onclose = () => {
+                websocket.current.onclose = (event) => {
                     setWebsocketStatus('disconnected');
-                    setStatusMessage('Reconnecting to real-time updates...');
-                    console.log('WebSocket disconnected');
+                    console.log('WebSocket disconnected. Code:', event.code, 'Reason:', event.reason);
 
-                    setTimeout(() => {
-                        if (isAuthenticated && websocket.current?.readyState === WebSocket.CLOSED) {
-                            initWebSocket();
-                        }
-                    }, 3000);
+                    if (event.code !== 1000) { // Not a normal closure
+                        setStatusMessage('Connection lost. Retrying...');
+
+                        // Attempt reconnection after delay
+                        setTimeout(() => {
+                            if (isAuthenticated && (!websocket.current || websocket.current.readyState === WebSocket.CLOSED)) {
+                                console.log('Attempting WebSocket reconnection...');
+                                initWebSocket();
+                            }
+                        }, 3000);
+                    }
                 };
             } catch (err) {
                 setWebsocketStatus('error');
@@ -711,12 +718,23 @@
                 {error && <div className="error">{error}</div>}
                 {success && <div className="success">{success}</div>}
 
+                {/* Add debugging info */}
+                <div style={{position: 'fixed', bottom: '10px', left: '10px', background: 'rgba(0,0,0,0.8)', color: 'white', padding: '10px', borderRadius: '5px', fontSize: '12px', zIndex: 1000}}>
+                    <div>WebSocket Status: {websocketStatus}</div>
+                    <div>WebSocket URL: {WS_URL}</div>
+                    <div>Authenticated: {isAuthenticated ? 'Yes' : 'No'}</div>
+                    <div>Ready State: {websocket.current?.readyState || 'None'}</div>
+                </div>
+
                 {currentUser?.isSeller ? (
                     <SellerDashboard
                         matches={matches}
                         loading={loading}
                         editingMatch={editingMatch}
                         setEditingMatch={setEditingMatch}
+                        websocketStatus={websocketStatus}
+                        websocket={websocket}
+                        initWebSocket={initWebSocket}
                         onSuccess={(message) => {
                             loadMatches();
                             setSuccess(message);
@@ -842,14 +860,36 @@
     }
 
     // Seller Dashboard Component
-    function SellerDashboard({ matches, loading, editingMatch, setEditingMatch, onSuccess, onError, onRefresh }) {
-        return (
+    function SellerDashboard({ matches, loading, editingMatch, setEditingMatch, websocketStatus, websocket, initWebSocket, onSuccess, onError, onRefresh }) {        return (
             <>
                 <div className="card seller-only">
                     <div className="role-badge">Seller</div>
                     <h2>🎟️ Match Management Center</h2>
                     <p>As a <strong>seller</strong>, you have full control to create, edit, and delete basketball matches.
                         Your changes will be broadcast in real-time to all connected clients!</p>
+
+                    <div style={{marginTop: '15px', display: 'flex', gap: '10px', alignItems: 'center'}}>
+                        <button
+                            className="btn btn-secondary"
+                            onClick={() => {
+                                if (websocket.current && websocket.current.readyState === WebSocket.OPEN) {
+                                    console.log('WebSocket is connected and ready');
+                                    onSuccess('WebSocket connection verified! ✅');
+                                } else {
+                                    console.log('WebSocket not connected, attempting reconnection...');
+                                    initWebSocket();
+                                    onError('WebSocket reconnection attempted. Check status in a few seconds.');
+                                }
+                            }}
+                        >
+                            🔗 Test Connection
+                        </button>
+                        <span style={{fontSize: '0.9rem', color: '#666'}}>
+            Status: <strong style={{color: websocketStatus === 'connected' ? '#4CAF50' : '#f44336'}}>
+                {websocketStatus.toUpperCase()}
+            </strong>
+        </span>
+                    </div>
                 </div>
 
                 <MatchForm
