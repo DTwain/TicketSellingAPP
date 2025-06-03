@@ -11,9 +11,8 @@ import java.time.format.DateTimeFormatter;
 public class Match extends Entity<Long> {
     private String teamA;
     private String teamB;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonSerialize(using = LocalDateTimeSerializer.class)
-    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime dateTime;
     private transient Integer availableTickets;
     private transient String priceRange;
