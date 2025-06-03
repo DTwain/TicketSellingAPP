@@ -446,22 +446,34 @@
 <script type="text/babel">
     const { useState, useEffect, useRef } = React;
 
-    // Authentication utilities
+    // Modify AuthUtils to not use localStorage persistence
     const AuthUtils = {
-        getToken: () => localStorage.getItem('basketball_token'),
-        setToken: (token) => localStorage.setItem('basketball_token', token),
-        removeToken: () => localStorage.removeItem('basketball_token'),
+        // Use sessionStorage instead of localStorage, or memory-only storage
+        getToken: () => sessionStorage.getItem('basketball_token'),
+        setToken: (token) => sessionStorage.setItem('basketball_token', token),
+        removeToken: () => {
+            sessionStorage.removeItem('basketball_token');
+            localStorage.removeItem('basketball_token'); // Clean up any existing localStorage
+        },
         getUser: () => {
-            const userStr = localStorage.getItem('basketball_user');
+            const userStr = sessionStorage.getItem('basketball_user');
             return userStr ? JSON.parse(userStr) : null;
         },
-        setUser: (user) => localStorage.setItem('basketball_user', JSON.stringify(user)),
-        removeUser: () => localStorage.removeItem('basketball_user'),
+        setUser: (user) => sessionStorage.setItem('basketball_user', JSON.stringify(user)),
+        removeUser: () => {
+            sessionStorage.removeItem('basketball_user');
+            localStorage.removeItem('basketball_user'); // Clean up any existing localStorage
+        },
         isAuthenticated: () => !!AuthUtils.getToken(),
         getAuthHeaders: () => ({
             'Authorization': `Bearer ${AuthUtils.getToken()}`,
             'Content-Type': 'application/json'
-        })
+        }),
+        // Add method to clear all storage
+        clearAllStorage: () => {
+            sessionStorage.clear();
+            localStorage.clear();
+        }
     };
 
     // Main App Component
@@ -485,7 +497,42 @@
             checkAuthentication();
         }, []);
 
+        // ADD THE NEW DEBUGGING useEffect HOOKS HERE:
+        useEffect(() => {
+            console.log('🔍 STATE-CHANGE: isAuthenticated changed to:', isAuthenticated);
+        }, [isAuthenticated]);
+
+        useEffect(() => {
+            console.log('🔍 STATE-CHANGE: currentUser changed to:', currentUser?.username);
+        }, [currentUser]);
+
+        useEffect(() => {
+            console.log('🔍 STATE-CHANGE: matches count changed to:', matches.length);
+        }, [matches.length]);
+
+        useEffect(() => {
+            console.log('🔍 STATE-CHANGE: websocketStatus changed to:', websocketStatus);
+        }, [websocketStatus]);
+
+        // Clear messages after timeout
+        useEffect(() => {
+            if (success) {
+                const timer = setTimeout(() => setSuccess(null), 4000);
+                return () => clearTimeout(timer);
+            }
+        }, [success]);
+
+        useEffect(() => {
+            if (statusMessage) {
+                const timer = setTimeout(() => setStatusMessage(''), 3000);
+                return () => clearTimeout(timer);
+            }
+        }, [statusMessage]);
+
         const checkAuthentication = async () => {
+            // Always clear localStorage on page load to force fresh login
+            localStorage.clear();
+
             // Check for force logout parameter
             const urlParams = new URLSearchParams(window.location.search);
             if (urlParams.get('logout') === 'true') {
@@ -495,37 +542,36 @@
                 return;
             }
 
-            const token = AuthUtils.getToken();
-            if (!token) {
-                setLoading(false);
-                return;
-            }
-
-            try {
-                const response = await fetch(`${API_BASE}/auth/validate`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ token })
-                });
-
-                const data = await response.json();
-
-                if (data.success && data.valid) {
-                    setIsAuthenticated(true);
-                    setCurrentUser(data.user);
-                    AuthUtils.setUser(data.user);
-                    loadMatches();
-                    initWebSocket();
-                } else {
-                    // Token is invalid
-                    handleLogout();
-                }
-            } catch (err) {
-                console.error('Token validation error:', err);
-                handleLogout();
-            }
-
+            // Always force fresh login - don't check for existing tokens
             setLoading(false);
+            return;
+        };
+
+        // Add this function inside App component
+        const testWebSocketConnection = async () => {
+            try {
+                // Test if WebSocket endpoint is reachable
+                const testWs = new WebSocket(WS_URL);
+
+                testWs.onopen = () => {
+                    console.log('✅ TEST: WebSocket endpoint is reachable');
+                    setStatusMessage('WebSocket endpoint test: SUCCESS ✅');
+                    testWs.close();
+                };
+
+                testWs.onerror = (error) => {
+                    console.error('❌ TEST: WebSocket endpoint test failed:', error);
+                    setStatusMessage('WebSocket endpoint test: FAILED ❌');
+                };
+
+                testWs.onclose = (event) => {
+                    console.log('🔌 TEST: Test connection closed:', event.code, event.reason);
+                };
+
+            } catch (err) {
+                console.error('❌ TEST: WebSocket test error:', err);
+                setStatusMessage(`WebSocket test error: ${err.message}`);
+            }
         };
 
         const handleLogin = (userData) => {
@@ -541,9 +587,13 @@
             console.log('🔑 LOGIN: About to load matches');
             loadMatches();
 
-            console.log('🔑 LOGIN: About to init WebSocket');
-            console.log('🔑 LOGIN: isAuthenticated before initWebSocket:', isAuthenticated);
-            initWebSocket();
+            // Add delay before WebSocket initialization to ensure state is updated
+            setTimeout(() => {
+                console.log('🔑 LOGIN: About to init WebSocket after delay');
+                console.log('🔑 LOGIN: isAuthenticated state:', isAuthenticated);
+                console.log('🔑 LOGIN: currentUser state:', currentUser);
+                initWebSocket();
+            }, 500); // 500ms delay
 
             console.log('🔑 LOGIN: handleLogin completed');
         };
@@ -561,19 +611,31 @@
             setSuccess('Logged out successfully!');
         };
 
-        // Load matches from REST API
         const loadMatches = async () => {
-            if (!isAuthenticated) return;
+            console.log('📊 LOAD-MATCHES: Starting loadMatches');
+            console.log('📊 LOAD-MATCHES: isAuthenticated =', isAuthenticated);
+            console.log('📊 LOAD-MATCHES: currentUser =', currentUser?.username);
+
+            if (!isAuthenticated) {
+                console.log('❌ LOAD-MATCHES: Not authenticated, skipping');
+                return;
+            }
 
             try {
                 setLoading(true);
                 setError(null);
+
+                console.log('📊 LOAD-MATCHES: Making API request to', `${API_BASE}/matches`);
+
                 const response = await fetch(`${API_BASE}/matches`, {
                     headers: AuthUtils.getAuthHeaders()
                 });
 
+                console.log('📊 LOAD-MATCHES: Response status:', response.status);
+
                 if (!response.ok) {
                     if (response.status === 401) {
+                        console.log('❌ LOAD-MATCHES: 401 Unauthorized, logging out');
                         handleLogout();
                         return;
                     }
@@ -581,29 +643,40 @@
                 }
 
                 const data = await response.json();
+                console.log('📊 LOAD-MATCHES: Received', data.length, 'matches');
+
                 setMatches(data);
                 if (data.length > 0) {
                     setSuccess(`Loaded ${data.length} basketball matches!`);
                 }
+
+                console.log('✅ LOAD-MATCHES: Successfully loaded matches');
+
             } catch (err) {
+                console.error('❌ LOAD-MATCHES: Error:', err);
                 setError(`Failed to load matches: ${err.message}`);
-                console.error('Error loading matches:', err);
             } finally {
                 setLoading(false);
             }
         };
 
-        // Initialize WebSocket connection
-        // Initialize WebSocket connection
         const initWebSocket = () => {
             console.log('🚀 WEBSOCKET: initWebSocket called');
             console.log('🚀 WEBSOCKET: isAuthenticated =', isAuthenticated);
             console.log('🚀 WEBSOCKET: currentUser =', currentUser);
             console.log('🚀 WEBSOCKET: WS_URL =', WS_URL);
 
-            if (!isAuthenticated) {
-                console.log('❌ WEBSOCKET: Skipping - not authenticated');
+            // Check if we have authentication token
+            const token = AuthUtils.getToken();
+            if (!token) {
+                console.log('❌ WEBSOCKET: Skipping - no authentication token');
                 return;
+            }
+
+            // Close existing WebSocket if any
+            if (websocket.current && websocket.current.readyState !== WebSocket.CLOSED) {
+                console.log('🔌 WEBSOCKET: Closing existing connection');
+                websocket.current.close();
             }
 
             try {
@@ -614,9 +687,11 @@
                 console.log('🔗 WEBSOCKET: Creating WebSocket object');
                 websocket.current = new WebSocket(WS_URL);
                 console.log('🔗 WEBSOCKET: WebSocket object created:', websocket.current);
+                console.log('🔗 WEBSOCKET: Initial ready state:', websocket.current.readyState);
 
                 websocket.current.onopen = () => {
                     console.log('✅ WEBSOCKET: onopen event fired');
+                    console.log('✅ WEBSOCKET: Connection ready state:', websocket.current.readyState);
                     setWebsocketStatus('connected');
                     setStatusMessage('Real-time updates enabled! 🚀');
                 };
@@ -626,33 +701,46 @@
                         console.log('📨 WEBSOCKET: Message received:', event.data);
                         const data = JSON.parse(event.data);
 
+                        console.log('📨 WEBSOCKET: Parsed message type:', data.type);
+                        console.log('📨 WEBSOCKET: Full message data:', data);
+
                         if (data.type === 'MATCH_UPDATED') {
-                            console.log('🔄 WEBSOCKET: Match updated, refreshing');
-                            loadMatches();
-                            const action = data.operation.toLowerCase();
-                            setStatusMessage(`Match ${action} - Data refreshed automatically!`);
+                            console.log('🔄 WEBSOCKET: Match updated detected, operation:', data.operation);
+                            console.log('🔄 WEBSOCKET: Current isAuthenticated:', isAuthenticated);
+                            console.log('🔄 WEBSOCKET: Current token exists:', !!AuthUtils.getToken());
+
+                            // Force refresh matches with better error handling
+                            refreshMatchesFromWebSocket(data.operation);
+
                         } else if (data.type === 'CONNECTION_ESTABLISHED') {
                             console.log('🔗 WEBSOCKET: Connection confirmed');
+                            setStatusMessage('Real-time connection established! 🎉');
+                        } else {
+                            console.log('📨 WEBSOCKET: Unknown message type:', data.type);
                         }
                     } catch (err) {
                         console.error('❌ WEBSOCKET: Error parsing message:', err);
+                        console.error('❌ WEBSOCKET: Raw message was:', event.data);
                     }
                 };
 
                 websocket.current.onerror = (error) => {
                     console.error('❌ WEBSOCKET: Error event:', error);
+                    console.log('❌ WEBSOCKET: Ready state during error:', websocket.current?.readyState);
                     setWebsocketStatus('error');
                     setStatusMessage('Real-time updates connection failed');
                 };
 
                 websocket.current.onclose = (event) => {
                     console.log('🔌 WEBSOCKET: Close event. Code:', event.code, 'Reason:', event.reason);
+                    console.log('🔌 WEBSOCKET: Was clean close:', event.wasClean);
                     setWebsocketStatus('disconnected');
 
-                    if (event.code !== 1000) {
-                        setStatusMessage('Connection lost. Retrying...');
+                    if (event.code !== 1000 && AuthUtils.getToken()) {
+                        setStatusMessage('Connection lost. Retrying in 3 seconds...');
                         setTimeout(() => {
-                            if (isAuthenticated && (!websocket.current || websocket.current.readyState === WebSocket.CLOSED)) {
+                            const currentToken = AuthUtils.getToken();
+                            if (currentToken && (!websocket.current || websocket.current.readyState === WebSocket.CLOSED)) {
                                 console.log('🔄 WEBSOCKET: Attempting reconnection...');
                                 initWebSocket();
                             }
@@ -661,10 +749,83 @@
                 };
 
                 console.log('🔗 WEBSOCKET: Event handlers attached');
+
+                // Add connection timeout
+                setTimeout(() => {
+                    if (websocket.current && websocket.current.readyState === WebSocket.CONNECTING) {
+                        console.log('⏰ WEBSOCKET: Connection timeout, ready state still CONNECTING');
+                        websocket.current.close();
+                        setWebsocketStatus('error');
+                        setStatusMessage('Connection timeout - retrying...');
+                        setTimeout(initWebSocket, 2000);
+                    }
+                }, 10000); // 10 second timeout
+
             } catch (err) {
                 console.error('❌ WEBSOCKET: Initialization error:', err);
                 setWebsocketStatus('error');
                 setStatusMessage(`Connection failed: ${err.message}`);
+            }
+        };
+
+        // Add this function inside the App component
+        const refreshMatchesFromWebSocket = async (operation) => {
+            try {
+                console.log('🔄 WS-REFRESH: Starting match refresh for operation:', operation);
+
+                // Check if we have authentication
+                const token = AuthUtils.getToken();
+                if (!token) {
+                    console.error('❌ WS-REFRESH: No authentication token available');
+                    setStatusMessage('Update received but not authenticated');
+                    return;
+                }
+
+                console.log('🔄 WS-REFRESH: Token available, making API call');
+
+                const response = await fetch(`${API_BASE}/matches`, {
+                    headers: AuthUtils.getAuthHeaders()
+                });
+
+                console.log('🔄 WS-REFRESH: API response status:', response.status);
+
+                if (!response.ok) {
+                    if (response.status === 401) {
+                        console.error('❌ WS-REFRESH: Authentication failed, logging out');
+                        handleLogout();
+                        return;
+                    }
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                console.log('🔄 WS-REFRESH: Received', data.length, 'matches from API');
+
+                // Update matches state
+                setMatches(data);
+
+                // Show success message
+                const action = operation ? operation.toLowerCase() : 'updated';
+                setStatusMessage(`🔄 Match ${action} - List refreshed automatically!`);
+
+                console.log('✅ WS-REFRESH: Match refresh completed successfully');
+
+            } catch (err) {
+                console.error('❌ WS-REFRESH: Error refreshing matches:', err);
+                setStatusMessage(`❌ Auto-refresh failed: ${err.message}`);
+                setError(`Failed to refresh matches: ${err.message}`);
+            }
+        };
+
+        // Add this function inside the App component
+        const getWebSocketReadyState = () => {
+            if (!websocket.current) return 'None';
+            switch (websocket.current.readyState) {
+                case WebSocket.CONNECTING: return 'CONNECTING (0)';
+                case WebSocket.OPEN: return 'OPEN (1)';
+                case WebSocket.CLOSING: return 'CLOSING (2)';
+                case WebSocket.CLOSED: return 'CLOSED (3)';
+                default: return 'UNKNOWN';
             }
         };
 
@@ -750,12 +911,50 @@
                 {error && <div className="error">{error}</div>}
                 {success && <div className="success">{success}</div>}
 
-                {/* Add debugging info */}
+                {/* Enhanced debug info with test functionality */}
                 <div style={{position: 'fixed', bottom: '10px', left: '10px', background: 'rgba(0,0,0,0.8)', color: 'white', padding: '10px', borderRadius: '5px', fontSize: '12px', zIndex: 1000}}>
                     <div>WebSocket Status: {websocketStatus}</div>
                     <div>WebSocket URL: {WS_URL}</div>
                     <div>Authenticated: {isAuthenticated ? 'Yes' : 'No'}</div>
-                    <div>Ready State: {websocket.current?.readyState || 'None'}</div>
+                    <div>Ready State: {getWebSocketReadyState()}</div>
+                    <div>Has Token: {AuthUtils.getToken() ? 'Yes' : 'No'}</div>
+                    <div>Current User: {currentUser?.username || 'None'}</div>
+                    <div>Matches Count: {matches.length}</div>
+                    <div style={{marginTop: '5px', display: 'flex', gap: '5px', flexWrap: 'wrap'}}>
+                        <button
+                            style={{padding: '2px 8px', fontSize: '10px'}}
+                            onClick={() => {
+                                console.log('🔄 Manual WebSocket reconnect attempt');
+                                initWebSocket();
+                            }}
+                        >
+                            Reconnect
+                        </button>
+                        <button
+                            style={{padding: '2px 8px', fontSize: '10px'}}
+                            onClick={testWebSocketConnection}
+                        >
+                            Test WS
+                        </button>
+                        <button
+                            style={{padding: '2px 8px', fontSize: '10px'}}
+                            onClick={() => {
+                                console.log('🔄 Manual match refresh');
+                                loadMatches();
+                            }}
+                        >
+                            Refresh
+                        </button>
+                        <button
+                            style={{padding: '2px 8px', fontSize: '10px'}}
+                            onClick={() => {
+                                console.log('🧪 Simulating WebSocket message');
+                                refreshMatchesFromWebSocket('TEST');
+                            }}
+                        >
+                            Test Refresh
+                        </button>
+                    </div>
                 </div>
 
                 {currentUser?.isSeller ? (
